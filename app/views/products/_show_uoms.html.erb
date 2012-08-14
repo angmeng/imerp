@@ -1,0 +1,134 @@
+<a name="pricing"></a>
+
+
+  <div class="mg10 exhibiton ex01">
+    <div class="exHead">
+        <div class="hTxt">
+            <div class="hTxtContent"><h2>Listing Product Uom for: <%= @product.name %></h2></div>
+        </div>
+        <div class="hLeft"></div>
+        <div class="hRight"></div>
+    </div>
+    <div class="exBody">
+        <div class="content">
+  
+        <%= form_tag update_uoms_product_path(@product) do %>
+        <table class="list">
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Stock Quantity</th>
+            <th>Barcode</th>
+            <th>Conversion</th>
+            <th>Fixed Cost</th>
+            <th>Minimum Selling Price</th>
+            <th>Default</th>
+            <th align="left">Action</th>
+          </tr>
+
+          <% @uoms.each do |u| %>
+            <tr class="<%= cycle "odd", "even"  %>" style="text-align: center">
+            <td>
+              <%= u.product_uom.name %>
+            </td>
+            <td>
+              <%= u.product_uom.description %>
+            </td>
+             <td>
+               <%= link_to "Show",  show_popup_product_path(u.id), :class=>"nyroModal"%>
+            </td>
+
+            <td>
+              <%= text_field_tag "uom["+u.id.to_s+"][barcode]", u.barcode %>
+            </td>
+            <td>
+              <%= text_field_tag "uom["+u.id.to_s+"][conversion]", u.conversion, :size => 5 %>
+            </td>
+            <td>
+              <%= text_field_tag "uom["+u.id.to_s+"][fixed_cost]", u.fixed_cost, :size => 10 %>
+            </td>
+            <td>
+              <%= text_field_tag "uom["+u.id.to_s+"][minimum_selling_price]", u.minimum_selling_price, :size => 10 %>
+            </td>
+            <td align="center"><%= check_box_tag("uom[#{u.id.to_s}][selected]",{},u.default_uom?)  %> </td>
+            
+             <td align="left">
+              <% if @product.is_mixed? %>
+                  <%= link_to "Mixed item list", mixed_product_product_path(u.id), :name => "mixed_items" %> |
+               <% end %>
+              <%= link_to "Pricing", show_pricings_product_uom_path(u) %>
+               <% unless u.product_uom.min_uom? %>
+               | <%= link_to "Remove", remove_item_product_uom_path(u),  :confirm => "This will delete the attached pricings. Are you sure? ", :method => :delete %>
+              <% end %>
+            </td>
+          </tr>
+          <% end %>
+          <tr>
+            <td colspan="2"></td>
+            <td></td>
+            <td align="center"><%= submit_tag("Update") unless @uoms.empty? %></td>
+            <td></td>
+          </tr>
+        </table>
+        <% end %>
+       </div>
+   </div>
+    <div class="exFoot">
+        <div class="fLeft"></div>
+        <div class="fRight"></div>
+    </div>
+</div>
+  <br/><hr/><br/>
+
+  <div class="mg10 exhibiton ex01">
+    <div class="exHead">
+        <div class="hTxt">
+            <div class="hTxtContent"><h2>Add product Uom</h2></div>
+        </div>
+        <div class="hLeft"></div>
+        <div class="hRight"></div>
+    </div>
+    <div class="exBody">
+        <div class="content">
+            <%= form_tag add_uoms_product_path(@product) do %>
+           <table class="flexi" style="font-size: 12px">
+             <thead>
+              <tr>
+                <th width="100" align="center"style="font-size: 12px"><strong><input type="checkbox" name="checkall" onclick="checkUncheckAll(this);"/></strong></th>
+                <th width="150" align="center"style="font-size: 12px"><strong>Name</strong></th>
+                <th width="300" align="center"style="font-size: 12px"><strong>Description</strong></th>
+              </tr>
+             </thead>
+           <tbody>
+              <% ProductUom.all.each do |u| %>
+               <tr class="<%= cycle "odd", "even"  %>" style="text-align: center">
+                <td><%= check_box_tag "product_uom_ids[]", u.id  %></td>
+                <td><%= u.name %></td>
+                <td><%= u.description rescue'-'%></td>
+              </tr>
+
+              <% end %>
+               </tbody>
+            </table>
+
+            <%= submit_tag "Add" %>
+          
+            <% end %>
+
+  </div>
+   </div>
+    <div class="exFoot">
+        <div class="fLeft"></div>
+        <div class="fRight"></div>
+    </div>
+</div>
+
+ <script type="text/javascript">
+ $('.flexi').flexigrid({width: $('#header').width() - 600});
+ </script>
+<script type="text/javascript">
+$(function() {
+  $('.nyroModal').nyroModal();
+});
+</script>
+

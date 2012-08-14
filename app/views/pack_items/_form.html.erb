@@ -1,0 +1,26 @@
+<%= simple_form_for(@pack_item) do |f| %>
+  <% if @pack_item.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@pack_item.errors.count, "error") %> prohibited this pack_item from being saved:</h2>
+
+      <ul>
+      <% @pack_item.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="inputs">
+    <%= f.input :pack_id %>
+    <%= f.input :product_id %>
+    <%= f.input :product_uom_id %>
+    <%= f.input :stock_location_id %>
+    <%= f.input :quantity %>
+    <%= f.input :cost %>
+  </div>
+
+  <div class="actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

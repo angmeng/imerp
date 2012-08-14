@@ -1,0 +1,6 @@
+<tr>
+  <td> <%= stock_count.stock_location.product_rack.product_location.name rescue"-" %></td>
+  <td> <%= stock_count.stock_location.product_rack.name rescue"-"%></td>
+  <td align="center"> <%= stock_count.opening_balance %></td>
+  <td align="center"> <%= stock_count.quantity %></td>
+</tr>

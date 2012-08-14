@@ -1,0 +1,15 @@
+<% title 'Customer Credit Note'  %>
+
+<%= render 'menu' %>
+
+ <% unless @customer_credit_note.settled? %>
+    <%= render "update_info" %>
+    <br/><hr/><br/>
+    <%= render "update_ccn_item" %>
+    <br></br>
+    <%= render "add_item" %>
+ <% else %>
+     <%= render "show_customer" %>
+     <br/><hr/>
+     <%= render "ccn_sattled" %>
+ <% end %>

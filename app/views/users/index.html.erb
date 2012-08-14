@@ -1,0 +1,48 @@
+<% title "Listing Users" %>
+<%= link_to image_tag("new.png"), new_user_path %>
+<br /><br />
+<div class="mg10 exhibiton ex01">
+    <div class="exHead">
+        <div class="hTxt">
+           <div class="hTxtContent"><h2>User</h2></div>
+        </div>
+        <div class="hLeft"></div>
+        <div class="hRight"></div>
+    </div>
+    <div class="exBody">
+        <div class="content">
+          <table class="list">
+
+              <tr>
+                <th  style="text-align: left">Login</th>
+                <th style="text-align: left">Name</th>
+                <th style="text-align: left">Email</th>
+                <th style="text-align: left">Department</th>
+                <th>Disabled</th>
+                <th>Action</th>
+              </tr>
+
+            <% @users.each do |user| %>
+              <tr class="<%= cycle "odd", "even"  %> ">
+                <td><%= user.login %></td>
+                <td><%= user.name %></td>
+                <td><%= user.email %></td>
+                <td><%= user.department.name %></td>
+                <td style="text-align: center"><%= user.disabled %></td>
+                <td style="text-align: center"><%= link_to 'Show', user %>
+                | <%= link_to 'Edit', edit_user_path(user) %>
+                | <%= link_to 'Destroy', user, :confirm => 'Are you sure?', :method => :delete %></td>
+              </tr>
+            <% end %>
+            </table>
+
+      </div>
+   </div>
+    <div class="exFoot">
+        <div class="fLeft"></div>
+        <div class="fRight"></div>
+    </div>
+</div>
+
+
+

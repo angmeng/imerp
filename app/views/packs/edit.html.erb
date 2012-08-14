@@ -1,0 +1,13 @@
+<% content_for :head do %>
+  <%= javascript_include_tag "smo" %>
+<% end %>
+
+<%= render 'menu' %>
+<br>
+<% unless @pack.posted?%>
+   <%= render "update_info" %>
+      <br><hr/>
+   <%= render "update_pack_item" %>
+ <% else %>
+     <%= render "settled_post_quantity" %>
+  <% end%>

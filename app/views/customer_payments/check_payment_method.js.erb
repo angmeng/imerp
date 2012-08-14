@@ -1,0 +1,9 @@
+ <% unless @payment.check? %>
+      $("#payment_info").css("display", "none");
+ <% end %>
+
+ <% if @payment.check? %>
+      $("#payment_info").css("display", "block");
+ <% end %>
+
+

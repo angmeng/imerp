@@ -1,0 +1,32 @@
+
+  <table class="list">
+    <tr>
+      <th>UOM</th>
+      <th>Description</th>
+      <th>Barcode</th>
+      <th>Conversion</th>
+      <th>Action</th>
+    </tr>
+    
+    <% @uoms.each do |u| %>
+      <tr class="<%= cycle "odd", "even"  %>" style="text-align: center">
+      <td>
+        <%= u.name %>
+      </td>
+      <td>
+        <%= u.description %>
+      </td>
+      <td>
+        <%= u.barcode %>
+      </td>
+      <td>
+        <%= u.conversion %>
+      </td>
+      <td>
+        <%= link_to "Pricing", show_pricings_product_uom_path(u) %> | 
+        <%= link_to "Remove", u, :confirm => "This will delete the attached pricings. Are you sure? ", :method => :delete, :remote => true %>
+      </td>
+    </tr>
+    
+    <% end %>
+  </table>

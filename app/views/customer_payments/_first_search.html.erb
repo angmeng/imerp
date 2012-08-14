@@ -1,0 +1,37 @@
+<%= render 'search_invoice' %>
+ <%= will_paginate @invoices  %>
+<br></br>
+<%= form_tag add_invoice_customer_payment_path(@customer_payment) do %>
+
+                      <table class="flexi" style="font-size: 12px">
+                         <thead>
+                            <tr>
+                            <th width="100" align="center" style="font-size: 12px"><input type="checkbox" name="checkall" onclick="checkUncheckAll(this);"/></th>
+                            <th width="250" align="center" style="font-size: 12px"><strong>Invoice No</strong></th>
+                            <th width="300" align="center" style="font-size: 12px"><strong>Invoice Date</strong></th>
+                            <th width="300" align="center" style="font-size: 12px"><strong>Customer</strong></th>
+                            <th width="200" align="center" style="font-size: 12px"><strong>Invoice Status</strong></th>
+                           </tr>
+                         </thead>
+                         <tbody>
+                      <% @invoices.each do |invoice| %>
+                        <tr class="<%= cycle("odd", "even") %>">
+                        <td><%= check_box_tag "item[#{invoice.id.to_s}][selected]"  %></td>
+                        <td align="center"><%=h invoice.invoice_number %></td>
+                        <td align="center"><%=h invoice.invoice_date.strftime("%d-%m-%Y") %> - <%=h invoice.end_invoice_date.strftime("%d-%m-%Y") %> </td>
+                        <td align="center"><%=h invoice.customer.name rescue"-"%></td>
+                        <td align="center"><%=raw invoice.payment_status %></td>
+
+                        </tr>
+                      <% end %>
+                         </tbody>
+                      </table>
+                      <%= submit_tag "Add and Return" unless @invoices.empty?%>
+                      <%= submit_tag "Add and Continue" unless @invoices.empty?%>
+                      <% end %>
+        
+
+
+<script type="text/javascript">
+   $('.flexi').flexigrid({width: $('#header').width() - 80});
+</script>

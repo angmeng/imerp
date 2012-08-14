@@ -1,0 +1,26 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Stock transfer number:</b>
+  <%= @stock_transfer.stock_transfer_number %>
+</p>
+
+<p>
+  <b>Stock transfer date:</b>
+  <%= @stock_transfer.stock_transfer_date %>
+</p>
+
+<p>
+  <b>Remark:</b>
+  <%= @stock_transfer.remark %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @stock_transfer.user_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_stock_transfer_path(@stock_transfer) %> |
+<%= link_to 'Back', stock_transfers_path %>
+   

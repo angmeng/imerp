@@ -1,0 +1,101 @@
+  <% content_for :head do %>
+              <%= javascript_include_tag("smo") %>
+            <% end %>
+            <%= render "/shared/autocomplete" %>
+             <%= link_to image_tag("backs.png", :title => "Back"), @goods_receive_note %>
+
+<div class="mg10 exhibiton ex01">
+        <div class="exHead">
+            <div class="hTxt">
+               <div class="hTxtContent"><h2>Good Receive Note Details</h2></div>
+            </div>
+            <div class="hLeft"></div>
+            <div class="hRight"></div>
+        </div>
+        <div class="exBody">
+            <div class="content">
+       
+            <table class="list">
+              <tr>
+                <th>GRN No</th>
+                <th>Date</th>
+                <th>S/N</th>
+                <th>DO No</th>
+                <th>Invoice No</th>
+                <th>PO No</th>
+                <th>Supplier</th>
+                <th>Settled</th>
+                <th>Status</th>
+              </tr>
+              <tr align="center">
+                <td><%=h @goods_receive_note.grn_number %></td>
+                <td><%=h @goods_receive_note.grn_date %></td>
+                <td><%=h @goods_receive_note.serial_number %></td>
+                <td><%=h @goods_receive_note.invoice_number %></td>
+                <td><%=h @goods_receive_note.do_number %></td>
+                <td><%=h @goods_receive_note.purchase_order.purchase_order_number %></td>
+                <td><%=h @goods_receive_note.supplier.name %></td>
+                <td><%=h @goods_receive_note.settled %></td>
+                <td><%=raw @goods_receive_note.status %></td>
+              </tr>
+            </table>
+</div>
+</div>
+    <div class="exFoot">
+        <div class="fLeft"></div>
+        <div class="fRight"></div>
+    </div>
+    </div>
+<hr>
+
+<%= form_tag(import_items_goods_receive_note_path(@goods_receive_note)) do  %>
+       <div class="mg10 exhibiton ex01">
+        <div class="exHead">
+            <div class="hTxt">
+               <div class="hTxtContent"><h2>Import from PO : <%= @purchase_order.purchase_order_number %> Supplier : <%= @purchase_order.supplier.name  %> </h2></div>
+            </div>
+            <div class="hLeft"></div>
+            <div class="hRight"></div>
+        </div>
+        <div class="exBody">
+            <div class="content">
+             
+               <table class="list">
+                <tr>
+                  <th>All <br /><input type="checkbox" name="checkall" onclick="checkUncheckAll(this);"/></th>
+                  <th align="left">Code</th>
+                  <th align="left">Description</th>
+                  <th align="left">UOM</th>
+                  <th>Quantity</th>
+                </tr>
+
+            <% if @items.any?  %>
+              <% @items.each do |p|  %>
+               <% unless p.product.is_mixed? %>
+                    <tr>
+                      <td align="center"><%= check_box_tag "purchase_order_item[#{p.id.to_s}][selected]"  %></td>
+                      <td><%= p.product.code %> </td>
+                      <td><%= p.product.full_description %> </td>
+                      <td><%= p.product_uom.name rescue "-"  %> </td>
+                      <td align="center"><%= p.quantity  %> </td>
+                    </tr>
+                  <% end %>
+                 <% end %>
+              <% else  %>
+               <tr>
+                <td style="color:red">  <%= " Item is already added......" %></td>
+              </tr>
+               
+              </table>
+                <p>
+                <%= submit_tag 'Import'  if @items.any?%>
+              </p>
+            <% end %>
+           <% end %>
+</div>
+</div>
+    <div class="exFoot">
+        <div class="fLeft"></div>
+        <div class="fRight"></div>
+    </div>
+    </div>

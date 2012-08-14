@@ -1,0 +1,27 @@
+<%= simple_form_for(@goods_receive_note) do |f| %>
+ <%= render "shared/error_messages", :target => @goods_receive_note %>
+
+  <div class="inputs">
+    <%#*<input type="text" size="24"id="datepicker" name="grn_date"/>%>
+    <%= f.input :grn_number %>
+    <%= f.input :do_number %>
+    <%= f.input :invoice_number %>
+    <%= f.input :serial_number %>
+    <%= f.input :remark %>
+    <%= f.input :supplier_id %>
+    <%= f.input :purchase_order_id %>
+    <%= f.input :voided %>
+    <%= f.input :settled %>
+  </div>
+
+  <div class="actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>
+
+<script>
+      $(function() {
+              $( "#datepicker" ).datepicker();
+
+      });
+  </script>

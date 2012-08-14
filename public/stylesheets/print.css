@@ -1,0 +1,16 @@
+fieldset {border:none;}
+
+.printdiv{
+
+	width: 96%;
+	height: 80%;
+        padding-left: 10px;
+        padding-right: 10px;
+        padding-bottom: 10px ;
+}
+.break { page-break-before: always; }
+
+body {visibility:hidden;}
+.print {visibility:visible;}
+
+.pri{visibility:hidden;}

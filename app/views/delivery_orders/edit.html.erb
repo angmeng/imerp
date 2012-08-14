@@ -1,0 +1,35 @@
+<% title 'Editing Delivery Order'  %>
+<br />
+<%= link_to 'Show', @delivery_order%> |
+<%= link_to 'Back', delivery_orders_path %>
+<br /><br />
+
+<%= form_for(@delivery_order) do |f| %>
+   <%= render "shared/error_messages", :target => @delivery_order %>
+
+
+ <p>
+    <%= f.label :delivery_order_date %><br />
+    <%= f.date_select :delivery_order_date  %>
+  </p>
+    <p>
+    <%= f.label :serial_number %><br />
+    <%= f.text_field :serial_number %>
+  </p>
+   <p>
+    <%= f.label :purchase_order_number, "PO No" %><br />
+    <%= f.text_field :purchase_order_number %>
+  </p>
+    <p>
+    <%= f.label :invoice_number, "Invoice No" %><br />
+    <%= f.text_field :invoice_number %>
+  </p>
+  <p>
+    <%= f.label :remark %><br />
+    <%= f.text_area :remark, :size => "60x4" %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+

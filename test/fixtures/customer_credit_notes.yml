@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  cust_credit_note_number: 1
+  cust_credit_note_date: 2011-03-22
+  remark: MyString
+  voided: false
+  posted: false
+
+two:
+  cust_credit_note_number: 1
+  cust_credit_note_date: 2011-03-22
+  remark: MyString
+  voided: false
+  posted: false

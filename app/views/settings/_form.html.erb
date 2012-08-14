@@ -1,0 +1,20 @@
+<%= simple_form_for(@setting) do |f| %>
+  <%= render "shared/error_messages", :target => @setting %>
+
+  <div class="inputs">
+    <%= f.input :company_name %>
+    <%= f.input :company_address_one, :label => 'Address 1' %>
+    <%= f.input :company_address_two, :label => 'Address 2' %>
+    <%= f.input :company_postcode, :label => 'Postcode' %>
+    <%= f.input :company_city, :label => 'City' %>
+    <%= f.input :company_country, :label => 'Country' %>
+    <%= f.input :phone_number, :label => 'Contact Number' %>
+    <%= f.input :fax_number, :label => 'Fax Number' %>
+
+    
+  </div>
+
+  <div class="actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

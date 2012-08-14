@@ -1,0 +1,29 @@
+<% title "Listing stock_locations" %>
+<%= link_to image_tag("new.png"), new_stock_location_path %>
+<br /><br />
+<table class="list">
+  <tr>
+    <th>Product</th>
+    <th>Location</th>
+    <th>Rack</th>
+    <th>Quantity</th>
+    <th>Action</th>
+
+  </tr>
+
+<% @stock_locations.each do |stock_location| %>
+  <tr class="<%= cycle "odd", "even"  %> " style="text-align: center">
+    <td><%= stock_location.product.short_description %></td>
+    <td><%= stock_location.product_rack.product_location.name %></td>
+    <td><%= stock_location.product_rack.name %></td>
+    <td><%= stock_location.quantity %></td>
+    <td><%= link_to 'Show', stock_location %>
+    | <%= link_to 'Edit', edit_stock_location_path(stock_location) %>
+    | <%= link_to 'Destroy', stock_location, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+

@@ -1,0 +1,40 @@
+<div class="mg10 exhibiton ex01">
+    <div class="exHead">
+        <div class="hTxt">
+            <div class="hTxtContent"><h2>Supplier Search</h2></div>
+        </div>
+        <div class="hLeft"></div>
+        <div class="hRight"></div>
+    </div>
+    <div class="exBody">
+        <div class="content">
+          <%= form_for @search do |f| %>
+             <table class="list" style="width: auto">
+            <thead>
+                  <tr>
+                   <th>Code</th>
+                   <th>Name</th>
+                   <th>City</th>
+                   <th>Suspend</th>
+                   <th>Action</th>
+                  </tr>
+                  </thead>
+             <tbody>
+                  <tr align="center">
+                      <td><%= f.text_field :code_equals %></td>
+                      <td><%= f.text_field :name_like %></td>
+                       <td><%= f.select :city_id_equals, City.all(:order => "name").map{|c| [c.name, c.id]}, {:include_blank => true} %></td>
+                      <td><%= f.select :suspend_equals, [["No", 0], ["Yes", 1]], {:include_blank => true}  %></td>
+                      <td><%= f.submit "Search" %></td>
+                  </tr>
+                  </tbody>
+          </table>
+
+          <% end %>
+  </div>
+   </div>
+    <div class="exFoot">
+        <div class="fLeft"></div>
+        <div class="fRight"></div>
+    </div>
+</div>

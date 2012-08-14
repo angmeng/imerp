@@ -1,0 +1,90 @@
+<% content_for :head do %>
+  <%= javascript_include_tag "smo" %>
+<% end %>
+ <%= link_to image_tag("backs.png", :title => "Back"), edit_supplier_payment_path(@supplier_payment) %>
+ 
+  <%= form_tag removed_item_supplier_payment_path(@supplier_payment) do %>
+  <div class="mg10 exhibiton ex01">
+        <div class="exHead">
+            <div class="hTxt">
+               <div class="hTxtContent"><h2>Supplier Payment Item</h2></div>
+            </div>
+            <div class="hLeft"></div>
+            <div class="hRight"></div>
+        </div>
+        <div class="exBody">
+            <div class="content">
+              <table class="flexi" style="font-size: 12px">
+               <thead>
+                <tr>
+                 <th width="80" align="center"style="font-size: 12px"><input type="checkbox" name="checkall" onclick="checkUncheckAll(this);"/></th>
+                 <th width="250" align="center"style="font-size: 12px"><strong>Purchase Order No</strong></th>
+                 <th width="250" align="center"style="font-size: 12px"><strong>Purchase Order date</strong></th>
+                 <th width="340" align="center" style="font-size: 12px"><strong>Supplier</strong></th>
+                  <th width="250" align="center"style="font-size: 12px"><strong>Amount</strong></th>
+
+               </tr>
+              </thead>
+              <tbody>
+                <% total_amount = 0  %>
+                <% total_balance = 0  %>
+                <% @items.each do |i| %>
+                  <% item_total = i.purchase_order.total_amount %>
+                  <% total_amount += item_total %>
+                  <% balance = item_total - i.total_paid_amount %>
+                  <% total_balance += balance %>
+
+                <tr class="<%= cycle("odd", "even") %>" align="center">
+                  <td align="center"><%= check_box_tag("item[#{i.id.to_s}][selected]")%></td>
+                  <td align="center"><%= i.purchase_order.purchase_order_number   %></td>
+                  <td align="center"><%= i.purchase_order.purchase_order_date.strftime("%d-%m-%Y")  %></td>
+                  <td align="center"><%= i.purchase_order.supplier.name  %></td>
+                  <td align="center"><%= item_total %></td>
+                <% end %>
+                </tr>
+               
+                </tbody>
+              </table>
+                <table><tr>
+                       <td>
+                         <%= submit_tag "Remove PO" unless @supplier_payment.supplier_payment_items.empty? %>
+                       </td>
+                       <td align="right" width="1050px"><strong>Total Amount : </strong> <%= total_amount %></td>
+                      </tr>
+                    </table>
+                
+              <% end %>
+
+</div>
+</div>
+    <div class="exFoot">
+        <div class="fLeft"></div>
+        <div class="fRight"></div>
+    </div>
+    </div>
+
+
+<script type="text/javascript">
+   $('.flexi').flexigrid({width: $('#header').width() - 80});
+</script>
+
+<hr>
+
+        <div class="mg10 exhibiton ex01">
+            <div class="exHead">
+               <div class="hTxt">
+                   <div class="hTxtContent"><h2>Add Items</h2></div>
+                  </div>
+                <div class="hLeft"></div>
+                <div class="hRight"></div>
+            </div>
+            <div class="exBody">
+            <div class="content">
+                <%= render "add_item" %>
+            </div>
+            </div>
+          <div class="exFoot">
+              <div class="fLeft"></div>
+              <div class="fRight"></div>
+          </div>
+          </div>

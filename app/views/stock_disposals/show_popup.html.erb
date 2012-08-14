@@ -1,0 +1,21 @@
+
+      <table class="list"  >
+          <tr>
+             <th align="center">UOM</th>
+             <th align="center">On Hand</th>
+             <th align="center">Purchase Order</th>
+             <th align="center">Packing List</th>
+             <th align="center">Balance</th>
+          </tr>
+         <% @result.each do |v| %>
+	<tr class="<%= cycle "odd", "even"  %> " style="text-align: center">
+		   <td align="center"><%= v.product_uom.name rescue "-" %> </td>
+                   <td align="center"><%= v.on_hand_quantity  %> </td>
+                   <td align="center"><%= v.virtual_order_quantity  %> </td>
+                   <td align="center"><%= v.virtual_packing_quantity  %> </td>
+                   <td align="center"><%= v.balance rescue "0"  %> </td>
+		</tr>
+               
+                <% end %>
+	</table>
+ 

@@ -1,0 +1,54 @@
+<% title "Listing Receive From Customer" %>
+<%= link_to image_tag("new.png"), new_customer_credit_note_path %>
+<br /><br />
+<%= render 'search_form'  %>
+<br>
+<hr>
+<br>
+<div class="mg10 exhibiton ex01">
+    <div class="exHead">
+        <div class="hTxt">
+           <div class="hTxtContent"><h2>Receive From Customer</h2></div>
+        </div>
+        <div class="hLeft"></div>
+        <div class="hRight"></div>
+    </div>
+    <div class="exBody">
+        <div class="content">
+              <%= will_paginate @customer_credit_notes %>
+
+              <table class="list">
+                <tr>
+                   <th>Date</th>
+                  <th>Receive From Customer Number</th>
+                  <th align="left">Customer</th>
+                  <th>Status</th>
+                  <th>Post Quantity Status</th>
+                  <th>Void Status</th>
+                  <th>Action</th>
+                  <th></th>
+                  <th></th>
+                </tr>
+
+              <% @customer_credit_notes.each do |customer_credit_note| %>
+                <tr class="<%= cycle "odd", "even"  %> " style="text-align: center">
+                  <td><%= customer_credit_note.cust_credit_note_date.strftime("%d-%m-%Y") rescue "-" %></td>
+                  <td><%= customer_credit_note.cust_credit_note_number %></td>
+                  <td align="left"><%= customer_credit_note.customer.name rescue "-" %></td>
+                  <td align="center"><%=raw customer_credit_note.status %></td>
+                  <td align="center"><%=raw customer_credit_note.quantity_post_status %></td>
+                  <td align="center"><%=raw customer_credit_note.void_status %></td>
+                  <td><%= link_to 'Edit', edit_customer_credit_note_path(customer_credit_note) %>
+                  | <%= link_to 'Destroy', customer_credit_note, :confirm => 'Are you sure?', :method => :delete %></td>
+                </tr>
+              <% end %>
+              </table>
+
+              
+</div>
+   </div>
+    <div class="exFoot">
+        <div class="fLeft"></div>
+        <div class="fRight"></div>
+    </div>
+</div>

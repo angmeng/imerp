@@ -1,0 +1,26 @@
+<%= render "menu" %>
+
+<% form_tag update_info_invoice_path(@invoice) do %>
+<table width="100%">
+  <tr>
+    <td><strong>Invoice No</strong></td><td> : </td> <td><%= @invoice.invoice_number %></td>
+    <td><strong>Date</strong></td><td> : </td> <td><%= @invoice.invoice_date.strftime("%d-%m-%Y") %></td>
+  </tr>
+  
+  <tr>
+    <td><strong>Remark</strong></td><td> : </td> <td><%= text_area_tag "invoice[remark]", @invoice.remark, :size => "100x2" %></td>
+  
+  </tr>
+  <tr>
+
+    <td colspan="4" align="center">
+<%= submit_tag "Update"  %>  </td>
+  </tr>
+</table>
+
+
+
+<% end %>
+<br /> <br />
+
+

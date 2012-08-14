@@ -1,0 +1,18 @@
+<fieldset style="background-color: khaki;padding: 8px 8px 8px 8px">
+  <legend>Delivery Order</legend>
+
+<table class="list">
+  <tr>
+    <th>DO No</th>
+    <th>Starred</th>
+    <th>Action</th>
+  </tr>
+<% @items.each do |i| %>
+  <tr class="<%= cycle("odd", "even") %>" align="center">
+    <td><%= i.delivery_order.delivery_order_number   %></td>
+    <td><%= i.delivery_order.starred   %></td>
+    <td><%= link_to "show", i.delivery_order  %></td>
+  </tr>
+<% end %>
+</table>
+</fieldset>

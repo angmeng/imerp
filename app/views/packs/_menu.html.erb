@@ -1,0 +1,9 @@
+  <%= link_to image_tag("home.png", :title => "View All"), packs_path %> |
+  <%= link_to image_tag("new.png", :title => "New"), new_pack_path %> |
+  <%= link_to image_tag("delete.png", :title => "Delete"), @pack, :confirm => 'Are you sure you want to delete this Product Mixed no?', :method => :delete %> 
+  | <%= link_to image_tag("print.png", :title => "Print"), preview_pack_path(@pack), {:target => "_blank"} %>
+
+  <% unless @pack.posted?  %>
+   | <%= link_to 'Complete', confirm_post_quantity_pack_path(@pack)%>
+  <% end %>
+

@@ -1,0 +1,38 @@
+<% content_for :head do %>
+  <%= javascript_include_tag "smo" %>
+<% end %>
+<% title 'Editing goods_receive_note'  %>
+<br />
+<%= link_to 'Show', @goods_receive_note %> |
+<%= link_to 'Back', goods_receive_notes_path %>
+<br /><br />
+
+<%= form_for(@goods_receive_note) do |f| %>
+   <%= render "shared/error_messages", :target => @goods_receive_note %>
+
+
+ <p>
+    <%= f.label :grn_date %><br />
+    <%= f.date_select :grn_date %>
+  </p>
+    <p>
+    <%= f.label :serial_number %><br />
+    <%= f.text_field :serial_number %>
+  </p>
+   <p>
+    <%= f.label :do_number, "DO No" %><br />
+    <%= f.text_field :do_number %>
+  </p>
+    <p>
+    <%= f.label :invoice_number, "Invoice No" %><br />
+    <%= f.text_field :invoice_number %>
+  </p>
+  <p>
+    <%= f.label :remark %><br />
+    <%= f.text_area :remark, :size => "60x4" %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+

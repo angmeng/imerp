@@ -1,0 +1,115 @@
+<script type="text/javascript">
+        $(document).ready(function(){
+
+         $("#supplier_payment_payment_method_id").change(function() {
+              $.post('/supplier_payments/check_payment_method?payment_method_id='+$(this).val());
+            });
+
+
+            });
+</script>
+
+<%= form_tag update_info_supplier_payment_path(@supplier_payment) do %>
+<div class="mg10 exhibiton ex01">
+        <div class="exHead">
+            <div class="hTxt">
+               <div class="hTxtContent"><h2>Supplier Payment Details</h2></div>
+            </div>
+            <div class="hLeft"></div>
+            <div class="hRight"></div>
+        </div>
+        <div class="exBody">
+            <div class="content">
+                <table class="list">
+                  <tr>
+                     <th>Supplier Payment No</th>
+                     <th>Date</th>
+                     <th>Supplier</th>
+                     <th>Status</th>
+                  </tr>
+                  <tr class="<%= cycle "odd", "even"  %> " style="text-align: center">
+                    <td align="center"><%= @supplier_payment.supplier_payment_number %></td>
+                    <td><input type="text" size="12" id="datepicker" name="supplier_payment[supplier_payment_date]" value="<%= @supplier_payment.supplier_payment_date.strftime("%d-%m-%Y") %>"/></td>
+                    <td align="center">
+                      <table border="0">
+                       <tr>
+                         <td style="background-color:lavender">
+                              <table width="350"><tr><td bgcolor="#ffffff">
+                                    <% if @supplier_payment.supplier_id.nil? %>
+                                         <%= "None" %>
+                                    <% else %>
+                                        <%= @supplier_payment.supplier.name %>
+                                    <%end%>
+                                  </td></tr>
+                              </table>
+                           </td>
+                           <td>
+                              <%= link_to image_tag("add_users.png", :title => "Add Customer"), add_supplier_supplier_payment_path(@supplier_payment)%>
+                           </td>
+                       </tr>
+                      </table>
+                   </td>
+                  <td><%= raw @supplier_payment.status %> </td>
+                 </tr>
+                </table>
+              <table class="list">
+                <tr>
+                   <th align="left">Payment Method</th>
+                   <th align="left"></th>
+                   <th align="left"></th>
+                   <th align="left"></th>
+                   <th align="right">Remark</th>
+                </tr>
+              <tr>
+                  <td><%=select("supplier_payment", "payment_method_id", PaymentMethod.all.collect {|p| [ p.payment_name, p.id ]},:include_blank => 'None')%> </td>
+                  <td colspan="3">
+                         <% if @supplier_payment.payment_method_id.nil? %>
+                              <div id="payment_info" style="display:none">
+                                  <%=  render :partial => '/supplier_payments/payment_details' %>
+                              </div>
+                         <% else %>
+                               <% if @supplier_payment.payment_method.check? %>
+                                    <div id="payment_info" style="display:block">
+                                        <%=  render :partial => '/supplier_payments/payment_details' %>
+                                    </div>
+                               <% else %>
+                                    <div id="payment_info" style="display:none">
+                                        <%=  render :partial => '/supplier_payments/payment_details' %>
+                                    </div>
+                               <%end%>
+                         <%end%>
+                  </td>
+                  <td align="right"> <%= text_area_tag "supplier_payment[remark]", @supplier_payment.remark,{:style=>"width:600px;height:15px; "} %></td>
+              </tr>
+           </table>
+            <p>
+               <%= submit_tag "Update info" %>
+            </p>
+            <% end %>
+  
+</div></div>
+    <div class="exFoot">
+        <div class="fLeft"></div>
+        <div class="fRight"></div>
+    </div>
+    </div>
+<script>
+	$(function() {
+		$( "#datepicker" ).datepicker({
+			showOn: "button",
+			buttonImage: "/images/calendar2.png",
+			buttonImageOnly: true,
+                        dateFormat: 'dd-mm-yy'
+		});
+	});
+	</script>
+<script>
+	$(function() {
+		$( "#datepicker2" ).datepicker({
+			showOn: "button",
+			buttonImage: "/images/calendar2.png",
+			buttonImageOnly: true,
+                        dateFormat: 'dd-mm-yy'
+		});
+	});
+	</script>

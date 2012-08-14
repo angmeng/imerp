@@ -1,0 +1,56 @@
+<% title "Listing sales orders" %>
+<%= link_to image_tag("new.png"), new_sales_order_path %>
+<br /><br />
+<%= render 'search_form'  %>
+<br><hr><br>
+
+
+<div class="mg10 exhibiton ex01">
+    <div class="exHead">
+        <div class="hTxt">
+            <div class="hTxtContent"><h2>Sales Orders</h2></div>
+        </div>
+        <div class="hLeft"></div>
+        <div class="hRight"></div>
+    </div>
+    <div class="exBody">
+        <div class="content">
+          <%= will_paginate @sales_orders %>
+              <table class="list">
+                <tr>
+                  <th>Date</th>
+                  <th>Sales order Number</th>
+                  <th>Issued user</th>
+                  <th>Approved user</th>
+                  <th>Status</th>
+                  <th>Void Status</th>
+                  <th>Action</th>
+
+                </tr>
+
+              <% @sales_orders.each do |sales_order| %>
+                <tr class="<%= cycle "odd", "even"  %> " style="text-align: center">
+                  
+                  <td><%= sales_order.sales_order_date.strftime("%d-%m-%Y") %></td>
+                  <td><%= sales_order.sales_order_number %></td>
+                  <td><%= sales_order.issued_user.name rescue "-" %></td>
+                  <td><%= sales_order.approved_user.name rescue "-" %></td>
+                  <td><%=raw sales_order.status %></td>
+                  <td><%= raw sales_order.void_status %></td>
+                 <td>
+                  <%= link_to 'Edit', edit_sales_order_path(sales_order) %>
+                  | <%= link_to 'Destroy', sales_order, :confirm => 'Are you sure?', :method => :delete %></td>
+                </tr>
+              <% end %>
+              </table>
+             
+  </div>
+ </div>
+    <div class="exFoot">
+        <div class="fLeft"></div>
+        <div class="fRight"></div>
+    </div>
+</div>
+
+
+

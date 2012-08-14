@@ -1,0 +1,18 @@
+<%= simple_form_for(@packing_list) do |f| %>
+  <%= render "shared/error_messages", :target => @packing_list%>
+
+  <div class="inputs">
+    <%= f.input :packing_list_date %>  
+
+    <%= f.input :term %>
+    <%= f.input :remark %>
+
+    <%= f.input :voided %>
+    <%= f.input :settled %>
+    
+  </div>
+
+  <div class="actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

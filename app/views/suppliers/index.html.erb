@@ -1,0 +1,60 @@
+<% title "Listing Suppliers" %>
+
+<%= link_to image_tag("new.png"), new_supplier_path %>
+<br /><br />
+<%= render "search" %>
+<br/><hr/><br/>
+<div class="mg10 exhibiton ex01">
+    <div class="exHead">
+        <div class="hTxt">
+            <div class="hTxtContent"><h2>Supplier</h2></div>
+        </div>
+        <div class="hLeft"></div>
+        <div class="hRight"></div>
+    </div>
+    <div class="exBody">
+        <div class="content">
+          <%= will_paginate @suppliers %>
+          <br />
+          <table class="list">
+            <tr>
+              <th style="text-align: left">Code</th>
+              <th style="text-align: left">Name</th>
+              <th style="text-align: left">Company number</th>
+              <th style="text-align: left">City</th>
+              <th style="text-align: left">Email</th>
+               <th style="text-align: left">Office contact</th>
+              <th style="text-align: left">Fax_number</th>
+              <th style="text-align: left">Term</th>
+              <th>Suspend</th>
+              <th>Action</th>
+
+            </tr>
+
+          <% @suppliers.each do |supplier| %>
+            <tr class="<%= cycle "odd", "even"  %> ">
+              <td><%= supplier.code %></td>
+              <td><%= supplier.name %></td>
+              <td><%= supplier.company_number %></td>
+              <td><%= supplier.city.name rescue"-" %></td>
+              <td><%= supplier.email %></td>
+              <td><%= supplier.office_contact %></td>
+
+              <td><%= supplier.fax_number %></td>
+            
+              <td><%= supplier.term %></td>
+              <td style="text-align: center"><%= supplier.suspend %></td>
+              <td style="text-align: center"><%= link_to 'Show', supplier %>
+              | <%= link_to 'Edit', edit_supplier_path(supplier) %>
+              | <%= link_to 'Destroy', supplier, :confirm => 'Are you sure?', :method => :delete %></td>
+            </tr>
+          <% end %>
+          </table>
+          <br />
+  </div>
+   </div>
+    <div class="exFoot">
+        <div class="fLeft"></div>
+        <div class="fRight"></div>
+    </div>
+</div>

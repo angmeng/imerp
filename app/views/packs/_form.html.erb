@@ -1,0 +1,24 @@
+<%= simple_form_for(@pack) do |f| %>
+  <% if @pack.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@pack.errors.count, "error") %> prohibited this pack from being saved:</h2>
+
+      <ul>
+      <% @pack.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="inputs">
+    <%= f.input :pack_date %>
+    <%= f.input :pack_number %>
+    <%= f.input :user_id %>
+    <%= f.input :remark %>
+  </div>
+
+  <div class="actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

@@ -1,0 +1,29 @@
+<%= form_tag add_auto_complete_item_sales_order_path(@sales_order) do %>
+<br/>
+ <table>
+  <tr>
+    <th>Code</th>
+    <th> Product Uom</th>
+    <th> Quantity</th>
+    <th> Unit Price</th>
+    <th> Discount</th>
+    <th> Action</th>
+  </tr>
+  <tr>
+    <td>
+        <%=  text_field "sales_order", "product_tokens"  %></td>
+    <td>
+        <%= select_tag "sales_order[product_uom_id]", options_for_select(ProductUom.all.collect{ |c| [ c.name, c.id ] } ) %>
+    </td>
+    <td  align="center"><%= text_field_tag("sales_order[quantity]", {}, :size => 15)  %> </td>
+    <td  align="center"><%= text_field_tag("sales_order[unit_price]", {}, :size => 15)  %> </td>
+    <td  align="center"><%= text_field_tag("sales_order[discounts]", {}, :size => 15)  %> </td>
+<td><%= submit_tag "Add item" %></td>
+  
+
+     
+  </tr>
+</table>
+ 
+<%  end %>
+

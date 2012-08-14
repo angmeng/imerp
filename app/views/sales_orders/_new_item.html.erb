@@ -1,0 +1,8 @@
+<table>
+  <tr>
+    <th>Product</th><td><%= select_tag("item[product_id]", options_for_select(@products))  %> </td>
+    <th>Customer</th><td><%= select_tag("item[customer_id]", options_for_select(@customers))  %> </td>
+    <th>Quantity</th><td><%= text_field_tag("item[quantity]")  %> </td>
+    <th>Unit Price</th><td><%= text_field_tag("item[unit_price]")  %> </td>
+  </tr>
+</table>

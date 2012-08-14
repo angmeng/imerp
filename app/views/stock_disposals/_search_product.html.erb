@@ -1,0 +1,32 @@
+<%= form_for @search, :url => {:action => "item_new_page"} do |f| %>
+<table class="list">
+  <tr>
+    <th>Code</th>
+    <th>In House code</th>
+    <th>Short Description</th>
+    <% if controller_name == "products" %>
+    <th>Type</th>
+    <% end %>
+    <th>Brand</th>
+    <th>Department</th>
+    <th>Category</th>
+    <th>Model</th>
+    <th></th>
+  </tr>
+  <tr>
+    <td align="center" ><%= f.text_field :code_contains %></td>
+    <td align="center" ><%= f.text_field :in_house_code_contains %></td>
+    <td align="center" ><%= f.text_field :short_description_contains %></td>
+    <% if controller_name == "products" %>
+    <td align="center" ><%= f.collection_select :product_kind_id_equals, ProductKind.all, :id, :name, :include_blank => true %></td>
+    <% end %>
+    <td align="center" ><%= f.collection_select :product_brand_id_equals, ProductBrand.all, :id, :name, :include_blank => true %></td>
+    <td align="center" ><%= f.collection_select :product_department_id_equals, ProductDepartment.all, :id, :name, :include_blank => true %></td>
+    <td align="center" ><%= f.collection_select :product_category_id_equals, ProductCategory.all, :id, :name, :include_blank => true %></td>
+    <td align="center" ><%= f.collection_select :product_model_id_equals, ProductModel.all, :id, :name, :include_blank => true %></td>
+    <td><%= f.submit "Search" %></td>
+  </tr>
+</table>
+    
+  <% end %>
+  <br />

@@ -1,0 +1,150 @@
+ <% if @pack.posted? %>
+<%= render 'menu' %>
+<% end %>
+<br>
+<div class="mg10 exhibiton ex01">
+        <div class="exHead">
+            <div class="hTxt">
+               <div class="hTxtContent"><h2>Pack Details</h2></div>
+            </div>
+            <div class="hLeft"></div>
+            <div class="hRight"></div>
+        </div>
+        <div class="exBody">
+            <div class="content">
+                <table class="list">
+                   <tr>
+                    <th>Product Mix Number</th>
+                    <th>Date</th>
+                    <th>Type</th>
+                    <th>User</th>
+
+                  </tr>
+                 <tr class="<%= cycle "odd", "even"  %> " style="text-align: center">
+                    <td><%= @pack.pack_number %></td>
+                     <td><%= @pack.pack_date.strftime("%d-%m-%Y") %></td>
+                     <td>
+                       <% if @pack.packing? %>
+                           pack
+                       <% else %>
+                           Unpack
+                        <% end %>
+                         </td>
+                     <td> <%= @pack.user.name %> </td>
+
+                 </tr>
+                </table>
+                <table class="list">
+                  <tr align="left">
+                   <th align="left">Remark</th>
+                </tr>
+                <tr align="left">
+                <td colspan="8"> <%= @pack.remark %></td>
+                </tr>
+                </table>
+                </div>
+</div>
+    <div class="exFoot">
+        <div class="fLeft"></div>
+        <div class="fRight"></div>
+    </div>
+    </div>
+<br><hr><br>
+<%= form_tag post_quantity_pack_path(@pack) do %>
+<div class="mg10 exhibiton ex01">
+        <div class="exHead">
+            <div class="hTxt">
+               <div class="hTxtContent"><h2> Pack Items Details</h2></div>
+            </div>
+            <div class="hLeft"></div>
+            <div class="hRight"></div>
+        </div>
+        <div class="exBody">
+            <div class="content">    
+                <table class="list">
+                   
+                    <tr>
+                      <th  align="left"><strong>Code</strong></th>
+                      <th  align="left"><strong>Description</strong></th>
+                      <th  align="center"><strong>UOM</strong></th>
+                      <th  align="center"><strong>Stock location</strong></th>
+                      <th  align="center"><strong>Quantity</strong></th>
+                      <th  align="right"><strong>Cost</strong></th>
+                     </tr>
+                     
+                  <% @pack.pack_items.each do |p| %>
+                    <tr class="<%= cycle "odd", "even"  %> ">
+                      <td style="text-align: left"><%= p.product.code  %></td>
+                      <td style="text-align: left"><%= p.product.full_description  %> </td>
+                      <td style="text-align: center"><%= p.product_uom.name %> </td>
+                      <td style="text-align: center"><%= p.stock_location.product_rack.name rescue "-"%> </td>
+                       <% if @pack.packing? %>
+                          <td style="text-align: center"> + <%= p.quantity %> </td>
+                       <% else %>
+                          <td style="text-align: center"> - <%= p.quantity %> </td>
+                      <% end %>
+                      <td style="text-align: right"><%= p.cost  %> </td>
+                    </tr>
+                    <tr>
+                      <td></td>
+                      
+                       <td colspan="4">
+                         <%# if p.pack_item_subitems.any? %>
+                         <table class="list">
+                         <tr>
+                          <th align="left"><strong>Code</strong></th>
+                          <th align="left"><strong>Description</strong></th>
+                          <th align="center"><strong>UOM</strong></th>
+                          <th align="center"><strong>Stock location</strong></th>
+                          <th align="center"><strong>Quantity</strong></th>
+                           <th align="right"><strong>Cost</strong></th>
+                        <%# end %>
+                        </tr>
+                        
+                          <% p.pack_item_subitems.each do |a| %>
+                          <tr class="<%= cycle "odd", "even"  %> ">
+                            <td style="text-align: left"><%= a.product.code  %></td>
+                            <td style="text-align: left"><%= a.product.full_description  %> </td>
+                            <td style="text-align: center"><%= a.product_uom.name rescue'-' %> </td>
+                            <td style="text-align: center"><%= a.stock_location.product_rack.name rescue "-"%> </td>
+                            <% if @pack.packing? %>
+                                <td style="text-align: center"> - <%= a.quantity %> </td>
+                            <% else %>
+                                <td style="text-align: center"> + <%= a.quantity %> </td>
+                            <% end %>
+                            <td style="text-align: right"><%= a.cost  %> </td>
+                          </tr>
+                           <% end %>
+                         
+                        </tr>
+                        </table>
+                        </td>
+                       <td></td>
+                    </tr>
+                  
+                   <% end %>
+                  </table>
+
+              <% unless @pack.posted? %>
+                  <table>
+                    <tr>
+                      <td align="center">
+                         <%= submit_tag "Confirm" ,:confirm => "Are you sure you want to post the quantity ?" unless @pack.pack_items.empty? %>
+                      </td>
+                      <td align="center">
+                         <%= submit_tag "Cancel" unless @pack.pack_items.empty? %>
+                      </td>
+                      
+                    </tr>
+                  </table>
+                  <% end %>
+              <% end %>
+                
+                 
+</div>
+</div>
+    <div class="exFoot">
+        <div class="fLeft"></div>
+        <div class="fRight"></div>
+    </div>
+    </div>

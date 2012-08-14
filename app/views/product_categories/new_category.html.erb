@@ -1,0 +1,40 @@
+<h3>New Product Category</h3><hr><br>
+<div class="mg10 exhibiton ex01">
+    <div class="exHead">
+        <div class="hTxt">
+           <div class="hTxtContent"><h2>New Product Category Form</h2></div>
+        </div>
+        <div class="hLeft"></div>
+        <div class="hRight"></div>
+    </div>
+    <div class="exBody">
+        <div class="content">
+           <%= form_for(@product_category) do |f| %>
+
+           <%= render "shared/error_messages", :target => @product_category %>
+               <% if @product %>
+              <%=  hidden_field_tag "product_id", @product.id%>
+             <% else %>
+              <%=  hidden_field_tag "product_id", 0 %>
+             <% end %>
+          <table>
+            <tr>
+              <th>Name</th><td><%=f.text_field  :name , :size => 50%></td>
+            </tr>
+            <tr>
+              <th>Description</th><td><%=f.text_area  :description ,{:style=>"width:280px;height:30px; "}%></td>
+            </tr>
+            <tr>
+              <th>Disabled</th> <td><%=f.check_box  :disabled %></td>
+            </tr>
+         </table>
+          <%= f.submit "Create" %>
+          <% end %>
+
+</div>
+</div>
+    <div class="exFoot">
+        <div class="fLeft"></div>
+        <div class="fRight"></div>
+    </div>
+    </div>

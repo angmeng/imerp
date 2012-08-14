@@ -1,0 +1,5 @@
+<%= link_to image_tag("home.png"), goods_receive_notes_path %> |
+<%= link_to image_tag("print.png"), preview_goods_receive_note_path(@goods_receive_note), :target => "_blank" %> 
+<% unless @goods_receive_note.posted? or @goods_receive_note.voided? %>
+  | <%= link_to 'Settle', settle_goods_receive_note_path(@goods_receive_note, :status_id => 1), :confirm => "Are you sure you want to settle this GRN ?" %>
+<% end %>

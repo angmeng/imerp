@@ -1,0 +1,23 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  invoice_date: 2011-03-01
+  invoice_number: MyString
+  customer_id: 1
+  term: MyString
+  remark: MyString
+  sales_order_id: 1
+  voided: false
+  settled: false
+  imported: false
+
+two:
+  invoice_date: 2011-03-01
+  invoice_number: MyString
+  customer_id: 1
+  term: MyString
+  remark: MyString
+  sales_order_id: 1
+  voided: false
+  settled: false
+  imported: false

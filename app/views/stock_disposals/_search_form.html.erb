@@ -1,0 +1,50 @@
+<script>
+	$(function() {
+		$( "#datepicker" ).datepicker();
+
+	});
+	</script>
+<div class="mg10 exhibiton ex01">
+    <div class="exHead">
+        <div class="hTxt">
+           <div class="hTxtContent"><h2>Stock Disposal Search</h2></div>
+        </div>
+        <div class="hLeft"></div>
+        <div class="hRight"></div>
+    </div>
+    <div class="exBody">
+        <div class="content">
+            <%= form_for @search, :as =>  :search, :html => {:method => :get} do |f| %>
+            <table class="list" style="width: auto">
+              <tr>
+                <th>Date</th>
+               <th>Stock Disposal Number</th>
+               
+               <th>User </th>
+               <th>Status </th>
+               <th>Post Quantity Status </th>
+               <th>Void Status </th>
+               <th></th>
+              </tr>
+              <tr>
+                 
+                  <td><input type="text" size="24"id="datepicker" name="search[stock_disposal_date_equals]"/></td>
+                   <td><%= f.text_field :stock_disposal_number_like %></td>
+                  <td><%= f.select :user_id_equals, User.all(:order => "name").map {|c| [c.name, c.id]} , {:include_blank => true} %></td>
+                  <td align="center"><%= f.select :settled_equals, [["Completed", true],["Processing", false]], {:include_blank => true} %></td>
+                 <td align="center"><%= f.select :posted_equals, [["Posted Quantity", true],["Unpost Quantity", false]], {:include_blank => true} %></td>
+                     <td align="center"><%= f.select :voided_equals, [["Voided", true],["Unvoided", false]], {:include_blank => true} %></td>
+                 <td align="center"><%= f.submit "Search" %></td>
+
+               </tr>
+
+            </table>
+
+              <% end %>
+              </div>
+   </div>
+    <div class="exFoot">
+        <div class="fLeft"></div>
+        <div class="fRight"></div>
+    </div>
+</div>

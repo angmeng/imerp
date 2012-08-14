@@ -1,0 +1,14 @@
+<%= form_tag add_auto_complete_invoice_customer_payment_path(@customer_payment) do %>
+<br/><br/>
+<table>
+  <tr>
+    <th>Invoice Number</th>
+     <td>
+        <%=  text_field "customer_payment", "invoice_tokens"  %>
+    </td>
+   <td><%= submit_tag "Add Invoice" %></td>
+  </tr>
+</table>
+
+<%  end %>
+

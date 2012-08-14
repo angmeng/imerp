@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  stock_transfer_number: MyString
+  stock_transfer_date: 2011-03-31
+  remark: MyString
+  user_id: 1
+
+two:
+  stock_transfer_number: MyString
+  stock_transfer_date: 2011-03-31
+  remark: MyString
+  user_id: 1

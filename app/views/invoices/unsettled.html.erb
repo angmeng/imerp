@@ -1,0 +1,29 @@
+<br />
+<%= link_to "Back", invoices_path %><%= will_paginate @invoices %>
+<%= will_paginate @invoices %>
+<br />
+<table class="list">
+  <tr>
+    <th>Invoice date</th>
+    <th>Invoice number</th>
+    <th>Customer</th>
+    <th>Voided</th>
+    <th>Settled</th>
+    <th>Action</th>
+  </tr>
+
+<% @invoices.each do |invoice| %>
+  <tr class="<%= cycle "odd", "even"  %> " style="text-align: center">
+    <td><%= invoice.invoice_date %></td>
+    <td><%= invoice.invoice_number %></td>
+    <td><%= invoice.customer.name rescue "-" %></td>
+    <td><%= invoice.voided %></td>
+    <td><%= raw invoice.current_status %></td>
+    <td>  <%= link_to 'Edit', edit_invoice_path(invoice) %> |
+    <%= link_to 'Destroy', invoice, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+<br />
+<%= will_paginate @invoices %>
+<br />

@@ -1,0 +1,25 @@
+<table class="list">
+    <tr>
+      <th>Product</th>
+      <th>UOM</th>
+      <th>Short Description</th>
+      <th>Quantity</th>
+      <th>Action</th>
+    </tr>
+    <% @product.mixed_items.each do |p| %>
+     <tr class="<%= cycle "odd", "even"  %> " style="text-align: center">
+      <td><%= p.product.code %></td>
+      <td style="text-align: center"><%= select_tag("mixed_product[#{p.id.to_s}][product_uom_id]", options_for_select(p.product.product_uom_options.map {|c| [c.name, c.id]}, p.product_uom_id))  %> </td>
+      <td><%= p.product.short_description %></td>
+      <td><%= text_field_tag "mixed_product["+p.id.to_s+"][quantity]", p.quantity %></td>
+      <td><%= link_to "Remove", p, :confirm => "Are you sure?", :remote => true, :method => :delete %>
+      </td>
+     </tr>
+    <% end %>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td align="center"><%= submit_tag("Update", :id => "loading") if @product.mixed_items.any? %></td>
+    </tr>
+  </table>

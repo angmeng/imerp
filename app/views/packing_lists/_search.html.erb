@@ -1,0 +1,46 @@
+ <script>
+                      $(function() {
+                              $( "#datepicker" ).datepicker();
+
+                      });
+              </script>
+<div class="mg10 exhibiton ex01">
+    <div class="exHead">
+        <div class="hTxt">
+            <div class="hTxtContent"><h2>Picking List Search </h2></div>
+        </div>
+        <div class="hLeft"></div>
+        <div class="hRight"></div>
+    </div>
+    <div class="exBody">
+        <div class="content">
+            <%= form_for @search do |f| %>
+              <table class="list" style="width: auto">
+                <tr>
+                  <th>Date</th>
+                  <th>Picking list No</th>
+                  <th>Sales Order No</th>
+                  <th>Customer</th>
+                  <th>Term</th>
+                 <th>Status</th>
+                  <th></th>
+                </tr>
+                <tr>
+                   <td><input type="text" size="24"id="datepicker" name="search[packing_list_date_equals]"/></td>
+                  <td align="center"><%= f.text_field :packing_list_number_like %></td>
+                  <td align="center"><%= f.text_field :sales_order_sales_order_number_like %></td>
+                   <td align="center"><%= f.select :customer_id_equals, Customer.all(:order => "name").map {|c| [c.name, c.id]} , {:include_blank => true} %></td>
+                   <td align="center"><%= f.text_field :term_like %></td>
+                   <td align="center"><%= f.select :settled_equals, [["Completed", true],["Processing", false]], {:include_blank => true} %></td>
+                  <td align="center"><%= f.submit "Search" %></td>
+               </tr>
+            </table>
+ </div>
+ </div>
+    <div class="exFoot">
+        <div class="fLeft"></div>
+        <div class="fRight"></div>
+    </div>
+</div>
+
+<% end %>

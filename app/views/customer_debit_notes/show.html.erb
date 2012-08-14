@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Cust debit note number:</b>
+  <%= @customer_debit_note.cust_debit_note_number %>
+</p>
+
+<p>
+  <b>Cust debit note date:</b>
+  <%= @customer_debit_note.cust_debit_note_date %>
+</p>
+
+<p>
+  <b>Remark:</b>
+  <%= @customer_debit_note.remark %>
+</p>
+
+<p>
+  <b>Voided:</b>
+  <%= @customer_debit_note.voided %>
+</p>
+
+<p>
+  <b>Posted:</b>
+  <%= @customer_debit_note.posted %>
+</p>
+
+<p>
+  <b>Customer:</b>
+  <%= @customer_debit_note.customer_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_customer_debit_note_path(@customer_debit_note) %> |
+<%= link_to 'Back', customer_debit_notes_path %>

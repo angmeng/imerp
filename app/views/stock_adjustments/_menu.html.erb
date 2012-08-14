@@ -1,0 +1,14 @@
+  <%= link_to image_tag("home.png", :title => "View All"), stock_adjustments_path %> |
+  <%= link_to image_tag("new.png", :title => "New"), new_stock_adjustment_path %> |
+  <%= link_to image_tag("delete.png", :title => "Delete"), @stock_adjustment, :confirm => 'Are you sure you want to delete this Stock Adjustment?', :method => :delete %> |
+  <%= link_to image_tag("print.png", :title => "Print"), preview_stock_adjustment_path(@stock_adjustment), {:target => "_blank"} %> 
+<% unless @stock_adjustment.voided?  %>
+  <% unless @stock_adjustment.posted?  %>
+   <% if  @stock_adjustment.settled? %>
+     | <%= link_to 'UnSettle', settle_stock_adjustment_path(@stock_adjustment, :status_id => 2), :confirm => "Are you sure you want to unsettle this Stock Adjustment?" %>
+     | <%= link_to 'Post Quantity', post_quantity_stock_adjustment_path(@stock_adjustment), :confirm => "Are you sure you want to post the quantity ?" %>
+    <% else %>
+     | <%= link_to 'Settle', settle_stock_adjustment_path(@stock_adjustment, :status_id => 1), :confirm => "Are you sure you want to settle this Stock Adjustment ?" %>
+  <% end %>
+  <% end %>
+<% end %>

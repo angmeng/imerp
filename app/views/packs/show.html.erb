@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Pack date:</b>
+  <%= @pack.pack_date %>
+</p>
+
+<p>
+  <b>Pack number:</b>
+  <%= @pack.pack_number %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @pack.user_id %>
+</p>
+
+<p>
+  <b>Remark:</b>
+  <%= @pack.remark %>
+</p>
+
+
+<%= link_to 'Edit', edit_pack_path(@pack) %> |
+<%= link_to 'Back', packs_path %>

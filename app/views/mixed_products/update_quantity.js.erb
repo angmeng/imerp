@@ -1,0 +1,6 @@
+$("#spinner").hide(200);
+$("#mixed_flash").effect("highlight", {}, 3000);
+$("#mixed_flash").html('<p class="flash_notice"><%= escape_javascript(flash.delete(:notice)) %></p>');
+
+$("#mixed_table").html("<%= escape_javascript(render :partial => '/products/mixed_table') %>");
+$("#mixed_flash").fadeOut();

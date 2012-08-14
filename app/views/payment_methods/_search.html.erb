@@ -1,0 +1,37 @@
+<div class="mg10 exhibiton ex01">
+    <div class="exHead">
+        <div class="hTxt">
+           <div class="hTxtContent"><h2>Payment Search</h2></div>
+        </div>
+        <div class="hLeft"></div>
+        <div class="hRight"></div>
+    </div>
+    <div class="exBody">
+        <div class="content">
+              <%= form_for @search do |f| %>
+                 <table class="list" style="width: auto">
+                <thead>
+                      <tr>
+                       
+                       <th>Name</th>
+                       <th>Description</th>
+                       <th></th>
+                      </tr>
+                      </thead>
+                <tbody>
+                  <tr align="center">
+                      <td><%= f.text_field :payment_name_like %></td>
+                      <td><%= f.text_field :description_like %></td>
+                      <td><%= f.submit "Search" %></td>
+                  </tr>
+                  </tbody>
+              </table>
+
+              <% end %>
+</div>
+   </div>
+    <div class="exFoot">
+        <div class="fLeft"></div>
+        <div class="fRight"></div>
+    </div>
+</div>

@@ -1,0 +1,20 @@
+<%= form_for(@department) do |f| %>
+<%= render "shared/error_messages", :target => @department %>
+
+
+<table>
+   
+      <tr>
+         <th>Name</th><td><%= f.text_field  :name %></td>
+      </tr>
+      <tr>
+        <th>Description</th><td><%= f.text_area :description, :size => "40x2" %></td>
+      </tr>
+       <tr>
+        <th></th><td><br/><%= f.submit  %></td>
+      </tr>
+
+</table>
+  
+
+<% end %>

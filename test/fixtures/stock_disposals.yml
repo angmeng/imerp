@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  stock_disposal_number: MyString
+  stock_disposal_date: 2011-04-01
+  remark: MyString
+  voided: false
+  posted: false
+  user_id: 1
+
+two:
+  stock_disposal_number: MyString
+  stock_disposal_date: 2011-04-01
+  remark: MyString
+  voided: false
+  posted: false
+  user_id: 1

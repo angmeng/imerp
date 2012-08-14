@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Product uom:</b>
+  <%= @product_pricing.product_uom_id %>
+</p>
+
+<p>
+  <b>Price level:</b>
+  <%= @product_pricing.price_level_id %>
+</p>
+
+<p>
+  <b>Selling price:</b>
+  <%= @product_pricing.selling_price %>
+</p>
+
+
+<%= link_to 'Edit', edit_product_pricing_path(@product_pricing) %> |
+<%= link_to 'Back', product_pricings_path %>

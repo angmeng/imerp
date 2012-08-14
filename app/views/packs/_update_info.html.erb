@@ -1,0 +1,66 @@
+<div class="mg10 exhibiton ex01">
+        <div class="exHead">
+            <div class="hTxt">
+               <div class="hTxtContent"><h2>Pack Details</h2></div>
+            </div>
+            <div class="hLeft"></div>
+            <div class="hRight"></div>
+        </div>
+        <div class="exBody">
+            <div class="content">
+                <%= form_tag update_info_pack_path(@pack) do %>
+
+                <table class="list">
+                   <tr>
+                    <th>Product Mix Number</th>
+                    <th>Date</th>
+                    <th>Type</th>
+                    <th>User</th>
+                    
+                  </tr>
+                 <tr class="<%= cycle "odd", "even"  %> " style="text-align: center">
+                    <td><%= @pack.pack_number %></td>
+                     <td><input type="text" size="12" id="datepicker" name="pack[pack_date]" value="<%= @pack.pack_date.strftime("%d-%m-%Y") %>"/></td>
+                     <td>
+                       <% if @pack.packing? %>
+                            <%= radio_button_tag 'pack[packing]',"#{true}",:checked => true%> pack &nbsp;
+                            <%= radio_button_tag 'pack[packing]',"#{false}"%> Unpack
+                        <% else %>
+                            <%= radio_button_tag 'pack[packing]',"#{true}"%> pack &nbsp;
+                            <%= radio_button_tag 'pack[packing]',"#{false}",:checked => true%> Unpack
+                        <% end %>
+                         </td>
+                     <td> <%= @pack.user.name %> </td>
+
+                 </tr>
+                </table>
+                <table class="list">
+                  <tr align="left">
+                   <th align="left">Remark</th>
+                </tr>
+                <tr align="left">
+                <td colspan="8"> <%= text_area_tag "pack[remark]", @pack.remark,{:style=>"width:600px;height:15px; "} %></td>
+                </tr>
+                </table>
+                <p>
+                   <%= submit_tag "Update info" %>
+                </p>
+                <% end %>
+                </div>
+</div>
+    <div class="exFoot">
+        <div class="fLeft"></div>
+        <div class="fRight"></div>
+    </div>
+    </div>
+<script>
+	$(function() {
+		$( "#datepicker" ).datepicker({
+                  buttonImage: "/images/calendar2.png",
+			showOn: "button",
+			
+			buttonImageOnly: true,
+                        dateFormat: 'dd-mm-yy'
+		});
+	});
+	</script>

@@ -1,0 +1,58 @@
+<div class="mg10 exhibiton ex01">
+    <div class="exHead">
+        <div class="hTxt">
+           <div class="hTxtContent"><h2>Delivery Order Details</h2></div>
+        </div>
+        <div class="hLeft"></div>
+        <div class="hRight"></div>
+    </div>
+    <div class="exBody">
+    <div class="content">
+            <table class="list">
+              <tr>
+                <th>DO No</th>
+                <th>Date</th>
+              
+                <th>PO No</th>
+             
+                <th>Packing list No</th>
+                <th>Salesman</th>
+                <th>Transport</th>
+                <th>Customer</th>
+               
+                <th>Status</th>
+              </tr>
+              <tr align="center">
+
+                <td><%= @delivery_order.delivery_order_number %></td>
+                <td><%= @delivery_order.delivery_order_date%> </td>
+               
+                <td><%= @delivery_order.purchase_order_number %> </td>
+                <td><%=h @delivery_order.packing_list.packing_list_number %></td>
+                <td><%=h @delivery_order.salesman.name rescue'-'%></td>
+                <td><%=h @delivery_order.transport.name rescue'-'%></td>
+                <td><%=h @delivery_order.customer.name rescue'-' %></td>
+               
+                 <% if @delivery_order.voided? %>
+                 <td><%=raw @delivery_order.void_status %></td>
+              <%else%>
+                 <td><%=raw @delivery_order.status %></td>
+               <%end%>
+              </tr>
+
+            </table>
+            <table class="list">
+              <tr align="left">
+                <th align="left">Remark</th>
+            </tr>
+            <tr align="left">
+            <td><%=h @delivery_order.remark %></td>
+            </tr>
+            </table>
+</div>
+ </div>
+    <div class="exFoot">
+        <div class="fLeft"></div>
+        <div class="fRight"></div>
+    </div>
+</div>

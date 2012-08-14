@@ -1,0 +1,21 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  delivery_order_date: 2011-03-07
+  delivery_order_number: 
+  purchase_order_number: MyString
+  invoice_number: MyString
+  serial_number: MyString
+  remark: MyString
+  vioded: false
+  settled: false
+
+two:
+  delivery_order_date: 2011-03-07
+  delivery_order_number: 
+  purchase_order_number: MyString
+  invoice_number: MyString
+  serial_number: MyString
+  remark: MyString
+  vioded: false
+  settled: false

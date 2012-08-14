@@ -1,0 +1,124 @@
+
+<%= stylesheet_link_tag 'print',:media => "print"%>
+
+<a href="#" onclick="window.print();return false;">Print</a>
+
+<div class="print">
+<p>
+<% @settings.each do |setting| %>
+    <h2 style="text-align: center"><%= setting.company_name rescue'-' %></h2>
+    <h3 style="text-align: center"><%= setting.company_address_one rescue'-' %>,</h3>
+    <h3 style="text-align: center"><%= setting.company_address_two rescue'-' %>,</h3>
+    <h3 style="text-align: center">
+    <%= setting.company_postcode rescue'-'  %>,
+    <%= setting.company_city rescue'-' %>,
+    <%= setting.company_country rescue'-' %></h3>
+     <h4 style="text-align: center">
+       TEL NO: <%= setting.phone_number rescue'-'  %>  &nbsp;
+    FAX NO: <%= setting.fax_number rescue'-' %></h4>
+
+    <h3>
+ <% end %>
+ </p>
+<%= image_tag("rtc.png")%>
+ <br><br>
+
+<table style="width: 100%">
+    <tr>
+      <td  style="width: 40%">
+        <table  style=" border:solid" >
+          <tr>
+          <th align="right"style="width: 10%"><strong>Bill To : </strong> </th>
+          <td style="width: 60%">&nbsp&nbsp<%= @customer_debit_note.customer.name rescue"-" %></td>
+          </tr>
+         <tr>
+          <td valign="top"></td>
+          <td> &nbsp&nbsp<%= @customer_debit_note.customer.address rescue"-"%><br />
+              &nbsp&nbsp<%= @customer_debit_note.customer.postcode rescue"-"%>
+          </td>
+          </tr>
+          <tr>
+          <td align="right"> <strong>Contact: </strong></td>
+          <td> &nbsp&nbsp<%= @customer_debit_note.customer.contact_person rescue"-"%> 
+               <strong>Tel:  </strong>&nbsp<%= @customer_debit_note.customer.office_contact rescue"-"%>
+               <strong>Fax:  </strong>&nbsp<%= @customer_debit_note.customer.fax_number rescue"-"%>
+          </td>
+          </tr>
+
+        </table>
+      </td>
+      <td style="width: 5%"></td>
+     <td style="width: 40%">
+        <table>
+          <tr>
+             <th align="right">Received to Customer Number:</th>
+             <td>&nbsp&nbsp<%= @customer_debit_note.cust_debit_note_number %></td>
+         </tr>
+          <tr>
+            <th align="right">Date:  </th>
+            <td>&nbsp &nbsp <%= @customer_debit_note.cust_debit_note_date.strftime("%d-%m-%Y")%></td>
+         </tr>
+
+
+      </table>
+
+      </td></tr>
+
+</table>
+
+
+<br />
+<table width="100%" cellpadding="2" cellspacing="0">
+  <tr>
+        <th align="center"style="border-bottom:outset "> No </th>
+        <th align="left"style="border-bottom:outset ">Product</th>
+        <th align="left"style="border-bottom:outset ">Description</th>
+	<th align="center"style="border-bottom:outset ">UOM</th>
+        <th align="center"style="border-bottom:outset ">Stock location</th>
+	<th align="right"style="border-bottom:outset ">Quantity</th>
+        <th align="right"style="border-bottom:outset ">Unit Price</th>
+	<th align="right"style="border-bottom:outset ">Total</th>
+  </tr>
+
+  <% line = 0 %>
+  <% total = 0.00 %>
+  <% @customer_debit_note.customer_debit_note_items.each do |c|  %>
+  <% line += 1%>
+  <% total += c.total %>
+  <tr>
+     <td align="center"><%= line.to_s %></td>
+     <td><%= c.product.code %></td>
+     <td><%= c.product.full_description %></td>
+     <td align="center"><%= c.product_uom.name rescue "-" %></td>
+     <td align="center"><%= c.stock_location.product_rack.name rescue "-"%></td>
+     <td align="right"><%= c.quantity %></td>
+     <td align="right"><%= "%.2f" % c.unit_price %></td>
+     <td align="right"> <%= number_with_precision(c.total, :precision => 2) %></td>
+  </tr>
+  <% end %>
+
+
+</table>
+<br /><br /><br /><br />
+<div style="margin-top:60%">
+  <hr>
+  <table style="border:solid; float:right" >
+  <tr>
+   Total Amount <th style="text-align: right"> <%= "%.2f" % total %></th>
+  </tr></table>
+  <br>
+<hr>
+<table style="width:100%">
+ <tr>
+    <td>Issued by:</td><td></td><td style="text-align:right;margin-right: 50px">Approved By:</td>
+  </tr>
+  <tr>
+    <td style="height: 100px">------------------------</td>
+    <td></td>
+    <td style="text-align:right;height: 100px;margin-right: 50px">------------------------</td>
+  </tr>
+</table>
+</div>
+</div>
+
+

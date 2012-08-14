@@ -1,0 +1,27 @@
+<h1>Listing product_pricings</h1>
+
+<table>
+  <tr>
+    <th>Product uom</th>
+    <th>Price level</th>
+    <th>Selling price</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @product_pricings.each do |product_pricing| %>
+  <tr>
+    <td><%= product_pricing.product_uom_id %></td>
+    <td><%= product_pricing.price_level_id %></td>
+    <td><%= product_pricing.selling_price %></td>
+    <td><%= link_to 'Show', product_pricing %></td>
+    <td><%= link_to 'Edit', edit_product_pricing_path(product_pricing) %></td>
+    <td><%= link_to 'Destroy', product_pricing, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Product pricing', new_product_pricing_path %>

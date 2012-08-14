@@ -1,0 +1,36 @@
+
+<%= render 'update_stock_adjustment_item' %>
+<br><hr/>
+
+
+<fieldset style="padding-left: 10px;padding-right: 5px;padding-bottom: 10px; width: 98%; height: 360px;background-color: #df9"><legend>Add item</legend>
+
+<a id="btn1" href="#">Advanced Search</a>  |
+<a id="btn2" href="#">Simple Search</a>
+<div id="log"></div>
+
+
+<div id="first" class="box"><%= render "first_search" %></div>
+<div id="second" class="box" style="display:none"><%= render "second_search" %></div>
+
+<script>
+$("#btn1").click(function() {
+  function complete() {
+    $("#first").show();
+  }
+  $("#second").fadeOut(400, complete);
+  $("#log").empty();
+});
+
+$("#btn2").click(function() {
+  function complete() {
+    $("#second").show();
+  }
+  $("#first").fadeOut(400, complete);
+   $("#log").empty();
+
+});
+
+
+</script>
+    </fieldset>

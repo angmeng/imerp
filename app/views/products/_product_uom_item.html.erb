@@ -1,0 +1,35 @@
+<tr>
+        <th align="left">Name</th>
+        <th align="left">Description</th>  
+        <th>Conversion</th>
+     </tr>
+<tr>
+  <td> <%= product_uom_item.product_uom.name %></td>
+  <td> <%= product_uom_item.product_uom.description %></td>
+ 
+  <td align="center"> <%= product_uom_item.conversion %></td>
+</tr>
+<tr>
+  <td></td>
+  <td colspan="3">
+    <table style="width: 100%">
+      <tr>
+        <th align="left">Price Level</th>
+        <th>Selling Price</th>
+      </tr>
+      <%= render :partial => 'product_pricing', :collection => product_uom_item.product_pricings %>
+    </table>
+    <br />
+    <table style="width: 100%">
+      <tr>
+        <th align="left">Location</th>
+        <th align="left">Rack</th>
+        <th>Opening Balance</th>
+        <th>Quantity</th>
+      </tr>
+      <%= render :partial => 'stock_count', :collection => product_uom_item.stock_counts %>
+    </table>
+    <br /><br />
+  </td>
+</tr>
+  

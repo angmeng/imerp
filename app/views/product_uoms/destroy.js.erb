@@ -1,0 +1,7 @@
+
+<% if flash[:notice] %>
+  $("#uom_flash").html('<p class="flash_notice"><%= escape_javascript(flash.delete(:notice)) %></p>');
+<% elsif flash[:error] %>
+  $("#uom_flash").html('<p class="flash_error"><%= escape_javascript(flash.delete(:error)) %></p>');
+<% end %>
+$("#uom_table").html("<%= escape_javascript(render :partial => '/products/uom_table') %>");

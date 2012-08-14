@@ -1,0 +1,18 @@
+<%= form_tag add_auto_complete_stock_stock_adjustment_path(@stock_adjustment) do %>
+<br/><br/>
+<table>
+  <tr>
+    <th>Code</th>
+
+     <td>
+        <%=  text_field "stock_adjustment", "product_tokens"  %>
+    </td>
+
+     <td><%= submit_tag "Add item" %></td>
+  </tr>
+</table>
+
+
+
+<%  end %>
+

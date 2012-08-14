@@ -1,0 +1,37 @@
+<h3>New Product Rack</h3><hr><br>
+<div class="mg10 exhibiton ex01">
+    <div class="exHead">
+        <div class="hTxt">
+           <div class="hTxtContent"><h2>New Product Rack Form</h2></div>
+        </div>
+        <div class="hLeft"></div>
+        <div class="hRight"></div>
+    </div>
+    <div class="exBody">
+        <div class="content">
+
+        <%= simple_form_for(@product_rack) do |f| %>
+          <%= render "shared/error_messages", :target => @product_rack %>
+            
+              <%=  hidden_field_tag "product_location_id", @product_location.id%>
+             
+
+
+          <div class="inputs">
+            <%= f.hidden_field :product_location_id, :value => @product_location.id %>
+            <%= f.input :name %>
+            <%= f.input :description, :input_html => {:size => "40x2"} %>
+            <%= f.input :disabled %>
+          </div>
+
+          <div class="actions">
+            <%= f.button :submit %>
+          </div>
+        <% end %>
+</div>
+   </div>
+    <div class="exFoot">
+        <div class="fLeft"></div>
+        <div class="fRight"></div>
+    </div>
+</div>

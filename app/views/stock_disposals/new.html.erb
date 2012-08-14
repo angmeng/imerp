@@ -1,0 +1,26 @@
+<% content_for :head do %>
+<%= javascript_include_tag("smo") %>
+<% end %>
+<%= render "/shared/autocomplete" %>
+<% title 'New Stock Disposal'  %>
+<br />
+<%= link_to 'Back', stock_disposals_path %>
+<br /><br />
+
+ <%= form_for(@stock_disposal) do |f| %>
+  <%= render "shared/error_messages", :target => @stock_disposal %>
+<table>
+      <%= f.hidden_field :user_id, :value => current_user.id %>
+      <tr>
+        <th>Date</th><td><%= f.date_select :stock_disposal_date %></td>
+      </tr>
+      <tr>
+        <th>Remark</th><td valign="top"><%= f.text_area :remark, :size => "60x2" %></td>
+      </tr>
+
+
+ </table>
+  <p>
+    <%= f.submit 'Next' %>
+  <% end %>
+  </p>

@@ -1,0 +1,13 @@
+  <%= link_to image_tag("home.png", :title => "View All"), stock_disposals_path %> |
+  <%= link_to image_tag("new.png", :title => "New"), new_stock_disposal_path %> |
+  <%= link_to image_tag("delete.png", :title => "Delete"), @stock_disposal, :confirm => 'Are you sure you want to delete this Stock Disposal?', :method => :delete %> |
+  <%= link_to image_tag("print.png", :title => "Print"), preview_stock_disposal_path(@stock_disposal), {:target => "_blank"} %>
+ <% unless @stock_disposal.voided?  %>
+   <% unless @stock_disposal.posted?  %>
+  <% unless @stock_disposal.settled? %>
+    | <%= link_to 'Settle', settle_stock_disposal_path(@stock_disposal, :status_id => 1), :confirm => "Are you sure you want to settle this Stock disposal ?" %>
+  <% else %>
+    | <%= link_to 'UnSettle', settle_stock_disposal_path(@stock_disposal, :status_id => 2), :confirm => "Are you sure you want to unsettle this stock disposal  ?" %>
+    | <%= link_to 'Post Quantity', post_quantity_stock_disposal_path(@stock_disposal), :confirm => "Are you sure you want to post the quantity ?" %>
+  <% end %>
+<% end %><% end %>

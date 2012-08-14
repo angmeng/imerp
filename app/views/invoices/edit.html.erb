@@ -1,0 +1,20 @@
+<% content_for :head do %>
+  <%= javascript_include_tag "smo" %>
+<% end %>
+
+<%= render 'menu' %>
+
+ <% unless @invoice.payment_paid? or @invoice.voided? or @invoice.imported%>
+    <%= render "show_invoice" %>
+    <br><hr/>
+    <% unless @invoice.customer_id == 0 %>
+    <%= image_tag("add_item2.png")%><%= link_to 'Add Invoice Item', item_new_page_invoice_path(@invoice) %><br>
+    
+    <%= render "update_do" %>
+    <% end %>
+   
+  <% else %>
+     <%= render "settled_invoice" %>
+     <br><hr/><br>
+     <%= render "settled_do" %>
+ <% end %>

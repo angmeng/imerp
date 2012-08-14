@@ -1,0 +1,44 @@
+<div class="mg10 exhibiton ex01">
+        <div class="exHead">
+            <div class="hTxt">
+               <div class="hTxtContent"><h2>Stock Adjustment Details</h2></div>
+            </div>
+            <div class="hLeft"></div>
+            <div class="hRight"></div>
+        </div>
+        <div class="exBody">
+            <div class="content">
+                <table class="list">
+                   <tr>   
+                    <th>Stock Adjustment Number</th>
+                    <th>Date</th>
+                    <th>User</th>
+                    <th>Status</th>
+                  </tr>
+                  <tr align="center">
+                    <td><%=h @stock_adjustment.stock_adjustment_number %></td>
+                    <td><%=h @stock_adjustment.stock_date %></td>
+                    <td><%=h @stock_adjustment.user.name  rescue "-" %></td>
+                    <% if @stock_adjustment.voided? %>
+                      <td><%=raw @stock_adjustment.void_status %></td>
+                    <%else%>
+                      <td align="center"><%=raw @stock_adjustment.status %> </td>
+                    <%end%>
+                  </tr>
+                  </table>
+               
+                <table class="list">
+                  <tr align="left">
+                   <th align="left">Remark</th>
+                </tr>
+                <tr align="left">
+                <td colspan="8"> <%= @stock_adjustment.remark%></td>
+                </tr>
+                </table>
+ </div>
+</div>
+    <div class="exFoot">
+        <div class="fLeft"></div>
+        <div class="fRight"></div>
+    </div>
+    </div>

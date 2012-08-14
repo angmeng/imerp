@@ -1,0 +1,41 @@
+<br />
+<%= link_to "Back", goods_receive_notes_path %>
+<br/>
+<%= will_paginate  @goods_receive_notes %>
+<br />
+<table class="list">
+  <thead>
+  <tr>
+    <th align="left">Receive Note No</th>
+    <th align="left">Date</th>
+    <th align="left">S/N</th>
+    <th align="left">DO No</th>
+    <th align="left">Invoice No</th>
+    <th align="left">PO No</th>
+    <th align="left">Supplier</th>
+    <th>Status</th>
+    <th>Action</th>
+  </tr>
+</thead>
+   <tbody>
+<% @goods_receive_notes.each do |goods_receive_note| %>
+    <tr class="<%= cycle("odd", "even") %>">
+    <td><%=h goods_receive_note.grn_number %></td>
+    <td><%=h goods_receive_note.grn_date.strftime("%d-%m-%Y") %></td>
+    <td><%=h goods_receive_note.serial_number %></td>
+    <td><%=h goods_receive_note.do_number %></td>
+    <td><%=h goods_receive_note.invoice_number %></td>
+    <td><%=h goods_receive_note.purchase_order.purchase_order_number %></td>
+    <td><%=h goods_receive_note.supplier.name %></td>
+    <td align="center"><%=raw goods_receive_note.status %></td>
+    <td align="center">
+    <%= link_to 'Edit', goods_receive_note %>  |
+    <%= link_to 'Destroy', goods_receive_note, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+ </tbody>
+</table>
+
+<br />
+
+<%= will_paginate  @goods_receive_notes %>

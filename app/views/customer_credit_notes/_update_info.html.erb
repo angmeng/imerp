@@ -1,0 +1,75 @@
+<div class="mg10 exhibiton ex01">
+        <div class="exHead">
+            <div class="hTxt">
+               <div class="hTxtContent"><h2>Receive From Customer Details</h2></div>
+            </div>
+            <div class="hLeft"></div>
+            <div class="hRight"></div>
+        </div>
+        <div class="exBody">
+            <div class="content">
+                <%= form_tag update_info_customer_credit_note_path(@customer_credit_note) do %>
+
+                <table class="list">
+                   <tr>
+                    <th>Receive From Customer Number</th>
+                    <th>Date</th>
+                    <th>Customer</th>
+                    <th>Status</th>
+                  </tr>
+                 <tr class="<%= cycle "odd", "even"  %> " style="text-align: center">
+                    <td><%= @customer_credit_note.cust_credit_note_number %></td>
+                     <td><input type="text" size="12" id="datepicker" name="customer_credit_note[cust_credit_note_date]" value="<%= @customer_credit_note.cust_credit_note_date.strftime("%d-%m-%Y") %>"/></td>
+                     <td align="center">
+                     <table border="0">
+                       <tr>
+                         <td style="background-color:lavender">
+                            <table width="350"><tr><td bgcolor="#ffffff">
+                                   <% if @customer_credit_note.customer_id > 0 %>
+                                <%= @customer_credit_note.customer.name %>
+                              <% else %>
+                                None
+                              <%end%>
+                            </td></tr></table>
+                          </td>
+                          <td>
+                            <%= link_to image_tag("add_users.png", :title => "Add Customer"), add_customer_customer_credit_note_path(@customer_credit_note)%>
+                          </td>
+                       </tr>
+                    </table>
+                 </td>
+                   
+                    
+                    <td><%= raw @customer_credit_note.status %> </td>
+                  </tr>
+                  </table>
+                <table class="list">
+                  <tr align="left">
+                   <th align="left">Remark</th>
+                </tr>
+                <tr align="left">
+                <td colspan="8"> <%= text_area_tag "customer_credit_note[remark]", @customer_credit_note.remark,{:style=>"width:600px;height:15px; "} %></td>
+                </tr>
+                </table>
+                <p>
+                   <%= submit_tag "Update info" %>
+                </p>
+                <% end %>
+                </div>
+</div>
+    <div class="exFoot">
+        <div class="fLeft"></div>
+        <div class="fRight"></div>
+    </div>
+    </div>
+<script>
+	$(function() {
+		$( "#datepicker" ).datepicker({
+                  buttonImage: "/images/calendar2.png",
+			showOn: "button",
+			
+			buttonImageOnly: true,
+                        dateFormat: 'dd-mm-yy'
+		});
+	});
+	</script>

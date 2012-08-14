@@ -1,0 +1,10 @@
+
+<% if @product_uom.errors.any? %>
+$("#uom_errors").effect("highlight", {}, 3000);
+$("#uom_errors").html("<%= escape_javascript(render "shared/error_messages", :target => @product_uom) %>");
+<% else %>
+/* Reset the comment form */
+$("#new_product_uom")[0].reset();
+
+$("#uom_table").html("<%= escape_javascript(render :partial => '/products/uom_table') %>");
+<% end %>

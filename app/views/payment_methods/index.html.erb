@@ -1,0 +1,49 @@
+<% title "Listing Payment" %>
+
+<%= link_to image_tag("new.png"), new_payment_method_path %>
+<br /><br />
+<%= render "search" %>
+<br><hr/><br>
+<div class="mg10 exhibiton ex01">
+    <div class="exHead">
+        <div class="hTxt">
+           <div class="hTxtContent"><h2>Customers</h2></div>
+        </div>
+        <div class="hLeft"></div>
+        <div class="hRight"></div>
+    </div>
+    <div class="exBody">
+        <div class="content">
+           <%= will_paginate @payments %>
+                  <br />
+                  <table class="list">
+                    <tr>
+                      <th>Payment name</th>
+                      <th>Description</th>
+                      <th>Action</th>
+                    </tr>
+                      <% @payment_methods.each do |payment_method| %>
+                        <tr>
+                          <td align="center"><%= payment_method.payment_name %></td>
+                          <td align="center"><%= payment_method.description %></td>
+                          <td align="center"><%= link_to 'Show', payment_method %>
+                          | <%= link_to 'Edit', edit_payment_method_path(payment_method) %>
+                          | <%= link_to 'Destroy', payment_method, :confirm => 'Are you sure?', :method => :delete %></td>
+                        </tr>
+                      <% end %>
+                      </table>
+
+                  <br />
+                  <%= will_paginate @payments %>
+                  <br />
+                  <br />
+
+
+          </div>
+   </div>
+    <div class="exFoot">
+        <div class="fLeft"></div>
+        <div class="fRight"></div>
+    </div>
+</div>
+

@@ -1,0 +1,25 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  grn_date: 2011-03-01
+  grn_number: MyString
+  do_number: MyString
+  invoice_number: MyString
+  serial_number: MyString
+  remark: MyString
+  supplier_id: 1
+  purchase_order_id: 1
+  voided: false
+  settled: false
+
+two:
+  grn_date: 2011-03-01
+  grn_number: MyString
+  do_number: MyString
+  invoice_number: MyString
+  serial_number: MyString
+  remark: MyString
+  supplier_id: 1
+  purchase_order_id: 1
+  voided: false
+  settled: false

@@ -1,0 +1,16 @@
+<%= form_tag add_customer_sales_order_path(@sales_order) do %>
+<table class="list">
+  <tr>
+    <th>Supplier</th>
+  </tr>
+<% @customer.each do |p| %>
+  <tr> 
+   <td><%= select_tag("item[#{p.id.to_s}][customer_id]", options_for_select(p.name, p.customer_id))  %> </td>
+   <td><%= p.name  %> </td>
+  </tr>
+<% end %>
+</table>
+<%= submit_tag "Add Customer"%>
+<% end %>
+<br />
+

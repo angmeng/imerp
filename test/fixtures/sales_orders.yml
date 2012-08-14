@@ -1,0 +1,21 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  sales_order_date: 2011-03-01
+  sales_order_number: MyString
+  remark: MyString
+  void: false
+  issued_user_id: 1
+  approved_user_id: 1
+  status_id: 1
+  company_id: 1
+
+two:
+  sales_order_date: 2011-03-01
+  sales_order_number: MyString
+  remark: MyString
+  void: false
+  issued_user_id: 1
+  approved_user_id: 1
+  status_id: 1
+  company_id: 1

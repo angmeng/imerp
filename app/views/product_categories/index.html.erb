@@ -1,0 +1,45 @@
+<% title "Listing Product Categories" %>
+<%= link_to image_tag("new.png"), new_product_category_path %>
+<br /><br />
+<div class="mg10 exhibiton ex01">
+    <div class="exHead">
+        <div class="hTxt">
+           <div class="hTxtContent"><h2>Product Category</h2></div>
+        </div>
+        <div class="hLeft"></div>
+        <div class="hRight"></div>
+    </div>
+    <div class="exBody">
+        <div class="content">
+            <%= will_paginate @product_categories %>
+            <table class="list">
+
+              <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Disabled</th>
+                <th>Action</th>
+
+              </tr>
+
+            <% @product_categories.each do |product_category| %>
+              <tr class="<%= cycle "odd", "even"  %> " style="text-align: center">
+                <td><%= product_category.name %></td>
+                <td><%= product_category.description %></td>
+                <td><%= product_category.disabled %></td>
+                <td><%= link_to 'Show', product_category %>
+                | <%= link_to 'Edit', edit_product_category_path(product_category) %>
+                | <%= link_to 'Destroy', product_category, :confirm => 'Are you sure?', :method => :delete %></td>
+              </tr>
+            <% end %>
+            </table>
+
+            <br />
+</div>
+</div>
+    <div class="exFoot">
+        <div class="fLeft"></div>
+        <div class="fRight"></div>
+    </div>
+    </div>
+

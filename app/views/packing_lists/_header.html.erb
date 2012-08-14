@@ -1,0 +1,26 @@
+  <table align="center">
+    <% @settings.each do |setting| %>
+   <tr>
+     <td align="center" style="font-size: 28"><%= setting.company_name rescue'-' %></td>
+   </tr>
+   <tr>
+     <td align="center"><%= setting.company_address_one rescue'-' %></td>
+   </tr>
+   <tr>
+     <td align="center"><%= setting.company_address_two rescue'-' %></td>
+   </tr>
+   <tr>
+     <td align="center">
+       <%= setting.company_postcode rescue'-'  %>,
+       <%= setting.company_city rescue'-' %>,
+       <%= setting.company_country rescue'-' %>
+     </td>
+   </tr>
+   <tr>
+     <td align="center">
+      &nbsp;&nbsp; TEL NO: <%= setting.phone_number rescue'-'  %>  &nbsp;
+            FAX NO: <%= setting.fax_number rescue'-' %>
+     </td>
+   </tr>
+   <% end %>
+ </table>

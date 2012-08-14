@@ -1,0 +1,24 @@
+<%= form_for @search, :url => {:action => "item_new_page"} do |f| %>
+
+  <table class="list" style="width: auto">
+    <tr>
+      <th>DO No</th>
+      <th>DO Date</th>
+     
+      
+      <th></th>
+    </tr>
+    <tr>
+      <td align="center"><%= f.text_field :delivery_order_number_like %></td>
+      <td><input type="text" size="24"id="datepicker" name="search[delivery_order_date_equals]"/></td>
+     
+       <td><%= f.submit  "Search"%></td>
+    </tr>
+</table>
+<% end %>
+<script>
+                  $(function() {
+                          $( "#datepicker" ).datepicker();
+
+                  });
+                  </script>

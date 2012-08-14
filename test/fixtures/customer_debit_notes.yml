@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  cust_debit_note_number: MyString
+  cust_debit_note_date: 2011-03-22
+  remark: MyString
+  voided: false
+  posted: false
+  customer_id: 1
+
+two:
+  cust_debit_note_number: MyString
+  cust_debit_note_date: 2011-03-22
+  remark: MyString
+  voided: false
+  posted: false
+  customer_id: 1

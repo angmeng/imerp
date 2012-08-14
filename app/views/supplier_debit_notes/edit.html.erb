@@ -1,0 +1,16 @@
+<% content_for :head do %>
+  <%= javascript_include_tag "smo" %>
+<% end %>
+
+<%= render 'menu' %>
+
+ <% unless @supplier_debit_note.settled? or @supplier_debit_note.voided? %>
+    <%= render "update_info" %>
+   <br><hr/>
+    <%= render "update_sdn_item" %>
+   
+ <% else %>
+     <%= render "show_supplier" %>
+     <br><hr/>
+     <%= render "sdn_sattled" %>
+<% end %>

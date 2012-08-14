@@ -1,0 +1,13 @@
+<%= simple_form_for(@product_rack) do |f| %>
+  <%= render "shared/error_messages", :target => @product_rack %>
+
+  <div class="inputs">
+    <%= f.input :name %>
+    <%= f.input :description, :input_html => {:size => "40x2"} %>
+    <%= f.input :disabled %>
+  </div>
+
+  <div class="actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

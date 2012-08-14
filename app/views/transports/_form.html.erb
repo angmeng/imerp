@@ -1,0 +1,55 @@
+
+  <%= form_for(@transport) do |f| %>
+<%= render "shared/error_messages", :target => @transport %>
+
+<table>
+      <tr>
+        <th>Code</th><td><%=f.text_field  :code %></td>
+      </tr>
+      <tr>
+         <th>Name</th><td><%= f.text_field  :name %></td>
+      </tr>
+      <tr>
+        <th>Company No</th><td><%=  f.text_field  :company_number %></td>
+      </tr>
+       <tr>
+        <th>Address</th><td><%=  f.text_field  :address %></td>
+      </tr>
+
+      <tr>
+        <th>Postcode</th><td valign="top"><%=f.text_field  :postcode%></td>
+      </tr>
+      <tr>
+         <th>City</th><td><%= f.select :city_id, City.all.map {|c|[c.name, c.id]} %></td>
+      </tr>
+       <tr>
+        <th>Email</th><td><%=f.text_field  :email %></td>
+      </tr>
+      <tr>
+         <th>Office Contact</th><td><%= f.text_field  :office_contact %></td>
+      </tr>
+      <tr>
+        <th>Office Contact 2</th><td><%=  f.text_field  :office_contact2 %></td>
+      </tr>
+       <tr>
+        <th>Fax number</th><td><%=  f.text_field  :fax_number %></td>
+      </tr>
+      <tr>
+         <th>Contact Person</th><td><%=  f.text_field  :contact_person  %></td>
+      </tr>
+      <tr>
+        <th>Contact Number</th><td valign="top"><%=f.text_field  :contact_number%></td>
+      </tr>
+       <tr>
+        <th>Term</th><td><%=  f.text_field  :term %></td>
+      </tr>
+      <tr>
+         <th>Remark</th><td><%=  f.text_field  :remark  %></td>
+      </tr>
+
+</table>
+
+
+    <%= f.submit 'Submit' %>
+
+<% end %>

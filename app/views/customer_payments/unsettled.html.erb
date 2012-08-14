@@ -1,0 +1,30 @@
+<br />
+<%= link_to "Back", customer_payments_path %>
+<%= will_paginate @customer_payment %>
+<br />
+
+<table class="list">
+  <tr>
+    <th>Customer payment date</th>
+    <th>Customer payment Number</th>
+    <th>Customer</th>
+    <th>Status</th>
+    <th>Voided</th>
+    <th>Action</th>
+  </tr>
+
+<% @customer_payments.each do |customer_payment| %>
+  <tr class="<%= cycle "odd", "even"  %> " style="text-align: center">
+    <td><%= customer_payment.cust_payment_date %></td>
+    <td><%= customer_payment.cust_payment_number %></td>
+    <td><%= customer_payment.customer.name rescue "-" %></td>
+    <td align="center"><%=raw customer_payment.status %></td>
+    <td><%= customer_payment.voided %></td>
+    <td>  <%= link_to 'Edit', edit_customer_payment_path(customer_payment) %> |
+    <%= link_to 'Destroy', customer_payment, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+<br />
+<%= will_paginate @customer_payments %>
+<br />

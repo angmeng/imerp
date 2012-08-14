@@ -1,0 +1,152 @@
+<% content_for :head do %>
+  <%= javascript_include_tag("smo") %>
+<% end %>
+<script>
+	$(function() {
+		$( "#datepicker" ).datepicker({
+                  buttonImage: "/images/calendar2.png",
+			showOn: "button",
+
+			buttonImageOnly: true,
+                        dateFormat: 'dd-mm-yy'
+		});
+	});
+	</script>
+<% title 'New Goods Receive Note'  %>
+<%= link_to 'Back', goods_receive_notes_path %>
+<br /><br />
+<div class="mg10 exhibiton ex01">
+    <div class="exHead">
+        <div class="hTxt">
+          <div class="hTxtContent"><h2>New GRN Form</h2></div>
+        </div>
+        <div class="hLeft"></div>
+        <div class="hRight"></div>
+    </div>
+    <div class="exBody">
+        <div class="content">
+              <% if @po %>
+              <%= form_for(@goods_receive_note)  do |f| %>
+                 <%= render "shared/error_messages", :target => @goods_receive_note %>
+
+                <p>
+                  <%= f.label :grn_date %><br />
+                   <input type="text" size="12" id="datepicker" name="goods_receive_note[grn_date]" value="<%= Date.today.strftime("%d-%m-%Y")%>"/>
+                </p>
+                  <p>
+                  <%= f.label :serial_number %><br />
+                  <%= f.text_field :serial_number %>
+                </p>
+                 <p>
+                  <%= f.label :do_number, "DO No" %><br />
+                  <%= f.text_field :do_number %>
+                </p>
+                  <p>
+                  <%= f.label :invoice_number, "Invoice No" %><br />
+                  <%= f.text_field :invoice_number %>
+                </p>
+                <p>
+                  <%= f.label :remark %><br />
+                  <%= f.text_area :remark, :size => "60x4" %>
+                </p>
+                <br />
+                <hr />
+                Search PO No :
+                <%= text_field_tag "po_number" %>
+                <%= submit_tag "Search" %>
+
+                <br />
+               <%= link_to "Settled PO", show_settled_po_goods_receive_notes_path %>
+                <table class="list">
+                  <tr>
+                    <th></th>
+                    <th>Date</th>
+                    <th>PO No</th>
+                     <th>Status</th>
+                    <th>Supplier</th>
+                  </tr>
+                <% @po.each do |p|  %>
+                  <tr>
+                    <td align="center"><%= f.radio_button :purchase_order_id, p.id  %></td>
+                    <td align="center"><%= p.purchase_order_date.strftime("%d-%m-%Y")  %> </td>
+                    <td align="center"><%= p.purchase_order_number  %> </td>
+                    <td align="center"><%=  raw p.current_status rescue "-"  %> </td>
+                    <td align="center"><%= p.supplier.name rescue "-"  %> </td>
+                  </tr>
+
+                <% end %>
+                </table>
+                  <p>
+                  <%= f.submit 'Import Item' if @po.any?%>
+                </p>
+                <% end %>
+              <% else %>
+                <%= form_for(@goods_receive_note) do |f| %>
+                <%= render "shared/error_messages", :target => @goods_receive_note %>
+
+               <p>
+                  <%= f.label :grn_date %><br />
+                  <input type="text" size="12" id="datepicker" name="goods_receive_note[grn_date]" value="<%= @goods_receive_note.grn_date.strftime("%d-%m-%Y") %>"/>
+                </p>
+                  <p>
+                  <%= f.label :serial_number %><br />
+                  <%= f.text_field :serial_number %>
+                </p>
+                 <p>
+                  <%= f.label :do_number, "DO No" %><br />
+                  <%= f.text_field :do_number %>
+                </p>
+                  <p>
+                  <%= f.label :invoice_number, "Invoice No" %><br />
+                  <%= f.text_field :invoice_number %>
+                </p>
+                <p>
+                  <%= f.label :remark %><br />
+                  <%= f.text_area :remark, :size => "60x4" %>
+                </p>
+                <br />
+                <hr />
+                <br />
+               <%= hidden_field_tag "purchase_order_id", @purchase_order.id  %>
+                <h3>Import from PO : <%= @purchase_order.purchase_order_number %> Supplier : <%= @purchase_order.supplier.name  %> </h3>
+                 <table class="list">
+                  <tr>
+                    <th>All <br /><input type="checkbox" name="checkall" onclick="checkUncheckAll(this);"/></th>
+                    <th align="left">Code</th>
+                    <th align="left">Description</th>
+                    <th align="left">UOM</th>
+                    <th>Quantity</th>
+                  </tr>
+                <% if @items.any?  %>
+                 <% @items.each do |p|  %>
+                  <tr>
+                    <td align="center"><%= check_box_tag "purchase_order_item[#{p.id.to_s}][selected]"  %>
+
+                    </td>
+                    <td><%= p.product.code %> </td>
+                    <td><%= p.product.full_description %> </td>
+                    <td><%= p.product_uom.name rescue "-"  %> </td>
+                    <td align="center"><%=  p.quantity - p.collected_quantity  %> </td>
+                  </tr>
+
+                <% end %>
+              <% else  %>
+               <tr>
+                <td style="color:red">  <%= " Item is already added......" %></td>
+              </tr>
+               <% end %>
+                </table>
+                  <p>
+                  <%= f.submit 'Create' if @items.any?%>
+                </p>
+              <% end %>
+              <% end %>
+</div>
+   </div>
+    <div class="exFoot">
+        <div class="fLeft"></div>
+        <div class="fRight"></div>
+    </div>
+</div>
+
+

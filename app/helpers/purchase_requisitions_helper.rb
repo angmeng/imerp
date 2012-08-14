@@ -1,0 +1,2 @@
+module PurchaseRequisitionsHelper
+end

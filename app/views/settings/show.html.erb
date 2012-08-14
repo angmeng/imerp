@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Company name:</b>
+  <%= @setting.company_name %>
+</p>
+
+<p>
+  <b>Company address one:</b>
+  <%= @setting.company_address_one %>
+</p>
+
+<p>
+  <b>Company address two:</b>
+  <%= @setting.company_address_two %>
+</p>
+
+<p>
+  <b>Company postcode:</b>
+  <%= @setting.company_postcode %>
+</p>
+
+<p>
+  <b>Company city:</b>
+  <%= @setting.company_city %>
+</p>
+
+<p>
+  <b>Company country:</b>
+  <%= @setting.company_country %>
+</p>
+
+<p>
+  <b>Product prefix code:</b>
+  <%= @setting.product_prefix_code %>
+</p>
+
+<p>
+  <b>Product last number:</b>
+  <%= @setting.product_last_number %>
+</p>
+
+
+<%= link_to 'Edit', edit_setting_path(@setting) %> |
+<%= link_to 'Back', settings_path %>

@@ -1,0 +1,17 @@
+<table>
+  <tr>
+    <td><h3>Mixed Items</h3></td>
+    <td><%= link_to "Add mixed item", show_products_mixed_product_path(@product), :name => "mixed_items" %>
+</td>
+  </tr>
+</table>
+
+<br />
+<div id="mixed_flash"></div>
+<br />
+
+<%= form_tag update_quantity_mixed_product_path(@product), :remote => true do %>
+  <div id="mixed_table">
+    <%= render :partial => "mixed_table" %>  
+  </div>
+<% end %>

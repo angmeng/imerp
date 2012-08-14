@@ -1,0 +1,44 @@
+<div class="mg10 exhibiton ex01">
+    <div class="exHead">
+        <div class="hTxt">
+            <div class="hTxtContent"><h2>Product</h2></div>
+        </div>
+        <div class="hLeft"></div>
+        <div class="hRight"></div>
+    </div>
+    <div class="exBody">
+        <div class="content">
+      <table class="list"  style="height: auto">
+          <tr>
+             <th align="center">Store Location</th>
+            <th align="center">UOM</th>
+            
+             <th align="right">On Hand</th>
+            
+          </tr>
+         <% total = 0 %>
+         <% @result.each do |v| %>
+         
+          <% total += v.quantity%>
+	<tr class="<%= cycle "odd", "even"  %> " style="text-align: center">
+           <td align="center"><%= v.stock_location.fullname rescue "-" %> </td>
+           <td align="center"><%= v.product_uom_item.product_uom.name  %> </td>
+           <td align="right"><%= v.quantity %> </td>
+       </tr>
+       <% end %>
+       <tr>
+         <td></td>
+         <td align="center"><strong>Total </strong></td>
+         <td colspan="2"align="right"><%= total %>  </td>
+       </tr>
+               
+                
+      </table>
+ 
+  </div>
+   </div>
+    <div class="exFoot">
+        <div class="fLeft"></div>
+        <div class="fRight"></div>
+    </div>
+</div>

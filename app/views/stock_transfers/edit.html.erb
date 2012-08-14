@@ -1,0 +1,15 @@
+<% content_for :head do %>
+  <%= javascript_include_tag "smo" %>
+<% end %>
+
+<%= render 'menu' %>
+ <% unless @stock_transfer.settled? or  @stock_transfer.voided?%>
+    <%= render "update_stock_transfer" %>
+   <br><hr/>
+    <%= render "update_stock_transfer_item" %>
+    
+ <% else %>
+     <%= render "show_stock_transfer" %>
+    <br><hr/><br>
+     <%= render "show_stock_transfer_item" %>
+ <% end %>

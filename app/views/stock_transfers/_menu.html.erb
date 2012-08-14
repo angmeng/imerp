@@ -1,0 +1,14 @@
+  <%= link_to image_tag("home.png", :title => "View All"), stock_transfers_path %> |
+  <%= link_to image_tag("new.png", :title => "New"), new_stock_transfer_path %> |
+  <%= link_to image_tag("delete.png", :title => "Delete"), @stock_transfer, :confirm => 'Are you sure you want to delete this Stock Transfer?', :method => :delete %> |
+  <%= link_to image_tag("print.png", :title => "Print"), preview_stock_transfer_path(@stock_transfer), {:target => "_blank"} %>
+  <% unless @stock_transfer.voided?  %>
+  <% unless @stock_transfer.posted?  %>
+  <% unless @stock_transfer.settled? %>
+    | <%= link_to 'Settle', settle_stock_transfer_path(@stock_transfer, :status_id => 1), :confirm => "Are you sure you want to settle this Stock Transfer ?" %>
+  <% else %>
+    | <%= link_to 'UnSettle', settle_stock_transfer_path(@stock_transfer, :status_id => 2), :confirm => "Are you sure you want to unsettle this stock transfer  ?" %> 
+    | <%= link_to 'Post Quantity', post_quantity_stock_transfer_path(@stock_transfer), :confirm => "Are you sure you want to post the quantity ?" %>
+  <% end %>
+<% end %>
+ <% end %>

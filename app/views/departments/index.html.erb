@@ -1,0 +1,43 @@
+
+<% title "Listing departments" %>
+<%= link_to image_tag("new.png"), new_department_path %>
+<br /><br />
+<div class="mg10 exhibiton ex01">
+    <div class="exHead">
+        <div class="hTxt">
+           <div class="hTxtContent"><h2>Department</h2></div>
+        </div>
+        <div class="hLeft"></div>
+        <div class="hRight"></div>
+    </div>
+    <div class="exBody">
+        <div class="content">
+          <table class="list">
+            <tr>
+              <th style="text-align: left">Name</th>
+              <th style="text-align: left">Description</th>
+              <th>Action</th>
+
+            </tr>
+
+          <% @departments.each do |department| %>
+            <tr class="<%= cycle "odd", "even"  %> ">
+              <td><%= department.name %></td>
+              <td><%= department.description %></td>
+              <td style="text-align: center"><%= link_to 'Show', department %>
+              | <%= link_to 'Edit', edit_department_path(department) %>
+              | <%= link_to 'Destroy', department, :confirm => 'Are you sure?', :method => :delete %></td>
+            </tr>
+          <% end %>
+          </table>
+
+    </div>
+   </div>
+    <div class="exFoot">
+        <div class="fLeft"></div>
+        <div class="fRight"></div>
+    </div>
+</div>
+
+
+

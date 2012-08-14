@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  invoice_id: 1
+  delivery_order_id: 1
+  amount: 9.99
+  remark: MyString
+
+two:
+  invoice_id: 1
+  delivery_order_id: 1
+  amount: 9.99
+  remark: MyString

@@ -1,0 +1,18 @@
+<% content_for :head do %>
+  <%= javascript_include_tag "smo" %>
+<% end %>
+
+<%= render '/shared/tab2' %>
+<%= render 'menu' %>
+  <% if @sales_order.approved? %>
+      <% unless @sales_order.packing_lists.empty? %>
+            <%= render "packing_lists"  %><br> <hr/><br>
+      <%end %>
+ <%end %>
+<%= render 'show_so' %><br> <hr/>
+<% if @sales_order.approved? or @sales_order.void? %>
+<br><%= render 'show_item' %>
+<% else %>
+  <%= render 'update_item' %>
+<hr/>
+<% end %>

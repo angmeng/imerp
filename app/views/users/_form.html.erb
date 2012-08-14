@@ -1,0 +1,40 @@
+<%= form_for(@user) do |f| %>
+<%= render "shared/error_messages", :target => @user %>
+
+  <div class="field">
+    <%= f.label :login %><br />
+    <%= f.text_field :login %>
+  </div>
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.text_field :email %>
+  </div>
+  <div class="field">
+    <%= f.label :department_id %><br />
+    <%= f.select :department_id, @departments.map {|c| [c.name, c.id]} %>
+  </div>
+  <div class="field">
+   <%= f.label :password, f.object.new_record? ? nil : "Change password" %><br />
+   <%= f.password_field :password %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation %>
+  </div>
+    
+  <div class="field">
+    <%= f.label :disabled %><br />
+    <%= f.check_box :disabled %>
+  </div>
+
+<br />
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

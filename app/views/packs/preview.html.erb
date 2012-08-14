@@ -1,0 +1,161 @@
+<%= stylesheet_link_tag 'print',:media => "print"%>
+
+<a href="#" onclick="window.print();return false;">Print</a>
+
+<div class="print">
+<table align="center">
+    <% @settings.each do |setting| %>
+   <tr>
+     <td align="center" style="font-size: 28"><%= setting.company_name rescue'-' %></td>
+   </tr>
+   <tr>
+     <td align="center"><%= setting.company_address_one rescue'-' %></td>
+   </tr>
+   <tr>
+     <td align="center"><%= setting.company_address_two rescue'-' %></td>
+   </tr>
+   <tr>
+     <td align="center">
+       <%= setting.company_postcode rescue'-'  %>,
+       <%= setting.company_city rescue'-' %>,
+       <%= setting.company_country rescue'-' %>
+     </td>
+   </tr>
+   <tr>
+     <td align="center">
+       TEL NO: <%= setting.phone_number rescue'-'  %>  &nbsp;
+            FAX NO: <%= setting.fax_number rescue'-' %>
+     </td>
+   </tr>
+   <% end %>
+ </table>
+<br>
+<table style="width: 100%">
+    <tr>
+      <td  style="width: 40%">
+        <table  style=" border:solid" >
+          <tr>
+            <td align ="right" style="width: 10%"><strong>User : </strong> </td>
+            <td>&nbsp;&nbsp;<%= @pack.user.name %></td>
+          </tr>
+          <tr>
+            <td align ="right" style="width: 10%"><strong>Email:</strong> </td>
+            <td>&nbsp;&nbsp;<%= @pack.user.email %></td>
+         </tr>
+        </table>
+      </td>
+      <td style="width: 5%"></td>
+     <td style="width: 45%">
+        <table>
+           <tr>
+            <td align ="right"><strong>Pack No : </strong> </td>
+            <td>&nbsp;&nbsp;<%= @pack.pack_number %></td>
+           </tr>
+           <tr>
+            <td align ="right" ><strong>Date : </strong> </td>
+            <td>&nbsp;&nbsp;<%= @pack.pack_date.strftime("%d-%m-%Y") %></td>
+           </tr>
+           <tr>
+             <td align ="right" ><strong>Pack Type : </strong> </td>
+             <td>
+              <% if @pack.packing? %>
+              &nbsp;&nbsp;  <%= "Pack"%>
+             <% else %>
+              &nbsp;&nbsp;<%= "Unpack"%>
+              <% end %>
+             </td>
+          </tr>
+      </table>
+     </td>
+   </tr>
+ </table><br><br>
+            <table width="100%" cellpadding="2" cellspacing="0">
+              <tr>
+                 <th width="8%" align="left"style="border-bottom:outset "> No </th>
+                 <th width="10%" align="left"style="border-bottom:outset ">Code</strong></th>
+                 <th width="20%" align="left"style="border-bottom:outset ">Description</strong></th>
+                 <th width="10%" align="center"style="border-bottom:outset ">UOM</strong></th>
+                 <th width="10%" align="center"style="border-bottom:outset ">Stock location</strong></th>
+                 <th width="10%" align="right"style="border-bottom:outset ">Quantity</strong></th>
+                 <th width="10%" align="right"style="border-bottom:outset ">Cost</strong></th>
+                     </tr>
+
+                      <% line = 0 %>
+                  <% @pack.pack_items.each do |p| %>
+                      <% line += 1%>
+                    <tr class="<%= cycle "odd", "even"  %> ">
+                       <td align="left"><%= line.to_s %></td>
+                      <td style="text-align: left"><%= p.product.code  %></td>
+                      <td style="text-align: left"><%= p.product.full_description  %> </td>
+                      <td style="text-align: center"><%= p.product_uom.name %> </td>
+                      <td style="text-align: center"><%= p.stock_location.product_rack.name rescue "-"%> </td>
+                      <td style="text-align: right"><%= p.quantity %> </td>
+                      <td style="text-align: right"><%= p.cost  %> </td>
+                    </tr>
+                    <tr>
+                      <td></td>
+                       <td colspan="5">
+                         <table class="list">
+                         <tr>
+                         <th  width="10%"  align="left"><strong>Code</strong></th>
+                          <th width="10%" align="left"><strong>Description</strong></th>
+                          <th width="10%" align="center"><strong>UOM</strong></th>
+                          <th width="10%" align="center"><strong>Stock location</strong></th>
+                          <th width="10%" align="center"><strong>Quantity</strong></th>
+
+                        </tr>
+
+                          <% p.pack_item_subitems.each do |a| %>
+                          <tr class="<%= cycle "odd", "even"  %> ">
+                            <td style="text-align: left"><%= a.product.code  %></td>
+                            <td style="text-align: left"><%= a.product.full_description  %> </td>
+                            <td style="text-align: center"><%= a.product_uom.name rescue'-' %> </td>
+                            <td style="text-align: center"><%= a.stock_location.product_rack.name rescue "-"%> </td>
+                            <td style="text-align: center"><%= a.quantity %> </td>
+
+                          </tr>
+                           <% end %>
+                        </tr>
+                        </table>
+                        </td>
+                       <td></td>
+                    </tr>
+                  
+                   <% end %>
+                  </table>
+
+ <div style="margin-top:60%">
+ <hr>
+  
+  <br>
+<hr>
+<table>
+  <tr>
+    <td> Term and Condition:-</td>
+  </tr>
+   <tr>
+    <td>1. Post-dated cheque with only be treated as payment after debited to our account.</td>
+  </tr>
+   <tr>
+    <td>2. Interest of 2% per month will be charges on overdue accounts.</td>
+  </tr>
+   <tr>
+    <td>3. No cash payment allowed unless special approval granted from our company's</td>
+  </tr>
+</table>
+<hr>
+
+<table style="width:100%">
+  <tr>
+    <td>Issued by:</td>
+  </tr>
+  <tr>
+
+    <td style="height: 150px;margin-right: 50px">------------------------<br></td>
+    <td></td>
+
+  </tr>
+</table>
+             
+ </div>
+ </div>

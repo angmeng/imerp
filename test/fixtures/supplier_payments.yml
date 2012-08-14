@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  supplier_payment_number: MyString
+  supplier_payment_date: 2011-03-28
+  remark: MyString
+  voided: false
+  supplier_id: 1
+
+two:
+  supplier_payment_number: MyString
+  supplier_payment_date: 2011-03-28
+  remark: MyString
+  voided: false
+  supplier_id: 1

@@ -1,0 +1,16 @@
+<% content_for :head do %>
+  <%= javascript_include_tag "smo" %>
+<% end %>
+
+<%= render 'menu' %>
+
+ <% unless @stock_disposal.settled? or @stock_disposal.voided? %>
+    <%= render "update_stock_disposal" %>
+   <br/><hr/>
+    <%= render "update_stock_disposal_item" %>
+    
+ <% else %>
+     <%= render "show_stock_disposal" %>
+     <br/><hr/><br/>
+     <%= render "show_stock_disposal_item" %>
+ <% end %>

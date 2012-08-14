@@ -1,0 +1,97 @@
+<%= form_tag update_info_sales_order_path(@sales_order) do %>
+<div class="mg10 exhibiton ex01">
+    <div class="exHead">
+        <div class="hTxt">
+           <div class="hTxtContent"><h2>SO Details</h2></div>
+        </div>
+        <div class="hLeft"></div>
+        <div class="hRight"></div>
+    </div>
+    <div class="exBody">
+        <div class="content">
+             
+            <table class="list">
+               <tr>
+                <th>SO No</th>
+                 <th>Date</th>
+                <th>Salesman</th>
+                <th>Issued By</th>
+                <th>Approved By</th>
+                <th>Status</th>
+
+              </tr>
+              <tr align="center">
+                <td><%= @sales_order.sales_order_number %></td>
+                 
+                    <%unless @sales_order.approved?%>
+                      
+                      <td><input type="text" size="12" id="datepicker" name="sales_order[sales_order_date]" value="<%= @sales_order.sales_order_date.strftime("%d-%m-%Y") %>"/></td>
+                      <td><%=  @sales_order.salesman.name rescue "-" %></td>
+                    <% else %>
+                     <td><%=  @sales_order.sales_order_date%></td>
+                     <td><%=  @sales_order.salesman.name rescue "-" %></td>
+                    <% end %>
+                    <td><%= @sales_order.issued_user.name rescue "-" %></td>
+                <td><%= @sales_order.approved_user.name rescue "-" %></td>
+                <% if @sales_order.void? %>
+                    <td><%=raw @sales_order.void_status %></td>
+                <%else%>
+                    <td><%=raw @sales_order.status %></td>
+                 <% end %>
+              </tr>
+            </table>
+           <%unless @sales_order.approved?  or @sales_order.void?%>
+                  <table class="list">
+                    <tr>
+                     <th align="left">Customer</th>
+                     <th align="left"></th>
+                     <th align="right">Remark</th>
+                    </tr>
+                    <tr align="left">
+                       <td width="350"style="background-color:lavender">
+                            <table width="350"><tr><td bgcolor="#ffffff">
+                                   <% if @sales_order.customer_id > 0 %>
+                                <%= @sales_order.customer.name %>
+                              <% else %>
+                                <%= "None"%>
+                              <%end%>
+                            </td></tr></table>
+                          </td>
+                          <td>
+                            <%= link_to image_tag("add_users.png", :title => "Add Customer"), add_customer_sales_order_path(@sales_order)%>
+                          </td>
+                      <td align="right"> <%= text_area_tag "sales_order[remark]", @sales_order.remark,{:style=>"width:600px;height:15px; "}%></td>
+                    </tr>
+                  </table>
+                  <%= submit_tag "Update info" %>
+            <% else %>
+                <table class="list">
+                  <tr align="left">Customer</th>
+                   <th align="Right">Remark</th>
+                  </tr>
+                  <tr align="left">
+                    <td align="left"> <%=  @sales_order.customer.name rescue"-"%></td>
+                    <td align="right"> <%=  @sales_order.remark %></td>
+                  </tr>
+                </table>
+           <% end %>
+  </div>
+   </div>
+    <div class="exFoot">
+        <div class="fLeft"></div>
+        <div class="fRight"></div>
+    </div>
+</div>
+
+
+   <% end %>
+<script>
+	$(function() {
+		$( "#datepicker" ).datepicker({
+			showOn: "button",
+			buttonImage: "/images/calendar2.png",
+			buttonImageOnly: true,
+                        dateFormat: 'dd-mm-yy'
+		});
+	});
+	</script>

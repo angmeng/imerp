@@ -1,0 +1,6 @@
+<%= link_to image_tag("home.png"), delivery_orders_path %> |
+<%= link_to image_tag("print.png"), preview_delivery_order_path(@delivery_order), :target => "_blank" %> 
+<% unless @delivery_order.posted? or  @delivery_order.voided?  %>
+ | <%= link_to 'Settle', settle_delivery_order_path(@delivery_order, :status_id => 1), :confirm => "Are you sure you want to settle this DO ?" %>
+  
+<% end %>

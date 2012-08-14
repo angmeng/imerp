@@ -1,0 +1,51 @@
+<% title "Listing Customer Payment" %>
+
+<%= link_to image_tag("new.png", :title => "new"), new_customer_payment_path %>
+<br /><br />
+<%= render "search" %>
+<br />
+<hr />
+<br />
+<div class="mg10 exhibiton ex01">
+        <div class="exHead">
+            <div class="hTxt">
+               <div class="hTxtContent"><h2>Customer Payment</h2></div>
+            </div>
+            <div class="hLeft"></div>
+            <div class="hRight"></div>
+        </div>
+        <div class="exBody">
+            <div class="content">
+                <%= will_paginate @customer_payment %>
+                  <br />
+
+                  <table class="list">
+                    <tr>
+                      <th>Date</th>
+                      <th>Customer Payment Number</th>
+                     <th align="left">Customer</th>
+                      <th>Status</th>
+                      <th>Void Status</th>
+                      <th>Action</th>
+                    </tr>
+
+                  <% @customer_payments.each do |customer_payment| %>
+                    <tr class="<%= cycle "odd", "even"  %> " style="text-align: center">
+                      <td><%= customer_payment.cust_payment_date.strftime("%d-%m-%Y") %></td>
+                      <td><%= customer_payment.cust_payment_number %></td>
+                      <td align="left"><%= customer_payment.customer.name rescue "-" %></td>
+                      <td align="center"><%=raw customer_payment.status %></td>
+                      <td><%= raw customer_payment.void_status %></td>
+                      <td>  <%= link_to 'Edit', edit_customer_payment_path(customer_payment) %> |
+                      <%= link_to 'Destroy', customer_payment, :confirm => 'Are you sure?', :method => :delete %></td>
+                    </tr>
+                  <% end %>
+                  </table>
+                  
+</div>
+</div>
+    <div class="exFoot">
+        <div class="fLeft"></div>
+        <div class="fRight"></div>
+    </div>
+    </div>

@@ -1,0 +1,58 @@
+<% title "Listing Transport" %>
+
+<%= link_to image_tag("new.png"), new_transport_path %>
+<br /><br />
+<%= render "search" %>
+<br><hr/><br>
+<div class="mg10 exhibiton ex01">
+    <div class="exHead">
+        <div class="hTxt">
+           <div class="hTxtContent"><h2>Transport</h2></div>
+        </div>
+        <div class="hLeft"></div>
+        <div class="hRight"></div>
+    </div>
+    <div class="exBody">
+        <div class="content">
+            <%= will_paginate @transports %>
+            <br />
+            <table class="list">
+              <tr>
+                <th align="left">Code</th>
+                <th align="left">Name</th>
+                <th align="left">Company number</th>
+                <th align="left">City</th>
+                <th align="left">Email</th>
+                <th align="left">Office contact</th>
+                <th align="left">Fax number</th>
+                <th align="left">Term</th>
+                <th>Action</th>
+                
+              </tr>
+
+            <% @transports.each do |transport| %>
+              <tr>
+                <td><%= transport.code %></td>
+                <td><%= transport.name %></td>
+                <td><%= transport.company_number %></td>
+                <td><%= transport.city.name rescue"-" %></td>
+                <td><%= transport.email %></td>
+                <td><%= transport.office_contact %></td>
+                <td><%= transport.fax_number %></td>
+                <td><%= transport.term %></td>
+                <td align="center"><%= link_to 'Show', transport %> |
+                <%= link_to 'Edit', edit_transport_path(transport) %> |
+                <%= link_to 'Destroy', transport, :confirm => 'Are you sure?', :method => :delete %></td>
+              </tr>
+            <% end %>
+            </table>
+            <br />
+            <%= will_paginate @customers %>
+            <br />
+            </div>
+   </div>
+    <div class="exFoot">
+        <div class="fLeft"></div>
+        <div class="fRight"></div>
+    </div>
+</div>

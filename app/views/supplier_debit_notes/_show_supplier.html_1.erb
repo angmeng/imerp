@@ -1,0 +1,23 @@
+
+<table class="list">
+   <tr>
+    <th>Credit Note Number</th>
+    <th>Date</th>
+    <th>Supplier</th>
+   </tr>
+   <tr align="center">
+    <td><%=h @supplier_debit_note.supplier_debit_note_number %></td>
+    <td><%= @supplier_debit_note.supplier_debit_note_date%></td>
+    <td><%= @supplier_debit_note.supplier.name %> </td>
+   </tr>
+</table>
+<br/>
+
+<table class="list">
+  <tr align="left">
+   <th align="left">Remark</th>
+</tr>
+<tr align="left">
+<td colspan="8"> <%=  @supplier_credit_note.remark %></td>
+</tr>
+</table>

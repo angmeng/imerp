@@ -1,0 +1,41 @@
+<br />
+<%= link_to "Back", delivery_orders_path %>
+<br/>
+<%= will_paginate  @delivery_orders %>
+<br />
+<table class="list">
+  <thead>
+  <tr>
+    <th align="left">DO No</th>
+    <th align="left">Date</th>
+    <th align="left">S/N</th>
+    <th align="left">PO No</th>
+    <th align="left">Invoice No</th>
+    <th align="left">Packing List No</th>
+    <th align="left">Customer</th>
+    <th>Status</th>
+    <th>Action</th>
+  </tr>
+</thead>
+   <tbody>
+<% @delivery_orders.each do |delivery_order| %>
+    <tr class="<%= cycle("odd", "even") %>">
+    <td><%=h delivery_order.delivery_order_number %></td>
+    <td><%=h delivery_order.delivery_order_date.strftime("%d-%m-%Y") %></td>
+    <td><%=h delivery_order.serial_number %></td>
+    <td><%=h delivery_order.purchase_order_number %></td>
+    <td><%=h delivery_order.invoice_number %></td>
+    <td><%=h delivery_order.packing_list.packing_list_number %></td>
+    <td><%=h delivery_order.customer.name %></td>
+    <td align="center"><%=raw delivery_order.status %></td>
+    <td align="center"><%= link_to 'Show', delivery_order %>
+    <%= link_to 'Edit', edit_delivery_order_path(delivery_order) %>
+    <%= link_to 'Destroy', delivery_order, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+ </tbody>
+</table>
+
+<br />
+
+<%= will_paginate  @delivery_orders %>

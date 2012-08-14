@@ -1,0 +1,165 @@
+<%= stylesheet_link_tag 'print',:media => "print"%>
+
+<a href="#" onclick="window.print();return false;">Print</a>
+
+<div class="print">
+<table align="center">
+    <% @settings.each do |setting| %>
+   <tr>
+     <td align="center" style="font-size: 28"><%= setting.company_name rescue'-' %></td>
+   </tr>
+   <tr>
+     <td align="center"><%= setting.company_address_one rescue'-' %></td>
+   </tr>
+   <tr>
+     <td align="center"><%= setting.company_address_two rescue'-' %></td>
+   </tr>
+   <tr>
+     <td align="center">
+       <%= setting.company_postcode rescue'-'  %>,
+       <%= setting.company_city rescue'-' %>,
+       <%= setting.company_country rescue'-' %>
+     </td>
+   </tr>
+   <tr>
+     <td align="center">
+      &nbsp;&nbsp; TEL NO: <%= setting.phone_number rescue'-'  %>  &nbsp;
+            FAX NO: <%= setting.fax_number rescue'-' %>
+     </td>
+   </tr>
+   <% end %>
+ </table>
+
+<%= image_tag("sales_order.png")%>
+  <table style="width: 100%">
+    <tr>
+      <td  style="width: 45%">
+        <table  style=" border:solid" >
+          <tr>
+          <th align="right"style="width: 10%"><strong>Bill To : </strong> </th>
+          <td style="width: 60%"><%= @sales_order.customer.name %></td>
+          </tr>
+         <tr>
+          <td valign="top"></td>
+          <td> <%= @sales_order.customer.address %><br />
+              <%= @sales_order.customer.postcode %>
+          </td>
+          </tr>
+          <tr>
+          <td align="right"> <strong>Contact: </strong></td>
+          <td> <%= @sales_order.customer.contact_person %>
+               <strong>Tel:  </strong><%= @sales_order.customer.office_contact %>
+               <strong>Fax:  </strong><%= @sales_order.customer.fax_number %>
+          </td>
+          </tr>
+
+
+        </table>
+      </td>
+      <td style="width: 5%"></td>
+     <td style="width: 50%">
+        <table>
+          <tr>
+             <td align="left"><strong>SO Number </strong> </td>
+             <th align="left">&nbsp;:</th>
+             <td>&nbsp;&nbsp;<%= @sales_order.sales_order_number %></td>
+         </tr>
+          <tr>
+            <th align="left">Date </th>
+            <th align="left">&nbsp;:</th>
+            <td>&nbsp;&nbsp;<%= @sales_order.sales_order_date.strftime("%d-%m-%Y") %></td>
+         </tr>
+
+
+        <tr>
+           <td align ="left"><strong>SalesCode</strong> </td>
+          <th align="left">&nbsp;:</th>
+          <td>&nbsp;&nbsp;<%= @sales_order.salesman.code rescue '-'%></td>
+        </tr>
+        <tr>
+            <td align ="left"><strong>Salesman</strong> </td>
+            <th align="left">&nbsp;:</th>
+            <td>&nbsp;&nbsp;<%= @sales_order.salesman.name %></td>
+        </tr>
+        </table>
+
+      </td></tr>
+
+</table>
+    
+
+<fieldset style="width: 96%; height: 1050px; border-style: none">
+<br />
+<table width="100%"  cellpadding="2" cellspacing="0">
+  <tr>
+        <th align="center"style="border-bottom:outset "> No </th>
+        <th align="left"style="border-bottom:outset ">Product</th>
+        <th align="left"style="border-bottom:outset ">Description</th>
+	<th align="left"style="border-bottom:outset ">UOM</th>
+	<th align="right"style="border-bottom:outset ">Quantity</th>
+        <th align="right"style="border-bottom:outset ">Unit Price</th>
+       <th align="right"style="border-bottom:outset ">Discount %</th>
+	<th align="right"style="border-bottom:outset ">Total</th>
+       
+  
+  </tr>
+	
+  <% line = 0 %>
+  <% total = 0.00 %>
+  <% total_quantity = 0.00 %>
+  <% @sales_order.confirmed_items.each do |c|  %>
+  <% line += 1%>
+  <% total += c.total_after_disc %>
+  <% total_quantity += c.quantity %>
+
+  <tr>
+     <td align="center"><%= line.to_s %></td>
+      <td><%= c.product.code %></td>
+     <td><%= c.product.full_description %></td>
+     <td align="left"><%= c.product_uom.name rescue "-" %></td>
+     <td align="right"><%= c.quantity %></td>
+    
+     <td align="right"><%= "%.2f" % c.unit_price %></td>
+      <td align="right"><%=  c.discounts %></td>
+     <td align="right"> <%= number_with_precision(c.total_after_disc, :precision => 2) %></td>
+     
+  </tr>
+  <% end %>
+  
+  
+  
+</table>
+</fieldset>
+
+  <hr>
+  <table style="float:right">
+    <tr>
+      <th> TOTAL AMOUNT: </th>
+      <td>
+        <table style="border:solid; float:right" >
+          <tr>
+              <th style="text-align: right"> <%= "%.2f" % total %></th>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+  <br/>
+  <br>
+<hr>
+<table style="width:100%">
+  <tr>
+    <td>Received by:</td><td></td><td align="center">Issued by:</td><td></td><td style="text-align:right;margin-right: 50px">Approved By:</td>
+  </tr>
+  <tr>
+    <td style="height: 150px">---------------------------------------------- <br>Authorized Signature & Company Stamp</td>
+    <td></td>
+    <td style="text-align:center ;height: 150px;margin-right: 50px">------------------------<br></td>
+    <td></td>
+    <td style="text-align:right;height: 150px;margin-right: 50px">------------------------<br></td>
+  </tr>
+</table>
+</div>
+
+
+

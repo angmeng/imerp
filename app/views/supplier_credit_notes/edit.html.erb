@@ -1,0 +1,20 @@
+<% content_for :head do %>
+  <%= javascript_include_tag "smo" %>
+<% end %>
+
+<% content_for :head do %>
+  <%= javascript_include_tag "smo" %>
+<% end %>
+
+<%= render 'menu' %>
+
+ <% unless @supplier_credit_note.settled? or @supplier_credit_note.voided? %>
+    <%= render "update_info" %>
+<br><hr/>
+    <%= render "update_scn_item" %>
+   
+ <% else %>
+     <%= render "show_supplier" %>
+     <br><hr/>
+     <%= render "scn_sattled" %>
+<% end %>

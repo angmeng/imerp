@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  product_uom_id: 1
+  price_level_id: 1
+  selling_price: 9.99
+
+two:
+  product_uom_id: 1
+  price_level_id: 1
+  selling_price: 9.99

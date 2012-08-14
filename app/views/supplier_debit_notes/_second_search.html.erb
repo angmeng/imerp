@@ -1,0 +1,18 @@
+<%= form_tag add_auto_complete_item_supplier_debit_note_path(@supplier_debit_note) do %>
+<br><br>
+<table>
+  <tr>
+    <th>Code</th>
+
+   <td>
+        <%=  text_field "supplier_debit_note", "product_tokens"  %>
+   </td>
+
+     <td><%= submit_tag "Add item" %></td>
+  </tr>
+</table>
+
+
+
+<%  end %>
+

@@ -1,0 +1,60 @@
+<% title "Add product to Rack"%>
+<br />
+<%= link_to "Back", edit_product_rack_path(@product_rack) %>
+<br />
+<div class="mg10 exhibiton ex01">
+    <div class="exHead">
+        <div class="hTxt">
+           <div class="hTxtContent"><h2>Product Rack Update Form</h2></div>
+        </div>
+        <div class="hLeft"></div>
+        <div class="hRight"></div>
+    </div>
+    <div class="exBody">
+        <div class="content">
+
+          <%= render '/products/search_form'%>
+</div>
+   </div>
+    <div class="exFoot">
+        <div class="fLeft"></div>
+        <div class="fRight"></div>
+    </div>
+</div>
+<br />
+<%= will_paginate @products %>
+<br />
+<%= form_tag add_stocks_product_rack_path(@product_rack) do %>
+
+<h3>Stock available to add</h3>
+  <table class="list">
+    <tr> 
+      <th></th>
+      <th>Product</th>
+      <th>Short Description</th>
+      <th>Type</th>
+      <th>Brand</th>
+      <th>Department</th>
+      <th>Category</th>
+      <th>Model</th>
+    </tr>
+     <% @products.each do |u| %>
+      <tr class="<%= cycle "odd", "even"  %> " style="text-align: center">
+      <td><%= check_box_tag "product_ids[]", u.id %></td>
+      <td><%= u.code %> </td>
+      <td><%= u.short_description %></td>
+      <td><%= u.product_kind.name rescue "-" %></td>
+      <td><%= u.product_brand.name rescue "-" %></td>
+      <td><%= u.product_department.name rescue "-" %></td>
+      <td><%= u.product_category.name rescue "-" %></td>
+      <td><%= u.product_model.name rescue "-" %></td>
+    </tr>
+    
+    <% end %>
+  </table>
+
+  <br />
+  <%= submit_tag "Add and Return" if @products.any? %>  <%= submit_tag "Add and Continue" if @products.any? %> 
+<% end %>
+  
+

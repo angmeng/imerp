@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Stock location:</b>
+  <%= @stock_count.stock_location_id %>
+</p>
+
+<p>
+  <b>Product uom:</b>
+  <%= @stock_count.product_uom_id %>
+</p>
+
+<p>
+  <b>Opening balance:</b>
+  <%= @stock_count.opening_balance %>
+</p>
+
+<p>
+  <b>Quantity:</b>
+  <%= @stock_count.quantity %>
+</p>
+
+
+<%= link_to 'Edit', edit_stock_count_path(@stock_count) %> |
+<%= link_to 'Back', stock_counts_path %>

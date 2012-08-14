@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Supplier payment number:</b>
+  <%= @supplier_payment.supplier_payment_number %>
+</p>
+
+<p>
+  <b>Supplier payment date:</b>
+  <%= @supplier_payment.supplier_payment_date %>
+</p>
+
+<p>
+  <b>Remark:</b>
+  <%= @supplier_payment.remark %>
+</p>
+
+<p>
+  <b>Voided:</b>
+  <%= @supplier_payment.voided %>
+</p>
+
+<p>
+  <b>Supplier:</b>
+  <%= @supplier_payment.supplier_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_supplier_payment_path(@supplier_payment) %> |
+<%= link_to 'Back', supplier_payments_path %>

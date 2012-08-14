@@ -1,0 +1,25 @@
+<a id="btn1" href="">first</a>
+<a id="btn2" href="">second</a>
+
+
+<div id="first" class="box"><%= render "first_search" %></div>
+<div id="second" class="box" style="display:none"><%= render "second_search" %></div>
+
+<script>
+$("#btn1").click(function() {
+  function complete() {
+    $("#first").show();
+  }
+
+  $("#second").fadeOut(1600, complete);
+});
+
+$("#btn2").click(function() {
+  function complete() {
+    $("#second").show();
+  }
+  $("#first").fadeOut(1600, complete);
+});
+
+
+</script>

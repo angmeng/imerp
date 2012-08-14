@@ -1,0 +1,13 @@
+  <%= link_to image_tag("home.png", :title => "View All"), sales_orders_path %> |
+  <%= link_to image_tag("new.png", :title => "New"), new_sales_order_path %> |
+  <%= link_to image_tag("delete.png", :title => "Delete"), @sales_order, :confirm => 'Are you sure you want to delete this SO?', :method => :delete %> |
+  <%= link_to image_tag("print.png", :title => "Print"), preview_sales_order_path(@sales_order), {:target => "_blank"} %> 
+  <% unless @sales_order.void? %>
+  <% if @sales_order.is_processing? %>
+    | <%= link_to "Send for approval", send_for_approval_sales_order_path(@sales_order), :confirm => "Are you sure you want to send it for approval ?" %>
+  <% elsif @sales_order.waiting_for_approval? %>
+    | <%= link_to "Approve", approve_sales_order_path(@sales_order), :confirm => "Are you sure you want to approve this SO and generate Packing List ?" %>
+  <% elsif @sales_order.approved? %>
+    | <% link_to "Regenerate packing list", regenerate_so_sales_order_path(@sales_order), :confirm => "Are you sure you want to regenerate this SO ?" %>
+  <% end %>
+  <% end %>

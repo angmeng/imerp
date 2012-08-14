@@ -1,0 +1,67 @@
+<% content_for :head do %>
+<script type="text/javascript">
+$(document).ready(function(){
+  $('#quantity_update').submit(function() {
+   $('#spinner').show();
+   
+});
+  
+    
+});
+</script>
+
+<% end %>
+
+<% title "Mixed Items" %>
+<table>
+  <tr>
+    
+    <td>
+   <%= link_to 'Back', edit_product_path(@product) %> |  <%= link_to "Add mixed item", show_products_mixed_product_path(@product_uom_item), :name => "mixed_items" %>
+    </td>
+  </tr>
+</table>
+<div class="mg10 exhibiton ex01">
+    <div class="exHead">
+        <div class="hTxt">
+            <div class="hTxtContent"><h2>Product Details</h2></div>
+        </div>
+        <div class="hLeft"></div>
+        <div class="hRight"></div>
+    </div>
+    <div class="exBody">
+        <div class="content">
+          <table class="list">
+            <tr>
+             <th>Code</th>
+             <th>InHouse Code</th>
+             <th>Short description</th>
+             <th>Full description</th>
+            </tr>
+           <tr class="<%= cycle "odd", "even"  %> " >
+             <td align="center"> <%= @product.code %></td>
+             <td align="center"> <%= @product.in_house_code %></td>
+             <td align="center"> <%= @product.short_description %></td>
+             <td align="center"> <%= @product.full_description %></td>
+
+           </tr>
+          </table>
+
+           </div>
+   </div>
+    <div class="exFoot">
+        <div class="fLeft"></div>
+        <div class="fRight"></div>
+    </div>
+</div>
+<br/><hr/>
+<br />
+<div id="spinner" style="display:none"><img alt="Ajaxloader" height="36" src="/images/ajaxLoader.gif" width="36" /> </div>
+<div id="mixed_flash" ></div>
+<br />
+
+<%= form_tag update_quantity_mixed_product_path(@product_uom_item), :remote => true, :id => "quantity_update" do %>
+  <div id="mixed_table">
+    <%= render :partial => "mixed_table" %>  
+  </div>
+<% end %>

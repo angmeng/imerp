@@ -1,0 +1,45 @@
+<div class="mg10 exhibiton ex01">
+        <div class="exHead">
+            <div class="hTxt">
+               <div class="hTxtContent"><h2>Receive From Customer Details</h2></div>
+            </div>
+            <div class="hLeft"></div>
+            <div class="hRight"></div>
+        </div>
+        <div class="exBody">
+            <div class="content">
+                <table class="list">
+                   <tr>
+                    <th>Receive From Customer Number</th>
+                    <th>Date</th>
+                    <th>Customer</th>
+                    <th>Status</th>
+                  </tr>
+                  <tr align="center">
+                    <td><%=h @customer_credit_note.cust_credit_note_number %></td>
+                    <td><%= @customer_credit_note.cust_credit_note_date %></td>
+                    <td><%= @customer_credit_note.customer.name rescue"-"  %> </td>
+                    <% if @customer_credit_note.voided? %>
+                       <td><%=raw @customer_credit_note.void_status %></td>
+                    <%else%>
+                       <td align="center"><%=raw @customer_credit_note.status %> </td>
+                     <%end%>
+
+                  </tr>
+                  </table>
+              
+                <table class="list">
+                  <tr align="left">
+                   <th align="left">Remark</th>
+                </tr>
+                <tr align="left">
+                <td colspan="8"> <%= @customer_credit_note.remark %></td>
+                </tr>
+                </table>
+                </div>
+</div>
+    <div class="exFoot">
+        <div class="fLeft"></div>
+        <div class="fRight"></div>
+    </div>
+    </div>

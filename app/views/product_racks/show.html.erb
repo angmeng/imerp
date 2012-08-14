@@ -1,0 +1,49 @@
+<table style="width: 80%">
+  <tr>
+    <td style="width: 30%">
+
+<p>
+  <b>Location:</b>
+  <%= @product_rack.product_location.name %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%= @product_rack.name %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @product_rack.description %>
+</p>
+
+<p>
+  <b>Disabled:</b>
+  <%= @product_rack.disabled %>
+</p>
+
+ </td>
+    <td>
+      <h2>Attached Stocks</h2>
+      <table class="list"> 
+        <tr>
+          <th>Product Code</th>
+          <th>Description</th>
+          <th>Short Description</th>
+        </tr>
+        <% @product_rack.products.each do |r| %>
+          <tr class="<%= cycle "odd", "even"  %> " style="text-align: center">
+            <td><%= r.code %></td>
+            <td><%= r.full_description %></td>
+            <td><%= r.short_description %></td>
+          </tr>
+        <% end %>
+      </table>
+    </td>
+  </tr>
+</table>
+
+
+
+<%= link_to 'Edit', edit_product_rack_path(@product_rack) %> |
+<%= link_to 'Back', product_racks_path %>

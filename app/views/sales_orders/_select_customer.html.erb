@@ -1,0 +1,7 @@
+<%= form_tag add_item_sales_order_path(@sales_order) do %>
+<table>
+  <tr>
+    <th>Customer</th><td>
+<%= select_tag("item[#{p.id.to_s}][customer_id]", options_for_select(@customers, p.customer_id))  %> </td>
+  </tr>
+</table>

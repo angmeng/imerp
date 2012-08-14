@@ -1,0 +1,58 @@
+<% title "Listing Salesman" %>
+
+<%= link_to image_tag("new.png"), new_salesman_path %>
+<br /><br />
+<%= render "search" %>
+<br/><hr /><br/>
+<div class="mg10 exhibiton ex01">
+    <div class="exHead">
+        <div class="hTxt">
+           <div class="hTxtContent"><h2>Salesman</h2></div>
+        </div>
+        <div class="hLeft"></div>
+        <div class="hRight"></div>
+    </div>
+    <div class="exBody">
+        <div class="content">
+            <%= will_paginate @salesmens %>
+            <br />
+          <table class="list">
+            <tr>
+              <th align="left">Code</th>
+              <th align="left">Name</th>
+              <th align="left">Company Number</th>
+              <th align="left">City</th>
+              <th align="left">Email</th>
+              <th align="left">Office contact</th>
+              <th align="left">Fax number</th>
+              <th align="left">Term</th>
+
+              <th>Actions</th>
+             
+            </tr>
+
+          <% @salesmens.each do |salesman| %>
+            <tr>
+              <td><%= salesman.code %></td>
+              <td><%= salesman.name %></td>
+              <td><%= salesman.company %></td>
+              <td><%= salesman.city.name rescue"-" %></td>
+              <td><%= salesman.email %></td>
+              <td><%= salesman.office_contact %></td>
+              <td><%= salesman.fax_number %></td>
+              <td><%= salesman.term %></td>
+              <td align="center"><%= link_to 'Show', salesman %> |
+              <%= link_to 'Edit', edit_salesman_path(salesman) %> |
+              <%= link_to 'Destroy', salesman, :confirm => 'Are you sure?', :method => :delete %></td>
+            </tr>
+          <% end %>
+          </table>
+         <%= will_paginate @salesmens %>
+            <br />
+            </div>
+   </div>
+    <div class="exFoot">
+        <div class="fLeft"></div>
+        <div class="fRight"></div>
+    </div>
+</div>

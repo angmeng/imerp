@@ -1,0 +1,5 @@
+<p>
+   <%= link_to image_tag("home.png", :title => "View All"), purchase_orders_path %>
+  | <%= link_to(image_tag("print.png", :title => "Print"), preview_purchase_order_path(@purchase_order), {:target => "_blank"}) %>
+  | <%= link_to("Back to PR", edit_purchase_requisition_path(@purchase_order.purchase_requisition)) if @purchase_order.purchase_requisition  %>
+</p>

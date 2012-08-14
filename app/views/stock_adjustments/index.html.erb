@@ -1,0 +1,52 @@
+<% title "Listing Stock Adjustment" %>
+<%= link_to image_tag("new.png"), new_stock_adjustment_path %>
+<br /><br />
+<%= render 'search_form'  %>
+<br><hr><br>
+<div class="mg10 exhibiton ex01">
+    <div class="exHead">
+        <div class="hTxt">
+           <div class="hTxtContent"><h2>Stock Adjustment</h2></div>
+        </div>
+        <div class="hLeft"></div>
+        <div class="hRight"></div>
+    </div>
+    <div class="exBody">
+        <div class="content">
+            <%= will_paginate @stock_adjustments %>
+            <br />
+            <table class="list">
+              <tr>
+                <th> Date</th>
+                <th>Stock Adjustment Number</th>
+                
+                <th>User</th>
+                <th>Status</th>
+                <th>Post Quantity Status</th>
+                <th>Void Status</th>
+                <th>Action</th>
+
+              </tr>
+
+            <% @stock_adjustments.each do |stock_adjustment| %>
+              <tr class="<%= cycle "odd", "even"  %> " style="text-align: center">
+                <td><%= stock_adjustment.stock_date.strftime("%d-%m-%Y") %></td>
+                <td><%= stock_adjustment.stock_adjustment_number %></td>
+                
+                <td><%= stock_adjustment.user.name rescue "-" %></td>
+                <td align="center"><%=raw stock_adjustment.status %></td>
+                <td align="center"><%=raw stock_adjustment.quantity_post_status %></td>
+                 <td align="center"><%=raw stock_adjustment.void_status %></td>
+                <td><%= link_to 'Edit', edit_stock_adjustment_path(stock_adjustment) %>
+                | <%= link_to 'Destroy', stock_adjustment, :confirm => 'Are you sure?', :method => :delete %></td>
+              </tr>
+            <% end %>
+            </table>
+
+            </div>
+   </div>
+    <div class="exFoot">
+        <div class="fLeft"></div>
+        <div class="fRight"></div>
+    </div>
+</div>

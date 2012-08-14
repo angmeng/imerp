@@ -1,0 +1,26 @@
+ <% content_for :head do %>
+  <%= javascript_include_tag("smo") %>
+<% end %>
+<% title 'New Stock Adjustment'  %>
+<br />
+<%= link_to 'Back', customer_payments_path %>
+<br /><br />
+
+ <%= form_for(@stock_adjustment) do |f| %>
+  <%= render "shared/error_messages", :target => @stock_adjustment %>
+
+   <%= f.hidden_field :user_id, :value => current_user.id %>
+
+<table>
+      <tr>
+        <th>Date</th><td><%= f.date_select :stock_date %></td>
+      </tr> 
+      <tr>
+        <th>Remark</th><td valign="top"><%= f.text_area :remark, :size => "60x2" %></td>
+      </tr>
+</table>
+  <p>
+    <%= f.submit 'Next' %>
+    <% end %>
+  </p>
+

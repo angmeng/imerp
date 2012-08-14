@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Pack item:</b>
+  <%= @pack_item_subitem.pack_item_id %>
+</p>
+
+<p>
+  <b>Product:</b>
+  <%= @pack_item_subitem.product_id %>
+</p>
+
+<p>
+  <b>Product uom:</b>
+  <%= @pack_item_subitem.product_uom_id %>
+</p>
+
+<p>
+  <b>Stock location:</b>
+  <%= @pack_item_subitem.stock_location_id %>
+</p>
+
+<p>
+  <b>Quantity:</b>
+  <%= @pack_item_subitem.quantity %>
+</p>
+
+
+<%= link_to 'Edit', edit_pack_item_subitem_path(@pack_item_subitem) %> |
+<%= link_to 'Back', pack_item_subitems_path %>

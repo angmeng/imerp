@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  supplier_debit_note_number: MyString
+  supplier_debit_note_date: 2011-03-22
+  remark: MyString
+  voided: false
+  posted: false
+  supplier_id: 1
+
+two:
+  supplier_debit_note_number: MyString
+  supplier_debit_note_date: 2011-03-22
+  remark: MyString
+  voided: false
+  posted: false
+  supplier_id: 1

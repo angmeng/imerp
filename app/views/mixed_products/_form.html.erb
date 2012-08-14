@@ -1,0 +1,23 @@
+<%= simple_form_for(@mixed_product) do |f| %>
+  <% if @mixed_product.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@mixed_product.errors.count, "error") %> prohibited this mixed_product from being saved:</h2>
+
+      <ul>
+      <% @mixed_product.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="inputs">
+    <%= f.input :parent_id %>
+    <%= f.input :product_id %>
+    <%= f.input :quantity %>
+  </div>
+
+  <div class="actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

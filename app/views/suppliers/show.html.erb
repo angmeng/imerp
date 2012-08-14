@@ -1,0 +1,100 @@
+
+ <%= link_to 'Back', suppliers_path %> |
+ <%= link_to 'New', new_supplier_path %> |
+ <%= link_to 'Edit', edit_supplier_path(@supplier) %> 
+
+ <div class="mg10 exhibiton ex01">
+    <div class="exHead">
+        <div class="hTxt">
+            <div class="hTxtContent"><h2>Supplier Details</h2></div>
+        </div>
+        <div class="hLeft"></div>
+        <div class="hRight"></div>
+    </div>
+    <div class="exBody">
+        <div class="content">
+              <p id="notice"><%= notice %></p>
+
+              <p>
+                <b>Code:</b>
+                <%= @supplier.code %>
+              </p>
+
+              <p>
+                <b>Name:</b>
+                <%= @supplier.name %>
+              </p>
+
+              <p>
+                <b>Company number:</b>
+                <%= @supplier.company_number %>
+              </p>
+
+              <p>
+                <b>Address:</b>
+                <%= @supplier.address %>
+              </p>
+
+              <p>
+                <b>City:</b>
+                <%= @supplier.city.name %>
+              </p>
+
+              <p>
+                <b>Postcode:</b>
+                <%= @supplier.postcode %>
+              </p>
+
+              <p>
+                <b>Email:</b>
+                <%= @supplier.email %>
+              </p>
+
+              <p>
+                <b>Office contact:</b>
+                <%= @supplier.office_contact %>
+              </p>
+
+              <p>
+                <b>Office contact2:</b>
+                <%= @supplier.office_contact2 %>
+              </p>
+
+              <p>
+                <b>Fax number:</b>
+                <%= @supplier.fax_number %>
+              </p>
+
+              <p>
+                <b>Contact person:</b>
+                <%= @supplier.contact_person %>
+              </p>
+
+              <p>
+                <b>Contact number:</b>
+                <%= @supplier.contact_number %>
+              </p>
+
+              <p>
+                <b>Term:</b>
+                <%= @supplier.term %>
+              </p>
+
+              <p>
+                <b>Remark:</b>
+                <%= @supplier.remark %>
+              </p>
+
+              <p>
+                <b>Suspend:</b>
+                <%= @supplier.suspend %>
+              </p>
+  </div>
+   </div>
+    <div class="exFoot">
+        <div class="fLeft"></div>
+        <div class="fRight"></div>
+    </div>
+</div>
+
+

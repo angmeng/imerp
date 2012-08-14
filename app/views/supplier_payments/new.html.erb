@@ -1,0 +1,28 @@
+<% content_for :head do %>
+  <%= javascript_include_tag("smo") %>
+<% end %>
+<% title 'New Supplier Payment'  %>
+<br />
+<%= link_to 'Back', supplier_payments_path %>
+<br /><br />
+
+<%= form_for(@supplier_payment) do |f| %>
+<%= render "shared/error_messages", :target => @supplier_payment %>
+<%= hidden_field :issued_user_id, :value => current_user.id %>
+<table>
+      <tr>
+        <th>Date</th><td><%= f.date_select :supplier_payment_date %></td>
+      </tr>
+      <tr>
+         <th>Customer</th><td><%= f.select :supplier_id, Supplier.all.map {|c| [c.name, c.id]} %></td>
+      </tr>
+      <tr>
+        <th>Remark</th><td valign="top"><%= f.text_area :remark, :size => "80x2" %></td>
+      </tr>
+</table>
+
+ <p>
+    <%= f.submit 'Next' %>
+<% end %>
+ </p>
+

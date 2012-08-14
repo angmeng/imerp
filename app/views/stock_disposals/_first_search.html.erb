@@ -1,0 +1,53 @@
+<%= render 'search_product' %>
+<%= form_tag add_item_stock_disposal_path(@stock_disposal) do %>
+ <%= will_paginate @products %><br></br>
+ <table class="flexi" style="font-size: 12px">
+   <thead>
+   <tr>
+   <th width="50" align="center" style="font-size: 12px"><strong><input type="checkbox" name="checkall" onclick="checkUncheckAll(this);"/></strong></th>
+    <th width="100" align="center" style="font-size: 12px"><strong>Code</strong></th>
+    <th width="100" align="center" style="font-size: 12px"><strong>Uom</strong></th>
+    <th width="120" align="center" style="font-size: 12px"><strong>In House Code</strong></th>
+    <th width="250" align="center" style="font-size: 12px"><strong>Short description</strong></th>
+    <th width="100" align="center" style="font-size: 12px"><strong>Type</strong></th>
+    <th width="100" align="center" style="font-size: 12px"><strong>Brand</strong></th>
+    <th width="100" align="center" style="font-size: 12px"><strong>Department</strong></th>
+    <th width="100" align="center" style="font-size: 12px"><strong>Category</strong></th>
+    <th width="100" align="center" style="font-size: 12px"><strong>Model</strong></th>
+
+  </tr>
+  </thead>
+  <tbody>
+    <% @products.each do |product| %>
+      <tr class="<%= cycle "odd", "even"  %> " style="text-align: center">
+        <td><%= check_box_tag "item[#{product.id.to_s}][selected]"  %></td>
+         <td align="left"><%= link_to product.code, show_popup_sales_order_path(product), :class=>"nyroModal"%> </td>
+        <td  align="center"><%= select_tag("item[#{product.id.to_s}][product_uom_id]", options_for_select(product.product_uom_options.map {|c| [c.name, c.id]})) %> </td>
+        <td><%= product.in_house_code %></td>
+        <td><%= product.short_description %></td>
+        <td><%= product.product_kind.name rescue "-" %></td>
+        <td><%= product.product_brand.name rescue "-" %></td>
+        <td><%= product.product_department.name rescue "-" %></td>
+        <td><%= product.product_category.name rescue "-" %></td>
+        <td><%= product.product_model.name rescue "-" %></td>
+      </tr>
+  <% end %>
+  </tbody>
+    </table>
+    <%= submit_tag "Add and Return" unless @products.empty? %>
+    <%= submit_tag "Add and Continue"  unless @products.empty? %>
+    <% end %>
+
+    <br />
+ <script type="text/javascript">
+   $('.flexi').flexigrid({width: $('#header').width() - 80});
+ </script>
+<script type="text/javascript">
+$(function() {
+  $('.nyroModal').nyroModal();
+});
+</script>
+
+
+
+

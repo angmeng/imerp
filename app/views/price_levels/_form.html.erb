@@ -1,0 +1,27 @@
+<%= simple_form_for(@price_level) do |f| %>
+  <% if @price_level.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@price_level.errors.count, "error") %> prohibited this price_level from being saved:</h2>
+
+      <ul>
+      <% @price_level.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="inputs">
+    <%= f.input :name %>
+    <%= f.input :description, :input_html => {:size => "40x2"} %>
+    <%= f.input :disabled %>
+  </div>
+
+  <div class="actions">
+    <% if action_name == "new" %>
+    <%= f.button :submit, :confirm => "It will take fews minute to generate the pricing based on all product, are you sure ?",  :disable_with => "Please wait ..." %>
+    <% else %>
+    <%= f.button :submit %>
+    <% end %>
+  </div>
+<% end %>

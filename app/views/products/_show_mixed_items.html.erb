@@ -1,0 +1,21 @@
+<h3>Mixed Items</h3>
+<br />
+<table class="list">
+    <tr>
+      <th>Product</th>
+      <th>UOM</th>
+      <th>Short Description</th>
+      <th>Quantity</th>
+      
+    </tr>
+    <% @product.mixed_items.each do |p| %>
+     <tr class="<%= cycle "odd", "even"  %> " style="text-align: center">
+      <td><%= p.product.code %></td>
+      <td><%= p.product_uom.name rescue "-" %></td>
+      <td><%= p.product.short_description %></td>
+      <td><%= p.quantity %></td>
+      
+     </tr>
+    <% end %>
+    
+  </table>

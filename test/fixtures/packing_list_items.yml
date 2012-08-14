@@ -1,0 +1,19 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  packing_list_id: 1
+  sales_order_id: 1
+  quantity: 1
+  product_id: 1
+  unit_price: 9.99
+  remark: MyString
+  product_uom_id: MyString
+
+two:
+  packing_list_id: 1
+  sales_order_id: 1
+  quantity: 1
+  product_id: 1
+  unit_price: 9.99
+  remark: MyString
+  product_uom_id: MyString

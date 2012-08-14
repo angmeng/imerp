@@ -1,0 +1,94 @@
+
+<%= link_to 'Back', salesmen_path %> |
+<%= link_to 'New', new_salesman_path %> |
+<%= link_to 'Edit', edit_salesman_path(@salesman) %> 
+<div class="mg10 exhibiton ex01">
+    <div class="exHead">
+        <div class="hTxt">
+           <div class="hTxtContent"><h2>Salesman Details</h2></div>
+        </div>
+        <div class="hLeft"></div>
+        <div class="hRight"></div>
+    </div>
+    <div class="exBody">
+        <div class="content">
+                <p id="notice"><%= notice %></p>
+
+                <p>
+                  <b>Code:</b>
+                  <%= @salesman.code %>
+                </p>
+
+                <p>
+                  <b>Name:</b>
+                  <%= @salesman.name %>
+                </p>
+
+                <p>
+                  <b>Company:</b>
+                  <%= @salesman.company %>
+                </p>
+
+                <p>
+                  <b>Address:</b>
+                  <%= @salesman.address %>
+                </p>
+
+                <p>
+                  <b>City:</b>
+                  <%= @salesman.city.name %>
+                </p>
+
+                <p>
+                  <b>Postcode:</b>
+                  <%= @salesman.postcode %>
+                </p>
+
+                <p>
+                  <b>Email:</b>
+                  <%= @salesman.email %>
+                </p>
+
+                <p>
+                  <b>Office contact:</b>
+                  <%= @salesman.office_contact %>
+                </p>
+
+                <p>
+                  <b>Office contact2:</b>
+                  <%= @salesman.office_contact2 %>
+                </p>
+
+                <p>
+                  <b>Fax number:</b>
+                  <%= @salesman.fax_number %>
+                </p>
+
+                <p>
+                  <b>Contact person:</b>
+                  <%= @salesman.contact_person %>
+                </p>
+
+                <p>
+                  <b>Contact number:</b>
+                  <%= @salesman.contact_number %>
+                </p>
+
+                <p>
+                  <b>Term:</b>
+                  <%= @salesman.term %>
+                </p>
+
+                <p>
+                  <b>Remark:</b>
+                  <%= @salesman.remark %>
+                </p>
+       </div>
+   </div>
+    <div class="exFoot">
+        <div class="fLeft"></div>
+        <div class="fRight"></div>
+    </div>
+</div>
+
+

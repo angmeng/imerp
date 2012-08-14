@@ -1,0 +1,95 @@
+<%= link_to 'Edit', edit_product_category_path(@product_category) %> |
+<%= link_to 'Back', product_categories_path %>
+
+<div class="mg10 exhibiton ex01">
+    <div class="exHead">
+        <div class="hTxt">
+           <div class="hTxtContent"><h2>Product Category Details</h2></div>
+        </div>
+        <div class="hLeft"></div>
+        <div class="hRight"></div>
+    </div>
+    <div class="exBody">
+        <div class="content">
+              <table class="list">
+                <tr>
+                 <th>Brand Name</th>
+                 <th>Description</th>
+                 <th>Disabled</th>
+                </tr>
+               <tr class="<%= cycle "odd", "even"  %> " style="text-align: center">
+                  <td align="center"> <%= @product_category.name %></td>
+                  <td align="center"><%= @product_category.description %></td>
+                  <td align="center"><%= @product_category.disabled %></td>
+               </tr>
+              </table>
+          </div>
+</div>
+    <div class="exFoot">
+        <div class="fLeft"></div>
+        <div class="fRight"></div>
+    </div>
+    </div>
+               <br/><hr/><br/>
+
+
+      <div class="mg10 exhibiton ex01">
+    <div class="exHead">
+        <div class="hTxt">
+           <div class="hTxtContent"><h2>Product Category Items</h2></div>
+        </div>
+        <div class="hLeft"></div>
+        <div class="hRight"></div>
+    </div>
+    <div class="exBody">
+        <div class="content">
+          <table class="flexi" style="font-size: 12px">
+                <thead>
+                   <tr>
+
+                    <th width="100" align="center" style="font-size: 12px"><strong>Code</strong></th>
+                    <th width="100" align="center" style="font-size: 12px"><strong>Uom</strong></th>
+                    <th width="120" align="center" style="font-size: 12px"><strong>In House Code</strong></th>
+                    <th width="250" align="center" style="font-size: 12px"><strong>Short description</strong></th>
+                    <th width="100" align="center" style="font-size: 12px"><strong>Type</strong></th>
+                    <th width="100" align="center" style="font-size: 12px"><strong>Brand</strong></th>
+                    <th width="100" align="center" style="font-size: 12px"><strong>Department</strong></th>
+                    <th width="100" align="center" style="font-size: 12px"><strong>Category</strong></th>
+                    <th width="100" align="center" style="font-size: 12px"><strong>Model</strong></th>
+
+                  </tr>
+                  </thead>
+                  <tbody>
+              <% line = 0%>
+              <%  @products.each do |product| %>
+               <% line += 1%>
+
+                <tr class="<%= cycle "odd", "even"  %> ">
+                  <td align="center"><%= line.to_s %></td>
+                  <td align="center"><%= link_to product.code, show_popup_product_brand_path(product), :rel => 'facebox'%></td>
+                  <td align="center"><%= product.in_house_code %></td>
+                  <td align="center"><%= product.short_description %></td>
+                  <td align="center"><%= product.product_kind.name rescue "-" %></td>
+                  <td align="center"><%= product.product_brand.name rescue "-" %></td>
+                  <td align="center"><%= product.product_department.name rescue "-" %></td>
+                  <td align="center"><%= product.product_category.name rescue "-" %></td>
+                  <td align="center"><%= product.product_model.name rescue "-" %></td>
+
+
+                </tr>
+              <% end %>
+                  </tbody>
+              </table>
+
+</div>
+</div>
+    <div class="exFoot">
+        <div class="fLeft"></div>
+        <div class="fRight"></div>
+    </div>
+    </div>
+
+<script type="text/javascript">
+ $('.flexi').flexigrid({width: $('#header').width() - 60});
+ </script>
+

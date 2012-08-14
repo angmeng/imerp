@@ -1,0 +1,45 @@
+
+<% title "Listing Product Uoms" %>
+
+<%= link_to image_tag("new.png"), new_product_uom_path %>
+<br /><br />
+<div class="mg10 exhibiton ex01">
+    <div class="exHead">
+        <div class="hTxt">
+           <div class="hTxtContent"><h2>Product UOM</h2></div>
+        </div>
+        <div class="hLeft"></div>
+        <div class="hRight"></div>
+    </div>
+    <div class="exBody">
+        <div class="content">
+              <%= will_paginate @product_uoms %>
+                  <table class="list">
+                    <tr>
+
+                      <th>Name</th>
+                      <th>Description</th>
+                      <th>Default</th>
+                      <th>Action</th>
+
+                    </tr>
+
+                  <% @product_uoms.each do |product_uom| %>
+                    <tr class="<%= cycle "odd", "even"  %> " style="text-align: center">
+                      <td><%= product_uom.name %></td>
+                      <td><%= product_uom.description %></td>
+                       <td><%= product_uom.builtin %></td>
+                      <td><%= link_to 'Show', product_uom %>
+                      | <%= link_to 'Edit', edit_product_uom_path(product_uom) %>
+                      | <%= link_to 'Destroy', product_uom, :confirm => 'Are you sure?', :method => :delete %></td>
+                    </tr>
+                  <% end %>
+                  </table>
+
+            </div>
+</div>
+    <div class="exFoot">
+        <div class="fLeft"></div>
+        <div class="fRight"></div>
+    </div>
+    </div>

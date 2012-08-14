@@ -1,0 +1,49 @@
+<div class="mg10 exhibiton ex01">
+    <div class="exHead">
+        <div class="hTxt">
+            <div class="hTxtContent"><h2>GRN Search</h2></div>
+        </div>
+        <div class="hLeft"></div>
+        <div class="hRight"></div>
+    </div>
+    <div class="exBody">
+        <div class="content">
+            <%= form_for @search do |f| %>
+              <table class="list" style="width: auto">
+                <tr>
+                  <th>Receive No</th>
+                  <th>S/N</th>
+                  <th>DO No</th>
+                  <th>Invoice No</th>
+                  <th>Product Code</th>
+                </tr>
+                <tr>
+                  <td align="center"><%= f.text_field :grn_number_like %></td>
+                  <td align="center"><%= f.text_field :serial_number_like %></td>
+                  <td align="center"><%= f.text_field :do_number_like %></td>
+                  <td align="center"><%= f.text_field :invoice_number_like %></td>
+                  <td align="center"><%= f.text_field :goods_receive_note_items_product_code_like %></td>
+               </tr>
+               <tr>
+                 <th>Product Description</th>
+                 <th>PO No</th>
+                  <th>Supplier</th>
+                  <th>Status</th>
+                  <th>Action</th>
+               </tr>
+               <tr>
+                 <td align="center"><%= f.text_field :goods_receive_note_items_product_full_description_like %></td>
+                  <td align="center"><%= f.text_field :purchase_order_purchase_order_number_like %></td>
+                  <td align="center"><%= f.select :supplier_id_equals, Supplier.all(:order => "name").map {|c| [c.name, c.id]} , {:include_blank => true} %></td>
+                  <td align="center"><%= f.select :settled_equals, [["Completed", true],["Processing", false]], {:include_blank => true} %></td>
+                  <td align="center"><%= f.submit "Search" %></td>
+               </tr>
+            </table>
+            <% end %>
+ </div>
+   </div>
+    <div class="exFoot">
+        <div class="fLeft"></div>
+        <div class="fRight"></div>
+    </div>
+</div>

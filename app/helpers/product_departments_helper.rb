@@ -1,0 +1,2 @@
+module ProductDepartmentsHelper
+end

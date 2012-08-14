@@ -1,0 +1,16 @@
+<%= form_tag add_auto_complete_product_stock_transfer_path(@stock_transfer) do %>
+<br/><br/>
+<table>
+  <tr>
+    <th>Code</th>
+    <td>
+        <%=  text_field "stock_transfer", "product_tokens"  %>
+   </td>
+   <td><%= submit_tag "Add item" %></td>
+  </tr>
+</table>
+
+
+
+<%  end %>
+

@@ -1,0 +1,13 @@
+<%= simple_form_for(@stock_location) do |f| %>
+<%= render "shared/error_messages", :target => @stock_location %>
+
+  <div class="inputs">
+    <%= f.association :product %>
+    <%= f.association :product_rack %>
+    <%= f.input :quantity %>
+  </div>
+
+  <div class="actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

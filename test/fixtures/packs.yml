@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  pack_date: 2011-06-20
+  pack_number: MyString
+  user_id: 1
+  remark: MyString
+
+two:
+  pack_date: 2011-06-20
+  pack_number: MyString
+  user_id: 1
+  remark: MyString

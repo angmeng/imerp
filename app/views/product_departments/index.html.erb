@@ -1,0 +1,44 @@
+<% title "Listing Product Departments" %>
+<%= link_to image_tag("new.png"), new_product_department_path %>
+<br /><br />
+<div class="mg10 exhibiton ex01">
+    <div class="exHead">
+        <div class="hTxt">
+           <div class="hTxtContent"><h2>Product Department</h2></div>
+        </div>
+        <div class="hLeft"></div>
+        <div class="hRight"></div>
+    </div>
+    <div class="exBody">
+        <div class="content">
+           <%= will_paginate @product_departments %>
+            <table class="list">
+              <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Disabled</th>
+                <th>Action</th>
+
+              </tr>
+
+            <% @product_departments.each do |product_department| %>
+              <tr class="<%= cycle "odd", "even"  %> " style="text-align: center">
+                <td><%= product_department.name %></td>
+                <td><%= product_department.description %></td>
+                <td><%= product_department.disabled %></td>
+                <td><%= link_to 'Show', product_department %>
+                | <%= link_to 'Edit', edit_product_department_path(product_department) %>
+                | <%= link_to 'Destroy', product_department, :confirm => 'Are you sure?', :method => :delete %></td>
+              </tr>
+            <% end %>
+            </table>
+
+<br />
+</div>
+</div>
+    <div class="exFoot">
+        <div class="fLeft"></div>
+        <div class="fRight"></div>
+    </div>
+    </div>
+

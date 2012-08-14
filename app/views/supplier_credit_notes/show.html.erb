@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Supplier debit note number:</b>
+  <%= @supplier_credit_note.supplier_debit_note_number %>
+</p>
+
+<p>
+  <b>Supplier debit note date:</b>
+  <%= @supplier_credit_note.supplier_debit_note_date %>
+</p>
+
+<p>
+  <b>Remark:</b>
+  <%= @supplier_credit_note.remark %>
+</p>
+
+<p>
+  <b>Voided:</b>
+  <%= @supplier_credit_note.voided %>
+</p>
+
+<p>
+  <b>Posted:</b>
+  <%= @supplier_credit_note.posted %>
+</p>
+
+<p>
+  <b>Supplier:</b>
+  <%= @supplier_credit_note.supplier_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_supplier_credit_note_path(@supplier_credit_note) %> |
+<%= link_to 'Back', supplier_credit_notes_path %>

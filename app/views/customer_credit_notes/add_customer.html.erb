@@ -1,0 +1,43 @@
+ <%= link_to image_tag("backs.png", :title => "Back"), edit_customer_credit_note_path(@customer_credit_note) %>
+<%= render 'search_cust' %>
+<br><hr><br>
+ <%= form_tag update_info_customer_credit_note_path(@customer_credit_note) do %>
+<div class="mg10 exhibiton ex01">
+    <div class="exHead">
+        <div class="hTxt">
+           <div class="hTxtContent"><h2>Add Customer</h2></div>
+        </div>
+        <div class="hLeft"></div>
+        <div class="hRight"></div>
+    </div>
+    <div class="exBody">
+        <div class="content">
+          <%= submit_tag "Add customer" unless @customers.empty? %><%= will_paginate @customers %>
+         <table class="list"  >
+          <tr>
+              <th width="50" align="center" style="font-size: 12px"></th>
+              <th>Code</th>
+              <th>Name</th>
+              <th>Company number</th>
+              <th>City</th>
+           </tr>
+       <% @customers.each do |customer| %>
+                     <tr class="<%= cycle "odd", "even"  %> " style="text-align: center">
+                      <td><%= radio_button_tag 'customer_credit_note[customer_id]',"#{customer.id.to_s}"%></td>
+                      <td><%= customer.code %></td>
+                      <td><%= customer.name %></td>
+                      <td><%= customer.company_number %></td>
+                      <td><%= customer.city.name rescue "-" %></td>
+                    </tr>
+              <% end %>
+	</table>
+        <%= submit_tag "Add customer" unless @customers.empty? %>
+   
+</div>
+   </div>
+    <div class="exFoot">
+        <div class="fLeft"></div>
+        <div class="fRight"></div>
+    </div>
+</div>
+<% end %>

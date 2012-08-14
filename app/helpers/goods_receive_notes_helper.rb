@@ -1,0 +1,2 @@
+module GoodsReceiveNotesHelper
+end

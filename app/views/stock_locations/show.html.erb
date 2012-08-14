@@ -1,0 +1,25 @@
+<%= link_to 'Edit', edit_stock_location_path(@stock_location) %> |
+<%= link_to 'Back', stock_locations_path %>
+
+<p>
+  <b>Product:</b>
+  <%= @stock_location.product.name %>
+</p>
+
+<p>
+  <b>Product location:</b>
+  <%= @stock_location.product_rack.product_location.name %>
+</p>
+
+<p>
+  <b>Product rack:</b>
+  <%= @stock_location.product_rack.name %>
+</p>
+
+<p>
+  <b>Quantity:</b>
+  <%= @stock_location.quantity %>
+</p>
+
+
+

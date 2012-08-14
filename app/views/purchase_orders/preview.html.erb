@@ -1,0 +1,158 @@
+
+<%= stylesheet_link_tag 'print',:media => "print"%>
+
+<a href="#" onclick="window.print();return false;">Print</a>
+
+<div class="print">
+<table align="center">
+    <% @settings.each do |setting| %>
+   <tr>
+     <td align="center" style="font-size: 28"><%= setting.company_name rescue'-' %></td>
+   </tr>
+   <tr>
+     <td align="center"><%= setting.company_address_one rescue'-' %></td>
+   </tr>
+   <tr>
+     <td align="center"><%= setting.company_address_two rescue'-' %></td>
+   </tr>
+   <tr>
+     <td align="center">
+       <%= setting.company_postcode rescue'-'  %>,
+       <%= setting.company_city rescue'-' %>,
+       <%= setting.company_country rescue'-' %>
+     </td>
+   </tr>
+   <tr>
+     <td align="center">
+      &nbsp;&nbsp; TEL NO: <%= setting.phone_number rescue'-'  %>  &nbsp;
+            FAX NO: <%= setting.fax_number rescue'-' %>
+     </td>
+   </tr>
+   <% end %>
+ </table>
+<%= image_tag("po2.png")%>
+
+<table style="width: 100%">
+    <tr>
+      <td  style="width: 50%">
+        <table  style=" border:solid" >
+       
+          <tr>
+          <th align="right"><strong>Supplier Name : </strong> </th>
+          <td>&nbsp; &nbsp;<%= @purchase_order.supplier.name %></td>
+          </tr>
+         <tr>
+          <td valign="top"></td>
+          <td> &nbsp; &nbsp;<%= @purchase_order.supplier.address %><br />
+              &nbsp; &nbsp;<%= @purchase_order.supplier.postcode %>, <%= @purchase_order.supplier.city.name rescue"-"%><br />
+              <strong>Tel:  </strong>&nbsp&nbsp<%= @purchase_order.supplier.office_contact %>
+               <strong>Fax:  </strong>&nbsp&nbsp<%= @purchase_order.supplier.fax_number %>
+          </td>
+          </tr>
+          
+
+
+        </table>
+      </td>
+     
+     <td style="width: 40%">
+        <table>
+          <tr>
+             <th style="width:100"align="right">PO No:</th>
+             <td> &nbsp; &nbsp;<%= @purchase_order.purchase_order_number %></td>
+         </tr>
+          <tr>
+            <th align="right">Date:  </th>
+            <td>&nbsp; &nbsp;<%= @purchase_order.purchase_order_date.strftime("%d-%m-%Y") %></td>
+         </tr>
+
+        <tr>
+          <th align="right">PR Number:</th>
+          <td> &nbsp; &nbsp;<%= @purchase_order.purchase_requisition.pr_number %></td>
+
+        </tr>
+        <tr>
+          <th align="right">Term: </th>
+          <td>&nbsp; &nbsp;<%= @purchase_order.term %></td>
+        </tr>
+
+        </table>
+
+      </td></tr>
+
+</table>
+<br />
+<fieldset style="width: 96%; height: 1080px; border-style: none">
+<table width="100%"  cellpadding="2" cellspacing="0">
+  <tr>
+    <th align="center"style="border-bottom:outset "> No </th>
+        <th align="left"style="border-bottom:outset ">Code</th>
+        <th align="left"style="border-bottom:outset ">Description</th>
+	<th align="left"style="border-bottom:outset ">UOM</th>
+	<th style="border-bottom:outset ">Quantity</th>
+        <th align="right" style="border-bottom:outset ">Unit Price</th>
+	<th align="right" style="border-bottom:outset ">Total</th>
+  </tr>
+
+  <% line = 0 %>
+  <% total = 0.00 %>
+  <% @purchase_order.purchase_order_items.each do |c|  %>
+  <% line += 1%>
+  <% total += c.total %>
+  <tr>
+     <td align="center"><%= line.to_s %></td>
+     <% if  c.product.mixed_items.any?%>
+     <td><strong><%= c.product.code %> </strong>(bundle Item)</td>
+     <%else%>
+     <td><strong><%= c.product.code %></strong></td>
+     <%end%>
+     <td><%= c.product.full_description %></td>
+     <td align="left"><%= c.product_uom.name rescue "-" %></td>
+     <td align="center"><%= c.quantity %></td>
+     <td align="right"><%= "%.2f" % c.unit_price %></td>
+     <td align="right"> <%= number_with_precision(c.total, :precision => 2) %></td>
+  </tr>
+  <% if c.product.is_mixed? %>
+          <% c.product.mixed_items.each do |p| %>
+
+          <tr>
+             <td></td>
+             <td  align="left"><%= p.product.code  %></td>
+             <td  align="left"><%= p.product.short_description %></td>
+             <td align="left"><%= p.product_uom.name rescue"-"%></td>
+             <td align="center"><%= p.quantity %></td>
+             <td></td>
+             <td></td>
+            
+          </tr>
+          <% end %>
+        <% end %>
+
+  <% end %>
+
+  <tr>
+    <td colspan="5">  </td>
+    <th align="right">Total Amount</th>
+    <th align="right"><%= "%.2f" % total %></th>
+  </tr>
+</table>
+
+</fieldset>
+
+
+<hr>
+<table style="width:100%">
+  <tr>
+    <td>Prepare by:</td><td></td><td style="text-align:right;margin-right: 50px">Approved By:</td>
+  </tr>
+  <tr>
+    <td style="height: 100px">------------------------</td>
+    <td></td>
+    <td style="text-align:right;height: 100px;margin-right: 50px">------------------------</td>
+  </tr>
+</table>
+
+
+
+
+</div>

@@ -1,0 +1,8 @@
+<p>
+  
+  <%= link_to image_tag("home.png", :title => "View All"), packing_lists_path %>
+  | <%= link_to(image_tag("print.png", :title => "Print"), preview_packing_list_path(@packing_list), {:target => "_blank"}) %>
+  <% if @packing_list.sales_order  %>
+  | <%= link_to("Back to SO", edit_sales_order_path(@packing_list.sales_order))  %>
+  <% end %>
+</p>

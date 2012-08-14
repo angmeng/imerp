@@ -1,0 +1,31 @@
+<%= simple_form_for(@delivery_order) do |f| %>
+  <% if @delivery_order.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@delivery_order.errors.count, "error") %> prohibited this delivery_order from being saved:</h2>
+
+      <ul>
+      <% @delivery_order.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="inputs">
+    <%= f.input :delivery_order_date %>
+    <%= f.input :delivery_order_number %>
+    <%= f.input :purchase_order_number %>
+    <%= f.input :invoice_number %>
+    <%= f.input :serial_number %>
+    <%= f.input :remark %>
+    <%= f.input :customer_id %>
+    <%= f.input :packing_list_id %>
+    <%= f.association :transport, :label => 'Transport' %>
+    <%= f.input :voided %>
+    <%= f.input :settled %>
+  </div>
+
+  <div class="actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

@@ -1,0 +1,45 @@
+<div class="mg10 exhibiton ex01">
+        <div class="exHead">
+            <div class="hTxt">
+               <div class="hTxtContent"><h2>Stock Transfer Details</h2></div>
+            </div>
+            <div class="hLeft"></div>
+            <div class="hRight"></div>
+        </div>
+        <div class="exBody">
+          <div class="content">
+
+         <table class="list">
+               <tr>
+                <th>Stock Transfer Number</th>
+                <th>Date</th>  
+                <th>User</th>
+                <th>Status</th>
+              </tr>
+              <tr align="center">
+                <td><%=h @stock_transfer.stock_transfer_number %></td>
+                 <td><%=  @stock_transfer.stock_transfer_date%></td>
+                <td><%=h @stock_transfer.user.name rescue "-" %></td>
+                 <% if @stock_transfer.voided? %>
+                   <td><%=raw @stock_transfer.void_status %></td>
+                 <%else%>
+                   <td align="center"><%=raw @stock_transfer.status %> </td>
+                 <%end%>
+              </tr>
+              </table>
+
+            <table class="list">
+              <tr align="left">
+               <th align="left">Remark</th>
+            </tr>
+            <tr align="left">
+            <td colspan="8"> <%= @stock_transfer.remark %></td>
+            </tr>
+            </table>
+ </div>
+</div>
+    <div class="exFoot">
+        <div class="fLeft"></div>
+        <div class="fRight"></div>
+    </div>
+    </div>

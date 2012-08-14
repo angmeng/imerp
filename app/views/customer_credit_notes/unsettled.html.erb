@@ -1,0 +1,35 @@
+<br />
+<%= link_to "Back", customer_credit_notes_path %>
+<br/>
+<%= will_paginate @customer_credit_notes %>
+<br />
+<table class="list">
+  <tr>
+
+    <th>Customer credit note date</th>
+    <th>Customer credit note number</th>
+    <th>Customer</th>
+    <th>Status</th>
+    <th>Voided</th>
+    <th>Posted</th>
+    <th>Action</th>
+
+  </tr>
+
+<% @customer_credit_notes.each do |customer_credit_note| %>
+  <tr class="<%= cycle "odd", "even"  %> " style="text-align: center">
+    <td><%= customer_credit_note.cust_credit_note_date %></td>
+    <td><%= customer_credit_note.cust_credit_note_number %></td>
+    <td><%= customer_credit_note.customer.name rescue "-" %></td>
+     <td align="center"><%=raw customer_credit_note.status %></td>
+    <td><%= customer_credit_note.voided %></td>
+    <td><%= customer_credit_note.posted %></td>
+   <td><%= link_to 'Edit', edit_customer_credit_note_path(customer_credit_note) %>
+    | <%= link_to 'Destroy', customer_credit_note, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+<%= will_paginate @customer_credit_notes %>
+<br />

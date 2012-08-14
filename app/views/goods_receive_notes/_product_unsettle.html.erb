@@ -1,0 +1,76 @@
+
+<%= link_to "Import from PO", show_items_goods_receive_note_path(@goods_receive_note) %><br />
+<% unless @goods_receive_note.purchase_order.imported? %>
+  <%= link_to "Mark this PO as completed delivered", settle_po_goods_receive_note_path(@goods_receive_note), :confirm => "Are you sure?" %>
+<% else %>
+  <%= link_to "Unmark this PO as incompleted delivered", unsettle_po_goods_receive_note_path(@goods_receive_note), :confirm => "Are you sure?" %>
+<% end %>
+<hr>
+<%= form_tag update_items_goods_receive_note_path(@goods_receive_note) do  %>
+<div class="mg10 exhibiton ex01">
+    <div class="exHead">
+        <div class="hTxt">
+           <div class="hTxtContent"><h2>Good Receive Note Items</h2></div>
+        </div>
+        <div class="hLeft"></div>
+        <div class="hRight"></div>
+    </div>
+    <div class="exBody">
+    <div class="content">
+         <table class="flexi" style="font-size: 12px">
+         <thead>
+          <tr>
+            <th width="50"  align="center" style="font-size: 12px"><strong><input type="checkbox" name="checkall" onclick="checkUncheckAll(this);"/></strong></th>
+            <th width="100" align="center" style="font-size: 12px"><strong>Code</strong></th>
+            <th width="200" align="center" style="font-size: 12px"><strong>Description</strong></th>
+            <th width="80"  align="center" style="font-size: 12px"><strong>UOM</strong></th>
+            <th width="80"  align="center" style="font-size: 12px"><strong>Price/Unit</strong></th>
+            <th width="100" align="center" style="font-size: 12px"><strong>Location</strong></th>
+            <th width="80"  align="center" style="font-size: 12px"><strong>Order Qty</strong></th>
+            <th width="80"  align="center" style="font-size: 12px"><strong>Received Qty</strong></th>
+            <th width="80"align="center"   style="font-size: 12px"><strong> TotalUpQty</strong></th>
+            <th width="80"  align="center" style="font-size: 12px"><strong>Balance</strong></th>
+            <th width="400" align="center" style="font-size: 12px"><strong>Remark</strong></th>
+         </tr>
+          </thead>
+          <tbody>
+           <% po_deliver_qty = 0 %>
+          <% @items.each do |i| %>
+          <% po_deliver_qty = i.purchase_order_item.collected_quantity %>
+
+            <tr class="<%= cycle("list0", "list1") %>" align="center">
+
+              <td style="text-align: center"><%= check_box_tag("item[#{i.id.to_s}][selected]", {})  %> </td>
+              <td><%= i.product.code rescue "-" %> </td>
+              <td><%= i.product.full_description rescue "-" %> </td>
+              <td><%= i.product_uom.name rescue "-" %> </td>
+              <td align="center"><%= text_field_tag "item[#{i.id.to_s}][unit_price]","%.2f" % i.unit_price, :size => 5 %> </td>
+              <td><%= select_tag "item[#{i.id.to_s}][stock_location_id]", options_for_select(i.product.stock_location_options, i.stock_location_id),:include_blank => 'None'%> </td>
+              <td><%= i.quantity %> </td>
+              <td><%= text_field_tag "item[#{i.id.to_s}][delivered_quantity]", i.delivered_quantity, :size => 5 %> </td>
+              <td><%= po_deliver_qty %> </td>
+              <td><%= i.quantity - po_deliver_qty %> </td>
+              <td><%= text_area_tag "item[#{i.id.to_s}][remark]", i.remark,{:style=>"width:380px;height:15px; "} %></td>
+
+          </tr>
+
+          <% end %>
+          </tbody>
+        </table>
+
+      <%= submit_tag "Remove Items" unless @goods_receive_note.goods_receive_note_items.empty? %>
+      <%= submit_tag "Update Items" unless @goods_receive_note.goods_receive_note_items.empty? %>
+<% end %>
+</div>
+ </div>
+    <div class="exFoot">
+        <div class="fLeft"></div>
+        <div class="fRight"></div>
+    </div>
+</div>
+        <script type="text/javascript">
+         $('.flexi').flexigrid({width: $('#header').width() - 60});
+         </script>
+
+
+        

@@ -1,0 +1,5 @@
+
+<% if flash[:notice] %>
+  $("#mixed_flash").html('<p class="flash_notice"><%= escape_javascript(flash.delete(:notice)) %></p>');
+<% end %>
+$("#mixed_table").html("<%= escape_javascript(render :partial => '/products/mixed_table') %>");

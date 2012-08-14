@@ -1,0 +1,53 @@
+<% title "Listing Purchase Requisitions" %>
+<%= link_to image_tag("new.png"), new_purchase_requisition_path %>
+<br /><br />
+<%= render "search_form" %>
+<br/><hr/><br/>
+<div class="mg10 exhibiton ex01">
+    <div class="exHead">
+        <div class="hTxt">
+            <div class="hTxtContent"><h2>Purchase Requisition</h2></div>
+        </div>
+        <div class="hLeft"></div>
+        <div class="hRight"></div>
+    </div>
+    <div class="exBody">
+        <div class="content">
+          <%= will_paginate @purchase_requisitions %>
+                 <table class="list" width="100%">
+                    <tr>
+                     <th>Date</th>
+                     <th>PR Number</th>
+                    
+                     <th>Issued user</th>
+                     <th>Approved user</th>
+                     <th>Status</th>
+                     <th>Void</th>
+                     <th>Action</th>
+
+                    </tr>
+
+                  <% @purchase_requisitions.each do |purchase_requisition| %>
+                    <tr class="<%= cycle "odd", "even"  %> " style="text-align: center">
+                      <td><%= purchase_requisition.pr_date.strftime("%d-%m-%Y") %></td>
+                      <td><%= purchase_requisition.pr_number %></td>
+                      <td><%= purchase_requisition.issued_user.name rescue "-" %></td>
+                      <td><%= purchase_requisition.approved_user.name rescue "-" %></td>
+                      <td><%=raw purchase_requisition.status %></td>
+                      <td><%= raw purchase_requisition.void_status %></td>
+                      <td>
+
+                      <%= link_to 'Edit', edit_purchase_requisition_path(purchase_requisition) %> |
+                      <%= link_to 'Destroy', purchase_requisition, :confirm => 'Are you sure?', :method => :delete %></td>
+                    </tr>
+                  <% end %>
+                    </table>
+        </div>
+   </div>
+    <div class="exFoot">
+        <div class="fLeft"></div>
+        <div class="fRight"></div>
+    </div>
+</div>
+
+

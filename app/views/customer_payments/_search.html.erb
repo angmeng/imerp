@@ -1,0 +1,45 @@
+<div class="mg10 exhibiton ex01">
+        <div class="exHead">
+            <div class="hTxt">
+               <div class="hTxtContent"><h2>Customer Payment Search</h2></div>
+            </div>
+            <div class="hLeft"></div>
+            <div class="hRight"></div>
+        </div>
+        <div class="exBody">
+            <div class="content">
+                              <script>
+                        $(function() {
+                                $( "#datepicker" ).datepicker();
+
+                        });
+                </script>
+                <%= form_for @search do |f| %>
+                  <table class="list" style="width: auto">
+                    <tr>
+                      <th>Date</th>
+                      <th>Customer Payment Number</th>
+                      
+                      <th>Customer</th>
+                      <th>Status</th>
+                      <th align="center">Void Status</th>
+                      <th>Action</th>
+                    </tr>
+                    <tr>
+                      
+                      <td><input type="text" size="24"id="datepicker" name="search[cust_payment_date_equals]"/></td>
+                      <td align="center"><%= f.text_field :cust_payment_number_like %></td>
+                      <td align="center"><%= f.select :customer_id_equals, Customer.all(:order => "name").map {|c| [c.name, c.id]} , {:include_blank => true} %></td>
+                      <td align="center"><%= f.select :settled_equals, [["Completed", true],["Processing", false]], {:include_blank => true} %></td>
+                          <td align="center"><%= f.select :voided_equals, [["Voided", true],["Unvoided", false]], {:include_blank => true} %></td>
+                      <td align="center"><%= f.submit "Search" %></td>
+                   </tr>
+                </table>
+                <% end %>
+ </div>
+</div>
+    <div class="exFoot">
+        <div class="fLeft"></div>
+        <div class="fRight"></div>
+    </div>
+    </div>

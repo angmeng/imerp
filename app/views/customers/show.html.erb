@@ -1,0 +1,101 @@
+
+<%= link_to 'Back', customers_path %> |
+<%= link_to 'New', new_customer_path %> |
+<%= link_to 'Edit', edit_customer_path(@customer) %>
+<div class="mg10 exhibiton ex01">
+    <div class="exHead">
+        <div class="hTxt">
+           <div class="hTxtContent"><h2>Customer Details</h2></div>
+        </div>
+        <div class="hLeft"></div>
+        <div class="hRight"></div>
+    </div>
+    <div class="exBody">
+        <div class="content">
+
+                <p>
+                  <b>Code:</b>
+                  <%= @customer.code %>
+                </p>
+
+                <p>
+                  <b>Name:</b>
+                  <%= @customer.name %>
+                </p>
+
+                <p>
+                  <b>Company number:</b>
+                  <%= @customer.company_number %>
+                </p>
+
+                <p>
+                  <b>Address:</b>
+                  <%= @customer.address %>
+                </p>
+
+                <p>
+                  <b>City:</b>
+                  <%= @customer.city.name %>
+                </p>
+
+                <p>
+                  <b>Postcode:</b>
+                  <%= @customer.postcode %>
+                </p>
+
+                <p>
+                  <b>Email:</b>
+                  <%= @customer.email %>
+                </p>
+
+                <p>
+                  <b>Office contact:</b>
+                  <%= @customer.office_contact %>
+                </p>
+
+                <p>
+                  <b>Office contact2:</b>
+                  <%= @customer.office_contact2 %>
+                </p>
+
+                <p>
+                  <b>Fax number:</b>
+                  <%= @customer.fax_number %>
+                </p>
+
+                <p>
+                  <b>Contact person:</b>
+                  <%= @customer.contact_person %>
+                </p>
+
+                <p>
+                  <b>Contact number:</b>
+                  <%= @customer.contact_number %>
+                </p>
+
+                <p>
+                  <b>Price Level:</b>
+                  <%= @customer.price_level.name %>
+                </p>
+
+                <p>
+                  <b>Term:</b>
+                  <%= @customer.term %>
+                </p>
+
+                <p>
+                  <b>Remark:</b>
+                  <%= @customer.remark %>
+                </p>
+
+                <p>
+                  <b>Suspend:</b>
+                  <%= @customer.suspend %>
+                </p>
+        </div>
+   </div>
+    <div class="exFoot">
+        <div class="fLeft"></div>
+        <div class="fRight"></div>
+    </div>
+</div>

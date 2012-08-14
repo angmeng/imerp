@@ -1,0 +1,205 @@
+class CustomerCreditNote < ActiveRecord::Base
+  has_many :customer_credit_note_items
+  has_many :product_movements, :as => :movement
+  belongs_to :customer
+
+  validates :cust_credit_note_date, :presence => true
+  before_create :generate_ccn_number
+  attr_reader :product_tokens
+  scope :unsettled, where(:settled => false)
+
+  
+  def check_settle
+      error_count = 0
+      if customer_credit_note_items.any?
+        customer_credit_note_items.each do |i|
+         if i.product_uom_id == 0 or i.quantity == 0 or i.unit_price == 0 or i.stock_location_id == 0
+           error_count += 1
+         end
+        end
+      else
+        error_count += 1
+      end
+      if error_count == 0
+        self.settled = true
+        save!
+        return true
+      else
+        return false
+      end
+
+  end
+  def check_cust
+      error_count = 0
+      if customer_id.nil? or customer_id == 0
+        error_count +=1
+      end
+      if error_count == 0
+        return true
+      else
+        return false
+      end
+  end
+  def update_item(item)
+    error_msg = ""
+    item.each do |item_id, content|
+       i = customer_credit_note_items.find(item_id.to_i)
+       if content[:product_uom_id].to_i > 0
+         if customer_credit_note_items.where("id != ? and product_id = ? and product_uom_id = ?", item_id, i.product_id, content[:product_uom_id]).first
+            error_msg << Product.find(i.product_id.to_i).code + " - " + ProductUom.find(content[:product_uom_id].to_i).name + " - is already exist <br>"
+        else
+            unless content[:quantity].index(/[abcdefghijklmnopqrstuvwxyz]/) or content[:quantity].blank? or content[:unit_price].index(/[abcdefghijklmnopqrstuvwxyz]/) or content[:unit_price].blank?
+              i = customer_credit_note_items.find(item_id.to_i)
+              i.quantity = content[:quantity].to_i
+              i.product_uom_id = content[:product_uom_id].to_i
+              i.stock_location_id = content[:stock_location_id].to_i
+              i.unit_price = content[:unit_price].to_f
+              i.save!
+            end
+        end
+       else
+          unless content[:quantity].index(/[abcdefghijklmnopqrstuvwxyz]/) or content[:quantity].blank? or content[:unit_price].index(/[abcdefghijklmnopqrstuvwxyz]/) or content[:unit_price].blank?
+              i = customer_credit_note_items.find(item_id.to_i)
+              i.quantity = content[:quantity].to_i
+              i.product_uom_id = content[:product_uom_id].to_i
+              i.stock_location_id = content[:stock_location_id].to_i
+              i.unit_price = content[:unit_price].to_f
+              i.save!
+        end
+  end
+  end
+      error_msg
+  end
+
+def status
+    
+      if settled?
+        "<em style='color:green'>Completed</em>"
+      else
+         "<em style='color:blue'>Processing</em>"
+      end
+     
+   
+ end
+
+def void_status
+if voided?
+    "<em style='color:red'>Voided</em>"
+ else
+    "<em style='color:brown'>Unvoided</em>"
+end
+end
+
+def quantity_post_status
+
+   if posted?
+         "<em style='color:purple'>Posted Quantity</em>"
+      else
+           "<em style='color:orange'>Unpost Quantity</em>"
+      end
+ end
+
+  def post_quantity
+    if posted?
+      return false
+    else
+      transaction do
+        customer_credit_note_items.each do |d|
+          item = ProductMovement.new(:movement_date => Date.today, :movement => self)
+          unless d.posted?
+            item.product_id = d.product_id
+            item.product_uom_id = d.product_uom_id
+            item.stock_location_id = d.stock_location_id
+            item.quantity = d.quantity
+            item.cost = d.unit_price
+            item.description = ProductMovement::ADD_CUSTOMER_CN_DESC
+            item.save!
+
+            d.posted = true
+            d.save!
+            uom_item = ProductUomItem.first(:conditions => ["product_id = ? and product_uom_id = ?", d.product_id, d.product_uom_id])
+            found = StockCount.first(:conditions => ["stock_location_id = ? and product_uom_item_id = ?", d.stock_location_id, uom_item.id])
+            found = StockCount.create!(:stock_location_id => d.stock_location_id, :product_uom_item_id => uom_item.id, :product_id => d.product_id, :product_uom_id => d.product_uom_id) unless found
+            found.quantity += d.quantity
+            found.save!
+          end
+        end
+        self.posted = true
+        save!
+      end
+    end
+  end
+
+  
+  
+
+ def remove_item(item)
+    item.each do |inv_id, content|
+      if content[:selected].to_i == 1
+        i = customer_credit_note_items.find(inv_id)
+        i.destroy
+      end
+    end
+  end
+
+  def add_autocomplete_item(item)
+    item_ids = item[:product_tokens].split(",")
+    item_ids.uniq.each do |i|
+      found = Product.find(i.to_i) rescue nil
+      customer_credit_note_items.create!(:product_id => i.to_i, :stock_location_id => 0) if found
+    end
+
+  end
+
+  def add_item(item)
+    error_msg = ""
+    item.each do |p_id, content|
+      if content[:selected].to_i == 1
+        if content[:product_uom_id].to_i > 0
+          if customer_credit_note_items.first(:conditions => ["product_id = ? and product_uom_id = ? ", p_id , content[:product_uom_id].to_i])
+           error_msg << Product.find(p_id.to_i).code + " - " + ProductUom.find(content[:product_uom_id].to_i).name + " - is already exist <br>"
+          else
+              i = customer_credit_note_items.new
+              unless content[:product_uom_id].blank?
+               i.product_uom_id = content[:product_uom_id].to_i
+              end
+              i.product_id = p_id.to_i
+              i.stock_location_id = 0
+              i.save!
+            end
+        else
+          i = customer_credit_note_items.new
+              unless content[:product_uom_id].blank?
+               i.product_uom_id = content[:product_uom_id].to_i
+              end
+              i.product_id = p_id.to_i
+              i.stock_location_id = 0
+              i.save!
+
+        end
+      end
+  end
+  error_msg
+  end
+
+  
+ 
+ def removed_ccn_item(item)
+    item.each do |item_id, content|
+      if content[:selected]
+        i = customer_credit_note_items.find(item_id)
+        i.destroy
+      end
+    end
+ end
+
+
+ private
+def generate_ccn_number
+    setting = Setting.first
+    setting.customer_credit_note_last_number += 1
+    setting.save!
+    self.cust_credit_note_number = setting.customer_credit_note_code + setting.customer_credit_note_last_number.to_s
+  end
+
+end

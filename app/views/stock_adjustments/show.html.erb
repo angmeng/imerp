@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Stock adjustment number:</b>
+  <%= @stock_adjustment.stock_adjustment_number %>
+</p>
+
+<p>
+  <b>Stock date:</b>
+  <%= @stock_adjustment.stock_date %>
+</p>
+
+<p>
+  <b>Remark:</b>
+  <%= @stock_adjustment.remark %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @stock_adjustment.user_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_stock_adjustment_path(@stock_adjustment) %> |
+<%= link_to 'Back', stock_adjustments_path %>

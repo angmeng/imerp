@@ -1,0 +1,24 @@
+<%= form_for(@sales_order) do |f| %>
+  <%= render "shared/error_messages", :target => @sales_order %>
+ <%= f.hidden_field :issued_user_id, :value => current_user.id %>
+   <table>
+      <tr>
+        <th>Date</th><td><%= f.date_select :sales_order_date %></td>
+      </tr>
+      <tr>
+        <th>Remark</th><td valign="top"><%= f.text_area :remark, :size => "80x2" %></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>
+            <div class="actions">
+              <% if controller.action_name == "new" %>
+              <%= f.submit " Next "  %>
+              <% end %>
+           </div>
+        </td>
+      </tr>
+    </table>
+   
+<% end %>
+

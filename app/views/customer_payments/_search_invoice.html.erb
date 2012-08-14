@@ -1,0 +1,26 @@
+<script>
+	$(function() {
+		$( "#datepickerfrom" ).datepicker();
+                $( "#datepickerto" ).datepicker();
+	});
+</script>
+
+<%= form_for @search, :url => {:action => "item_new_page"} do |f| %>
+<table class="list" style="width: auto">
+    <tr>
+      <th>Invoice Number</th>
+     
+      <th>Invoice date</th>
+      <th></th>
+   </tr>
+   <tr>
+      <td align="center"><%= f.text_field :invoice_number_like %></td>
+      <td align="center">
+      <input type="text" id="datepickerfrom" name="search[invoice_date_gte]"/> - <input type="text" id="datepickerto" name="search[invoice_date_lte]"/></td>
+      <td><%= f.submit  "Search" %></td>
+   </tr>
+  
+  
+</table>
+
+<% end %>

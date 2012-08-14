@@ -1,0 +1,26 @@
+<%= simple_form_for(@stock_disposal) do |f| %>
+  <% if @stock_disposal.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@stock_disposal.errors.count, "error") %> prohibited this stock_disposal from being saved:</h2>
+
+      <ul>
+      <% @stock_disposal.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="inputs">
+    <%= f.input :stock_disposal_number %>
+    <%= f.input :stock_disposal_date %>
+    <%= f.input :remark %>
+    <%= f.input :voided %>
+    <%= f.input :posted %>
+    <%= f.input :user_id %>
+  </div>
+
+  <div class="actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

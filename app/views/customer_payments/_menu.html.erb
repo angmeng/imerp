@@ -1,0 +1,7 @@
+<%= link_to image_tag("home.png", :title => "View All"), customer_payments_path %> |
+<%= link_to image_tag("new.png", :title => "New"), new_customer_payment_path %> |
+<%= link_to image_tag("delete.png", :title => "Delete"), @customer_payment, :confirm => 'Are you sure you want to delete this Customer Payment?', :method => :delete %> |
+<%= link_to image_tag("print.png", :title => "Print"), preview_customer_payment_path(@customer_payment), {:target => "_blank",} %>
+<% unless @customer_payment.settled? or @customer_payment.voided? %>
+| <%= link_to 'Settle', post_payment_customer_payment_path(@customer_payment), :confirm => "Are you sure you want to settled the payment ?" %>
+ <% end %>

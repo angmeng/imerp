@@ -1,0 +1,21 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  purchase_requisition_id: 1
+  product_id: 1
+  supplier_id: 1
+  quantity: 1
+  unit_price: 9.99
+  remark: MyString
+  confirmed: false
+  purchase_order_id: 1
+
+two:
+  purchase_requisition_id: 1
+  product_id: 1
+  supplier_id: 1
+  quantity: 1
+  unit_price: 9.99
+  remark: MyString
+  confirmed: false
+  purchase_order_id: 1

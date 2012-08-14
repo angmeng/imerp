@@ -1,0 +1,28 @@
+<br />
+<%= link_to "Back", stock_disposals_path %>
+<br/>
+<%= will_paginate @stock_disposals %>
+<br />
+<table class="list">
+  <tr>
+    <th>Stock adjustment number</th>
+    <th>Stock adjustment date</th>
+    <th>User</th>
+     <th>Status</th>
+    <th>Action</th>
+
+  </tr>
+
+<% @stock_disposals.each do |stock_disposal| %>
+  <tr class="<%= cycle "odd", "even"  %> " style="text-align: center">
+    <td><%= stock_disposal.stock_disposal_number %></td>
+    <td><%= stock_disposal.stock_disposal_date %></td>
+    <td><%= stock_disposal.user.name rescue "-" %></td>
+    <td align="center"><%=raw stock_disposal.status %></td>
+    <td><%= link_to 'Edit', edit_stock_disposal_path(stock_disposal) %>
+    | <%= link_to 'Destroy', stock_disposal, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+<br />
+<%= will_paginate @stock_disposals %>

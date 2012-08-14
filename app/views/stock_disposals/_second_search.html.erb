@@ -1,0 +1,17 @@
+<%= form_tag add_auto_complete_product_stock_disposal_path(@stock_disposal) do %>
+<br/><br/>
+<table>
+  <tr>
+    <th>Code</th>
+
+     <td>
+        <%=  text_field "stock_disposal", "product_tokens"  %>
+    </td>
+     <td><%= submit_tag "Add item" %></td>
+  </tr>
+</table>
+
+
+
+<%  end %>
+

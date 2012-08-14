@@ -1,0 +1,51 @@
+<% title "Listing Price Levels" %>
+<%= link_to image_tag("new.png"), new_price_level_path %>
+<br /><br />
+<div class="mg10 exhibiton ex01">
+        <div class="exHead">
+            <div class="hTxt">
+               <div class="hTxtContent"><h2>Price Level</h2></div>
+            </div>
+            <div class="hLeft"></div>
+            <div class="hRight"></div>
+        </div>
+        <div class="exBody">
+            <div class="content">
+              <%= will_paginate @product_price_levels %>
+                 <table class="list">
+                <thead>
+                <tr>
+                  <th align="left">Name</th>
+                  <th align="left">Description</th>
+                  <th>System Built-in</th>
+                  <th>Disabled</th>
+                  <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                  <% @price_levels.each do |price_level| %>
+                    <tr class="<%= cycle "odd", "even"  %> ">
+                      <td><%= price_level.name %></td>
+                      <td><%= price_level.description %></td>
+                      <td style="text-align: center"><%= price_level.built_in %></td>
+                      <td style="text-align: center"><%= price_level.disabled %></td>
+                      <td style="text-align: center"><%= link_to 'Show', price_level %>
+                      <% unless price_level.built_in %>
+                      | <%= link_to('Edit', edit_price_level_path(price_level)) %>
+                      | <%= link_to 'Destroy', price_level, :confirm => 'The attached pricings will be deleted as well. Are you sure?', :method => :delete %></td>
+                      <% end %>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+
+              <br />
+</div>
+</div>
+    <div class="exFoot">
+        <div class="fLeft"></div>
+        <div class="fRight"></div>
+    </div>
+    </div>
+
+

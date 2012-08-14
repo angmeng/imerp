@@ -1,0 +1,47 @@
+<script>
+	$(function() {
+		$( "#datepickerfrom" ).datepicker();
+                $( "#datepickerto" ).datepicker();
+	});
+	</script>
+<div class="mg10 exhibiton ex01">
+    <div class="exHead">
+        <div class="hTxt">
+           <div class="hTxtContent"><h2>Invoice Search</h2></div>
+        </div>
+        <div class="hLeft"></div>
+        <div class="hRight"></div>
+    </div>
+    <div class="exBody">
+        <div class="content">
+              <%= form_for @search do |f| %>
+                <table class="list" style="width: auto">
+                  <tr>
+                    <th>Date</th>
+                    <th>Invoice Number</th>
+                    
+                    <th>Customer</th>
+                    <th>Invoice Status</th>
+                    <th>Payment Status</th>
+                    <th>Void Status</th>
+                    <th></th>
+                  </tr>
+                  <tr>
+                   
+                   <td align="center"> <input type="text" id="datepickerfrom" name="search[invoice_date_gte]"/> - <input type="text" id="datepickerto" name="search[invoice_date_lte]"/></td>
+                   <td align="center"><%= f.text_field :invoice_number_like %></td>
+                   <td align="center"><%= f.select :customer_id_equals, Customer.all(:order => "name").map {|c| [c.name, c.id]} , {:include_blank => true} %></td>
+                    <td align="center"><%= f.select :settled_equals, [["Completed", true],["Processing", false]], {:include_blank => true} %></td>
+                   <td align="center"><%= f.select :payment_paid_equals, [["Paid", true],["Unpaid", false]], {:include_blank => true} %></td>
+                   <td align="center"><%= f.select :voided_equals, [["Voided", true],["Unvoided", false]], {:include_blank => true} %></td>
+                    <td align="center"><%= f.submit "Search" %></td>
+                 </tr>
+              </table>
+              <% end %>
+</div>
+   </div>
+    <div class="exFoot">
+        <div class="fLeft"></div>
+        <div class="fRight"></div>
+    </div>
+</div>

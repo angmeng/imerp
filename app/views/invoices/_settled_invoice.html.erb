@@ -1,0 +1,50 @@
+<div class="mg10 exhibiton ex01">
+    <div class="exHead">
+        <div class="hTxt">
+           <div class="hTxtContent"><h2>Invoice Details</h2></div>
+        </div>
+        <div class="hLeft"></div>
+        <div class="hRight"></div>
+    </div>
+    <div class="exBody">
+        <div class="content">
+            <table class="list">
+              <tr>
+               <th>Invoice No</th>
+               <th>Date</th>
+               <th>Customer</th>
+               <th>Term</th>
+               <th>Status</th>
+
+
+              </tr>
+
+             <tr class="<%= cycle "odd", "even"  %> " style="text-align: center">
+                <td align="center"><%= @invoice.invoice_number %></td>
+                <td align="center"><%= @invoice.invoice_date%> - <%= @invoice.end_invoice_date %> </td>
+                <td><%= @invoice.customer.name %> </td>
+                <td align="center"><%= @invoice.term %> </td>
+                 <% if @invoice.voided? %>
+                 <td><%=raw @invoice.void_status %></td>
+              <%else%>
+                 <td align="center"><%=raw @invoice.payment_status %> </td>
+               <%end%>
+               
+
+             </tr>
+
+            <table class="list">
+              <tr align="left">
+               <th align="left">Remark</th>
+            </tr>
+            <tr align="left">
+            <td colspan="8"> <%= @invoice.remark %></td>
+            </tr>
+            </table>
+</div>
+   </div>
+    <div class="exFoot">
+        <div class="fLeft"></div>
+        <div class="fRight"></div>
+    </div>
+</div>

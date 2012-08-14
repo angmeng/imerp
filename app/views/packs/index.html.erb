@@ -1,0 +1,58 @@
+<% title "Listing Product Mixed" %>
+<%= link_to image_tag("new.png"), new_pack_path %>
+<br /><br />
+<%= render 'search_form'  %>
+<br>
+<hr>
+<br>
+<div class="mg10 exhibiton ex01">
+    <div class="exHead">
+        <div class="hTxt">
+           <div class="hTxtContent"><h2>Pack</h2></div>
+        </div>
+        <div class="hLeft"></div>
+        <div class="hRight"></div>
+    </div>
+    <div class="exBody">
+        <div class="content">
+              <%= will_paginate @packs %>
+
+              <table class="list">
+                <tr>
+                  <th>Pack Date</th>
+                  <th>Pack number</th>
+                  <th>User</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                
+                  
+                </tr>
+
+             <% @packs.each do |pack| %>
+                <tr>
+                  <td align="center"><%= pack.pack_date.strftime("%d-%m-%Y") %></td>
+                  <td align="center"><%= pack.pack_number %></td>
+                  <td align="center"><%= pack.user.name %></td>
+                  <td align="center"><%=raw pack.status %></td>
+                
+                   <td align="center"> <%= link_to 'Edit', edit_pack_path(pack) %>
+                  | <%= link_to 'Destroy', pack, :confirm => 'Are you sure?', :method => :delete %></td>
+                </tr>
+              <% end %>
+              </table>
+
+
+</div>
+   </div>
+    <div class="exFoot">
+        <div class="fLeft"></div>
+        <div class="fRight"></div>
+    </div>
+</div>
+
+
+
+
+
+
+

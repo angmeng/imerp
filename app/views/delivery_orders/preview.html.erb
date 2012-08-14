@@ -1,0 +1,198 @@
+
+<%= stylesheet_link_tag 'print',:media => "print"%>
+
+<a href="#" onclick="window.print();return false;">Print</a>
+
+<div class="print">
+<table align="center">
+    <% @settings.each do |setting| %>
+   <tr>
+     <td align="center" style="font-size: 28"><%= setting.company_name rescue'-' %></td>
+   </tr>
+   <tr>
+     <td align="center"><%= setting.company_address_one rescue'-' %></td>
+   </tr>
+   <tr>
+     <td align="center"><%= setting.company_address_two rescue'-' %></td>
+   </tr>
+   <tr>
+     <td align="center">
+       <%= setting.company_postcode rescue'-'  %>,
+       <%= setting.company_city rescue'-' %>,
+       <%= setting.company_country rescue'-' %>
+     </td>
+   </tr>
+   <tr>
+     <td align="center">
+      &nbsp;&nbsp; TEL NO: <%= setting.phone_number rescue'-'  %>  &nbsp;
+            FAX NO: <%= setting.fax_number rescue'-' %>
+     </td>
+   </tr>
+   <% end %>
+ </table>
+<%= image_tag("do.png")%>
+
+ <table style="width: 100%">
+    <tr>
+      <td  style="width: 40%">
+        <table  style=" border:solid" >
+          <tr>
+          <th align="right"style="width: 10%"><strong>Bill To : </strong> </th>
+          <td style="width: 60%">&nbsp;&nbsp;<%= @delivery_order.customer.name %></td>
+          </tr>
+         <tr>
+          <td valign="top"></td>
+          <td> &nbsp;&nbsp;<%= @delivery_order.customer.address %><br />
+              &nbsp;&nbsp;<%= @delivery_order.customer.postcode %>
+          </td>
+          </tr>
+          <tr>
+          <td align="right"> <strong>Contact: </strong></td>
+          <td> &nbsp;&nbsp;<%= @delivery_order.customer.contact_person %> 
+               <strong>Tel:  </strong>&nbsp;<%= @delivery_order.customer.office_contact %>
+               <strong>Fax:  </strong>&nbsp;<%= @delivery_order.customer.fax_number %>
+          </td>
+          </tr>
+
+        </table>
+      </td>
+     <td style="width: 5%"></td>
+     <td style="width: 20%">
+        <table>
+          <tr>
+            <th align="left">Date  </th>
+            <th align="left">&nbsp;:</th>
+            <td>&nbsp;&nbsp;<%= @delivery_order.delivery_order_date.strftime("%d-%m-%Y") %></td>
+         </tr>
+          <tr>
+             <th align="left">DO Number</th>
+             <th align="left">&nbsp;:</th>
+             <td>&nbsp;&nbsp;<%= @delivery_order.delivery_order_number %></td>
+         </tr>
+          
+         <tr>
+          <th align="left">SO Number </th>
+          <th align="left">&nbsp;:</th>
+          <td>&nbsp;&nbsp;<%=h @delivery_order.packing_list.sales_order.sales_order_number %></td>
+        </tr>
+        <tr>
+          <th align="left">PO Number</th>
+          <th align="left">&nbsp;:</th>
+          <td> &nbsp;&nbsp;<%=h @delivery_order.purchase_order_number %></td>
+        </tr>
+        </table>
+    </td>
+     <td style="width: 20%">
+        <table>
+         <tr>
+          <th align="left">Sales code</th>
+          <th align="left">&nbsp;:</th>
+          <td> &nbsp;&nbsp;<%=h @delivery_order.salesman.code%></td>
+         </tr>
+        <tr>
+          <th align="left">Transport code </th>
+          <th align="left">&nbsp;:</th>
+          <td> &nbsp;&nbsp;<%=h @delivery_order.transport.code%></td>
+        </tr>
+        <tr>
+          <th align="left">Term </th>
+          <th align="left">&nbsp;:</th>
+          <td> &nbsp;&nbsp;<%=h @delivery_order.packing_list.term %></td>
+        </tr>
+        <tr>
+          <th align="left">Page </th>
+          <th align="left">&nbsp;:</th>
+          <td></td>
+        </tr>
+       </table>
+    </td>
+
+  </tr>
+
+</table>
+ <fieldset style="width: 96%; height: 890px; border-style: none">
+
+<br /><br />
+<table width="100%" cellpadding="2" cellspacing="0">
+  <tr>
+    <th align ="left"style="border-bottom:outset ">No</th>
+    <th align ="left"style="border-bottom:outset ">Code</th>
+    <th align ="left"style="border-bottom:outset ">Description</th>
+    <th style="border-bottom:outset ">UOM</th>
+    <th style="border-bottom:outset ">Unit Price</th>
+    <th style="border-bottom:outset ">Order Qty</th>
+    <th style="border-bottom:outset ">Deliver Qty</th>
+   </tr>
+  <% line = 0 %>
+  <% @items.each do |i| %>
+  <% po_deliver_qty = i.packing_list_item.collected_quantity %>
+  <% line += 1%>
+  <tr>
+    <td align="center"><%= line.to_s %></td>
+     <% if  i.product.mixed_items.any?%>
+     <td><strong><%=  i.product.code %> </strong>(bundle Item)</td>
+     <%else%>
+     <td><strong><%= i.product.code %></strong></td>
+     <%end%>
+    <td><%= i.product.full_description rescue "-" %> </td>
+    <td align="center"><%= i.product_uom.name rescue "-" %> </td>
+    <td align="center"><%= "%.2f" % i.unit_price %> </td>
+    <td align="center"><%= po_deliver_qty %> </td>
+    <td align="center"><%= i.delivered_quantity %> </td>
+   
+ </tr>
+ 
+<% if i.product.is_mixed? %>
+          <% i.product.mixed_items.each do |p| %>
+
+          <tr>
+             <td></td>
+             <td  align="left"><%= p.product.code  %></td>
+             <td  align="left"><%= p.product.short_description %></td>
+             <td align="center"><%= p.product_uom.name rescue"-"%></td>
+             <td align="center"><%#= p.quantity %></td>
+             <td></td>
+             <td></td>
+             <td></td>
+          </tr>
+          <% end %>
+        <% end %>
+
+  <% end %>
+ 
+
+</table>
+</fieldset>
+
+<hr>
+<table>
+  <tr>
+    <td> Term and Condition:-</td>
+  </tr>
+   <tr>
+    <td>1. Post-dated cheque with only be treated as payment after debited to our account.</td>
+  </tr>
+   <tr>
+    <td>2. Interest of 2% per month will be charges on overdue accounts.</td>
+  </tr>
+   <tr>
+    <td>3. No cash payment allowed unless special approval granted from our company's</td>
+  </tr>
+</table>
+<hr>
+
+<table style="width:100%">
+  <tr>
+    <td>Received by:</td><td></td><td align="center">Issued by:</td><td></td><td style="text-align:right;margin-right: 50px">Approved By:</td>
+  </tr>
+  <tr>
+    <td style="height: 150px">---------------------------------------------- <br>Authorized Signature & Company Stamp</td>
+    <td></td>
+    <td style="text-align:center ;height: 150px;margin-right: 50px">------------------------<br></td>
+    <td></td>
+    <td style="text-align:right;height: 150px;margin-right: 50px">------------------------<br></td>
+  </tr>
+</table>
+
+
+</div>

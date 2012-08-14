@@ -1,0 +1,31 @@
+<h1>Listing pack_item_subitems</h1>
+
+<table>
+  <tr>
+    <th>Pack item</th>
+    <th>Product</th>
+    <th>Product uom</th>
+    <th>Stock location</th>
+    <th>Quantity</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @pack_item_subitems.each do |pack_item_subitem| %>
+  <tr>
+    <td><%= pack_item_subitem.pack_item_id %></td>
+    <td><%= pack_item_subitem.product_id %></td>
+    <td><%= pack_item_subitem.product_uom_id %></td>
+    <td><%= pack_item_subitem.stock_location_id %></td>
+    <td><%= pack_item_subitem.quantity %></td>
+    <td><%= link_to 'Show', pack_item_subitem %></td>
+    <td><%= link_to 'Edit', edit_pack_item_subitem_path(pack_item_subitem) %></td>
+    <td><%= link_to 'Destroy', pack_item_subitem, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Pack item subitem', new_pack_item_subitem_path %>

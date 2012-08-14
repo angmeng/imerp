@@ -1,0 +1,36 @@
+
+  <fieldset style="padding-left: 10px;padding-right: 10px;padding-bottom: 10px ; width: 95%; height: 400px;background-color:#ffffff">
+
+    <a id="btn1" href="#"><strong>Simple Search</strong></a>  |
+<a id="btn2" href="#"><strong>Advanced Search</strong></a>
+<div id="log"></div>
+
+
+<div id="first" class="box"><%= render "second_search" %></div>
+<div id="second" class="box" style="display:none"><%= render "first_search" %></div>
+
+<script>
+$("#btn1").click(function() {
+  function complete() {
+    $("#first").show();
+  }
+  $("#second").fadeOut(400, complete);
+  $("#log").empty();
+});
+
+$("#btn2").click(function() {
+  function complete() {
+    $("#second").show();
+  }
+  $("#first").fadeOut(400, complete);
+   $("#log").empty();
+
+});
+
+
+</script>
+    </fieldset>
+
+
+
+

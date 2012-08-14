@@ -1,0 +1,77 @@
+
+
+<% title "Listing products" %>
+<%= link_to image_tag("new.png"), new_product_path %>
+<br /><br />
+<%= render 'search_form' %>
+
+<br/><hr/><br/>
+
+<div class="mg10 exhibiton ex01">
+    <div class="exHead">
+        <div class="hTxt">
+            <div class="hTxtContent"><h2>Product</h2></div>
+        </div>
+        <div class="hLeft"></div>
+        <div class="hRight"></div>
+    </div>
+    <div class="exBody">
+        <div class="content">
+
+           <%= will_paginate @products %>
+              <br />
+              <table class="list">
+                <tr>
+                  <th align="left">Code</th>
+                  <th align="left">Short description</th>
+                  <th align="left">Quantity on hand</th>
+                  <th align="left">Type</th>
+                  <th align="left">Brand</th>
+                  <th align="left">Department</th>
+                  <th align="left">Category</th>
+                  <th align="left">Model</th>
+
+                  <th>Action</th>
+
+                </tr>
+
+              <% @products.each do |product| %>
+                <tr class="<%= cycle "odd", "even"  %> ">
+                  <td> <a href="<%= show_onhand_product_path(product)%>" class="nyroModal"><%=  product.code%></a>
+                  </td>
+                  <td><%= product.short_description %></td>
+                  <td><%= product.uom_status %></td>
+                  <td><%= product.product_kind.name rescue "-" %></td>
+                  <td><%= product.product_brand.name rescue "-" %></td>
+                  <td><%= product.product_department.name rescue "-" %></td>
+                  <td><%= product.product_category.name rescue "-" %></td>
+                  <td><%= product.product_model.name rescue "-" %></td>
+                  <td style="text-align: center"><%= link_to 'Show', product %>
+                  | <%= link_to 'Edit', edit_product_path(product) %>
+                  | <%= link_to 'Destroy', product, :confirm => 'Are you sure?', :method => :delete %></td>
+                </tr>
+              <% end %>
+              </table>
+
+              <br />
+
+
+        </div>
+   </div>
+    <div class="exFoot">
+        <div class="fLeft"></div>
+        <div class="fRight"></div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+$(function() {
+  $('.nyroModal').nyroModal();
+});
+</script>
+
+
+
+
+

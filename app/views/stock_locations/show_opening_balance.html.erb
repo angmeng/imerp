@@ -1,0 +1,53 @@
+ <%= link_to "Back", edit_product_rack_path(@product_rack) %> |
+ <%= link_to "Add all product uom to location", add_uoms_product_rack_path(@product_rack), :confirm => "It might take fews minutes to process, are you are ?" %>
+
+
+<div class="mg10 exhibiton ex01">
+    <div class="exHead">
+        <div class="hTxt">
+           <div class="hTxtContent"><h2>Opening Balance for <%= @product.short_description %>  in  <%=  @product_rack.product_location.name %> - <%=  @product_rack.name %> </h2></div>
+        </div>
+        <div class="hLeft"></div>
+        <div class="hRight"></div>
+    </div>
+    <div class="exBody">
+        <div class="content">
+
+            <%= form_tag update_balance_stock_location_path(@stock_location) do %>
+              <table class="list">
+                <tr>
+                  <th>Product Uom</th>
+                  <th>Opening Balance</th>
+                  <th></th>
+                </tr>
+
+                <% @stock_counts.each do |u| %>
+                  <tr class="<%= cycle "odd", "even"  %> " style="text-align: center">
+                  <td>
+                    <%= u.product_uom_item.product_uom.name %>
+                  </td>
+                  <td>
+                    <%= text_field_tag "stock_count["+u.id.to_s+"][opening_balance]", u.opening_balance %>
+                  </td>
+
+                  <td>
+
+                  </td>
+                </tr>
+
+                <% end %>
+                <tr style="text-align: center">
+                  <td></td>
+                  <td><%= submit_tag "Update" if @stock_counts.any? %></td>
+                  <td></td>
+                </tr>
+              </table>
+            <% end %>
+</div>
+   </div>
+    <div class="exFoot">
+        <div class="fLeft"></div>
+        <div class="fRight"></div>
+    </div>
+</div>
+

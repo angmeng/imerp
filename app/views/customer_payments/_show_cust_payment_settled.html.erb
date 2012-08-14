@@ -1,0 +1,64 @@
+<div class="mg10 exhibiton ex01">
+        <div class="exHead">
+            <div class="hTxt">
+               <div class="hTxtContent"><h2>Customer Payment Details</h2></div>
+            </div>
+            <div class="hLeft"></div>
+            <div class="hRight"></div>
+        </div>
+        <div class="exBody">
+            <div class="content"><table class="list">
+                <tr>
+                 <th>customer payment No</th>
+                 <th>Date</th>
+                 <th>customer</th>
+                 <th>Status</th>
+                </tr>
+               <tr class="<%= cycle "odd", "even"  %> " style="text-align: center">
+                  <td align="center"><%= @customer_payment.cust_payment_number %></td>
+                  <td><%=  @customer_payment.cust_payment_date.strftime("%d-%m-%Y")%></td>
+                  <td><%= @customer_payment.customer.name rescue '-' %> </td>
+                  <% if @customer_payment.voided? %>
+                 <td><%=raw @customer_payment.void_status %></td>
+              <%else%>
+                 <td align="center"><%=raw @customer_payment.status %> </td>
+               <%end%>
+                </tr>
+              </table>
+              <table class="list">
+                <tr align="left">
+                 <th align="left">Payment Method</th>
+                   <th align="left"></th>
+                   <th align="left"></th>
+                   <th align="left"></th>
+                 <th align="right">Remark</th>
+              </tr>
+
+              <tr>
+                 <td colspan="3"><%= @customer_payment.payment_method.payment_name %>
+                     <% unless @customer_payment.cheque_date.nil? %>
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      <strong>Cheque date : </strong><%= @customer_payment.cheque_date.strftime("%d-%m-%Y") %>
+                      <%end%>
+                       <% unless @customer_payment.cheque_number.nil? %>
+                         &nbsp;&nbsp;&nbsp; <strong>Cheque No : </strong><%= @customer_payment.cheque_number %>
+                      <%end%>
+                       <% unless @customer_payment.bank.nil? %>
+                          &nbsp;&nbsp;&nbsp;  <strong>Bank : </strong><%= @customer_payment.bank %>
+                      <%end%>
+                     </td>
+                  <td></td>
+                  <td align="right"> <%= @customer_payment.remark%></td>
+              </tr>
+              </table>
+    </div>
+            </div>
+          <div class="exFoot">
+              <div class="fLeft"></div>
+              <div class="fRight"></div>
+          </div>
+          </div>
+
+
+

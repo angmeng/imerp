@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Parent:</b>
+  <%= @mixed_product.parent_id %>
+</p>
+
+<p>
+  <b>Product:</b>
+  <%= @mixed_product.product_id %>
+</p>
+
+<p>
+  <b>Quantity:</b>
+  <%= @mixed_product.quantity %>
+</p>
+
+
+<%= link_to 'Edit', edit_mixed_product_path(@mixed_product) %> |
+<%= link_to 'Back', mixed_products_path %>

@@ -1,0 +1,49 @@
+<% title "Listing Invoice" %>
+<%= link_to image_tag("new.png", :title => "new"), new_invoice_path %>
+<br /><br />
+
+<%= render "search" %>
+<br><hr>
+<br />
+<div class="mg10 exhibiton ex01">
+    <div class="exHead">
+        <div class="hTxt">
+           <div class="hTxtContent"><h2>Invoice</h2></div>
+        </div>
+        <div class="hLeft"></div>
+        <div class="hRight"></div>
+    </div>
+    <div class="exBody">
+        <div class="content">
+              <%= will_paginate @invoices %>
+              <table class="list">
+                <tr>
+                  <th >Date</th>
+                  <th>Invoice Number</th>
+                  <th align="left">Customer</th>
+                  <th>Status</th>
+                  <th>Void Status</th>
+                  <th>Action</th>
+                </tr>
+
+              <% @invoices.each do |invoice| %>
+                <tr class="<%= cycle "odd", "even"  %> " style="text-align: center">
+                 
+                  <td><%= invoice.invoice_date.strftime("%d-%m-%Y") %> - <%= invoice.end_invoice_date.strftime("%d-%m-%Y") %></td>
+                  <td><%= invoice.invoice_number %></td>
+                  <td align="left"><%= invoice.customer.name rescue "-" %></td>
+                  <td><%= raw invoice.payment_status %></td>
+                  <td><%= raw invoice.void_status %></td>
+                  <td>  <%= link_to 'Edit', edit_invoice_path(invoice) %> |
+                  <%= link_to 'Destroy', invoice, :confirm => 'Are you sure?', :method => :delete %></td>
+                </tr>
+              <% end %>
+              </table>
+              
+</div>
+   </div>
+    <div class="exFoot">
+        <div class="fLeft"></div>
+        <div class="fRight"></div>
+    </div>
+</div>

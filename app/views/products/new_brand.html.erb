@@ -1,0 +1,39 @@
+<% title "New Product Brand" %>
+<% flash.each do |name, msg| %>
+	           <%= content_tag :p, raw(msg), :class => "flash_#{name}" %>
+	         <% end  %>
+<div class="mg10 exhibiton ex01">
+    <div class="exHead">
+        <div class="hTxt">
+           <div class="hTxtContent"><h2>New Product Brand Form</h2></div>
+        </div>
+        <div class="hLeft"></div>
+        <div class="hRight"></div>
+    </div>
+    <div class="exBody">
+        <div class="content">
+           <%= form_for add_brand_product_path(@product)  do |f|  %>
+       
+           <%= render "shared/error_messages", :target => @product %>
+
+          <table>
+            <tr>
+              <th>Name</th><td><%=f.text_field  :name , :size => 50%></td>
+            </tr>
+            <tr>
+              <th>Description</th><td><%=f.text_area  :description ,{:style=>"width:280px;height:15px; "}%></td>
+            </tr>
+            <tr>
+              <th>Disabled</th> <td><%=f.check_box  :disabled %></td>
+            </tr>
+         </table>
+          <%= f.submit "Add Brand" %>
+          <% end %>
+
+</div>
+</div>
+    <div class="exFoot">
+        <div class="fLeft"></div>
+        <div class="fRight"></div>
+    </div>
+    </div>

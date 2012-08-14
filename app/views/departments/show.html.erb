@@ -1,0 +1,31 @@
+<%= link_to 'Back', departments_path %> |
+<%= link_to 'New', new_customer_path %> |
+<%= link_to 'Edit', edit_department_path(@department) %> 
+<div class="mg10 exhibiton ex01">
+    <div class="exHead">
+        <div class="hTxt">
+           <div class="hTxtContent"><h2>Department Details</h2></div>
+        </div>
+        <div class="hLeft"></div>
+        <div class="hRight"></div>
+    </div>
+    <div class="exBody">
+        <div class="content">
+            <p>
+              <b>Name:</b>
+              <%= @department.name %>
+            </p>
+
+            <p>
+              <b>Description:</b>
+              <%= @department.description %>
+            </p>
+  </div>
+   </div>
+    <div class="exFoot">
+        <div class="fLeft"></div>
+        <div class="fRight"></div>
+    </div>
+</div>
+
+

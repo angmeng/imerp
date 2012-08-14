@@ -1,0 +1,23 @@
+<% content_for :head do %>
+  <%= javascript_include_tag "smo" %>
+<% end %>
+
+<%= render 'menu' %>
+<br />
+
+  <% if @stock_adjustment.settled?  or @stock_adjustment.voided?%>
+    <%= render 'show_user' %>
+   <br/><hr/><br/>
+    <%= render "show_stock_adjustment_item" %>
+  <% else %>
+    <%= render 'update_user' %>
+    <br/><hr/>
+    <%= render 'update_stock_adjustment_item' %>
+    <% end %>
+
+  
+
+
+
+
+

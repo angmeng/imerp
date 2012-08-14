@@ -1,0 +1,17 @@
+<%= form_tag auto_complete_item_product_path(@product) do %>
+<table>
+  <tr>
+    <th>Code</th>
+
+    <td>
+        <%=  text_field "product", "product_tokens"  %>
+    </td>
+
+     <td><%= submit_tag "Add item" %></td>
+  </tr>
+</table>
+
+
+
+<%  end %>
+

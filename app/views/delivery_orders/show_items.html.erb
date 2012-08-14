@@ -1,0 +1,88 @@
+<% content_for :head do %>
+  <%= javascript_include_tag("smo") %>
+<% end %>
+ <%= link_to image_tag("backs.png", :title => "Back"),  @delivery_order %>
+<br />
+<div class="mg10 exhibiton ex01">
+    <div class="exHead">
+        <div class="hTxt">
+           <div class="hTxtContent"><h2>DO Details</h2></div>
+        </div>
+        <div class="hLeft"></div>
+        <div class="hRight"></div>
+    </div>
+    <div class="exBody">
+        <div class="content">
+                <table class="list">
+                  <tr>
+                    <th>DO No</th>
+                    <th>Date</th>
+                    <th>PO No</th>
+                    <th>Picking List No</th>
+                    <th>Customer</th>
+                    <th>Settled</th>
+                    <th>Status</th>
+                  </tr>
+                  <tr align="center">
+                    <td><%=h @delivery_order.delivery_order_number %></td>
+                    <td><%=h @delivery_order.delivery_order_date %></td>
+
+                    <td><%=h @delivery_order.purchase_order_number %></td>
+                    <td><%=h @delivery_order.packing_list.packing_list_number %></td>
+                    <td><%=h @delivery_order.customer.name %></td>
+                    <td><%=h @delivery_order.settled %></td>
+                    <td><%=raw @delivery_order.status %></td>
+                  </tr>
+                </table>
+          </div>
+   </div>
+    <div class="exFoot">
+     <div class="fLeft"></div>
+    <div class="fRight"></div>
+    </div>
+</div>
+  <hr />
+
+  <div class="mg10 exhibiton ex01">
+    <div class="exHead">
+        <div class="hTxt">
+          <div class="hTxtContent"><h2>Import from Picking List : <%= @packing_list.packing_list_number %>, Customer : <%= @packing_list.customer.name  %> </h2></div>
+        </div>
+        <div class="hLeft"></div>
+        <div class="hRight"></div>
+    </div>
+    <div class="exBody">
+     <div class="content">
+         <%= form_tag(import_items_delivery_order_path(@delivery_order)) do  %>
+
+  
+             <table class="list">
+              <tr>
+                <th>All <br /><input type="checkbox" name="checkall" onclick="checkUncheckAll(this);"/></th>
+                <th align="left">Code</th>
+                <th align="left">Description</th>
+                <th align="left">UOM</th>
+                <th>Quantity</th>
+              </tr>
+            <% @items.each do |p|  %>
+              <tr>
+                <td align="center"><%= check_box_tag "packing_list_item[#{p.id.to_s}][selected]"  %></td>
+                <td><%= p.product.code %> </td>
+                <td><%= p.product.full_description %> </td>
+                <td><%= p.product_uom.name rescue "-"  %> </td>
+                <td align="center"><%= p.quantity  %> </td>
+              </tr>
+
+            <% end %>
+            </table>
+              <p>
+              <%= submit_tag 'Import' %>
+            </p>
+          <% end %>
+            </div>
+   </div>
+    <div class="exFoot">
+        <div class="fLeft"></div>
+        <div class="fRight"></div>
+    </div>
+</div>

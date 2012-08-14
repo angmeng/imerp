@@ -1,0 +1,16 @@
+<%= form_tag add_auto_complete_purchase_order_supplier_payment_path(@supplier_payment) do %>
+<table>
+  <tr>
+    <th>Purchase Order Number</th>
+    <td>
+        <%=  text_field "supplier_payment", "purchase_order_tokens"  %>
+    </td>
+
+    <td><%= submit_tag "Add Purchase Order" %></td>
+  </tr>
+</table>
+
+
+
+<%  end %>
+

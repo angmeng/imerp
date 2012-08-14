@@ -1,0 +1,42 @@
+<%= form_tag add_auto_complete_item_purchase_requisition_path(@purchase_requisition) do %>
+ <br/>
+  <% cust_id = session[:supplier].to_i %>
+<% if cust_id > 0 %>
+  <%= hidden_field_tag "supplier_id", cust_id %>
+<% else %>
+ <%= hidden_field_tag "supplier_id", 0 %>
+<% end %>
+<table border="0">
+   <tr><td>
+    <th>Supplier :&nbsp;</th>
+    <td style="background-color:#CCCCFF;">
+      <table border="0" width="400"><tr><td bgcolor="#ffffff">
+        <% if @supplier %>
+          <%= @supplier.name %>
+        <% else %>
+          None
+        <%end%>
+      </td></tr></table>
+    </td>
+    <td>
+      <%= link_to image_tag("add_users.png", :title => "Add supplier"), add_supplier_purchase_requisition_path(@purchase_requisition)%></td>
+    </td>
+   </tr>
+</table>
+<table>
+  <tr>
+   <th>&nbsp;&nbsp;Code&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :&nbsp;</th>
+
+     <td> 
+        <%=  text_field "purchase_requisition", "product_tokens"  %>
+     </td>
+      
+     <td><%= submit_tag "Add item" %></td>
+  </tr>
+</table>
+
+
+
+<%  end %>
+
+ 

@@ -1,0 +1,34 @@
+<%= render 'search_po' %>
+<%= will_paginate @purchase_orders%>
+<br/></br>
+<%= form_tag add_purchase_order_supplier_payment_path(@supplier_payment) do %>
+<table class="flexi" style="font-size: 12px">
+ <thead>
+       <tr>
+       <th width="100" align="center" style="font-size: 12px"><input type="checkbox" name="checkall" onclick="checkUncheckAll(this);"/></th>
+       <th width="250" align="center" style="font-size: 12px"><strong>Purchase order No</strong></th>
+       <th width="250" align="center" style="font-size: 12px"><strong>Purchase order Date</strong></th>
+        <th width="300" align="center" style="font-size: 12px"><strong>Supplier</strong></th>
+        <th width="250" align="center" style="font-size: 12px"><strong>PO Status</strong></th>
+       </tr>
+</thead>
+ <tbody>
+    <% @purchase_orders.each do |purchase_order| %>
+      <tr class="<%= cycle("odd", "even") %>">
+      <td><%= check_box_tag "item[#{purchase_order.id.to_s}][selected]"  %></td>
+      <td align="center"><%=h purchase_order.purchase_order_number %></td>
+      <td align="center"><%=h purchase_order.purchase_order_date.strftime("%d-%m-%Y") %></td>
+      <td align="center"><%=h purchase_order.supplier.name rescue "-"%></td>
+      <td align="center"><%=raw purchase_order.current_status %></td>
+
+      </tr>
+    <% end %>
+ </tbody>
+    </table>
+<%= submit_tag "Add and Return" unless @purchase_orders.empty?%>
+<%= submit_tag "Add and Continue" unless @purchase_orders.empty?%>
+<% end %>
+
+<script type="text/javascript">
+   $('.flexi').flexigrid({width: $('#header').width() - 80});
+</script>

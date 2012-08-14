@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Cust payment number:</b>
+  <%= @customer_payment.cust_payment_number %>
+</p>
+
+<p>
+  <b>Cust payment date:</b>
+  <%= @customer_payment.cust_payment_date %>
+</p>
+
+<p>
+  <b>Remark:</b>
+  <%= @customer_payment.remark %>
+</p>
+
+<p>
+  <b>Voided:</b>
+  <%= @customer_payment.voided %>
+</p>
+
+<p>
+  <b>Customer:</b>
+  <%= @customer_payment.customer_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_customer_payment_path(@customer_payment) %> |
+<%= link_to 'Back', customer_payments_path %>

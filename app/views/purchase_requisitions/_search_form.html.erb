@@ -1,0 +1,50 @@
+<script>
+	$(function() {
+		$( "#datepicker" ).datepicker();
+
+	});
+	</script>
+<div class="mg10 exhibiton ex01">
+            <div class="exHead">
+               <div class="hTxt">
+                   <div class="hTxtContent"><h2>PR search</h2></div>
+                  </div>
+                <div class="hLeft"></div>
+                <div class="hRight"></div>
+            </div>
+            <div class="exBody">
+            <div class="content">
+                <%= form_for @search, :as =>  :search, :html => {:method => :get} do |f| %>
+                <table class="list" style="width: auto">
+                    <tr>
+                      <th>Date</th>
+                      <th>PR No</th>
+                      <th>Issued User</th>
+                      <th>Approved User</th>
+                      <th>Status</th>
+                      <th>Void Status</th>
+                      <th></th>
+                    </tr>
+                    <tr>
+                     
+                     <td><input type="text" size="24"id="datepicker" name="search[pr_date_equals]"/></td>
+                     <td><%= f.text_field :pr_number_like %></td>
+                     <td><%= f.select :issued_user_id_equals, User.all(:order => "name").map {|c| [c.name, c.id]} , {:include_blank => true} %></td>
+                     <td><%= f.select :approved_user_id_equals, User.all(:order => "name").map {|c| [c.name, c.id]} , {:include_blank => true} %></td>
+                      <td align="center"><%= f.select :status_id_equals, [["Approved", 2],["Waiting Approved", 1],["Processing", 0]], {:include_blank => true} %></td>
+                            <td align="center"><%= f.select :void_equals, [["Voided", true],["Unvoided", false]], {:include_blank => true} %></td>
+                      <td align="center"><%= f.submit "Search" %></td>
+
+                   </tr>
+
+                </table>
+
+                  <% end %>
+                  <br />
+              </div>
+            </div>
+          <div class="exFoot">
+              <div class="fLeft"></div>
+              <div class="fRight"></div>
+          </div>
+  </div>

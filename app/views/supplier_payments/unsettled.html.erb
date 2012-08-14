@@ -1,0 +1,30 @@
+<br />
+<%= link_to "Back", supplier_payments_path %>
+<%= will_paginate @supplier_payment %>
+<br />
+
+<table class="list">
+  <tr>
+    <th>Supplier payment date</th>
+    <th>Supplier payment Number</th>
+    <th>Supplier</th>
+    <th>Status</th>
+    <th>Voided</th>
+    <th>Action</th>
+  </tr>
+
+<% @supplier_payments.each do |supplier_payment| %>
+  <tr class="<%= cycle "odd", "even"  %> " style="text-align: center">
+    <td><%= supplier_payment.supplier_payment_date %></td>
+    <td><%= supplier_payment.supplier_payment_number %></td>
+    <td><%= supplier_payment.supplier.name rescue "-" %></td>
+    <td align="center"><%=raw supplier_payment.status %></td>
+    <td><%= supplier_payment.voided %></td>
+    <td>  <%= link_to 'Edit', edit_supplier_payment_path(supplier_payment) %> |
+    <%= link_to 'Destroy', supplier_payment, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+<br />
+<%= will_paginate @supplier_payments %>
+<br />

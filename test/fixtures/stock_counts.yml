@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  stock_location_id: 1
+  product_uom_id: 1
+  opening_balance: 9.99
+  quantity: 9.99
+
+two:
+  stock_location_id: 1
+  product_uom_id: 1
+  opening_balance: 9.99
+  quantity: 9.99

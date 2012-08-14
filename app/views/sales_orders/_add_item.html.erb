@@ -1,0 +1,41 @@
+<fieldset style="padding-left: 10px;padding-right: 10px;padding-bottom: 10px"><legend>Add item</legend>
+<%= render 'search_product' %>
+<%= will_paginate @products %>
+<br />
+<%= form_tag add_item_sales_order_path(@sales_order) do %>
+<table class="list">
+  <tr>
+    <th></th>
+    <th>Code</th>
+    <th>In House Code</th>
+    <th>Short description</th>
+    <th>Type</th>
+    <th>Brand</th>
+    <th>Department</th>
+    <th>Category</th>
+    <th>Model</th>
+
+  </tr>
+
+<% @products.each do |product| %>
+  <tr class="<%= cycle "odd", "even"  %> " style="text-align: center">
+    <td><%= check_box_tag "item[#{product.id.to_s}][selected]"  %></td>
+    <td><%= product.code %></td>
+    <td><%= product.in_house_code %></td>
+    <td><%= product.short_description %></td>
+    <td><%= product.product_kind.name rescue "-" %></td>
+    <td><%= product.product_brand.name rescue "-" %></td>
+    <td><%= product.product_department.name rescue "-" %></td>
+    <td><%= product.product_category.name rescue "-" %></td>
+    <td><%= product.product_model.name rescue "-" %></td>
+
+
+  </tr>
+<% end %>
+</table>
+<%= submit_tag "Add Item" unless @products.empty? %>
+<% end %>
+<br />
+
+</fieldset>
+

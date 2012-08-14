@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  product_id: 1
+  name: MyString
+  description: MyText
+  barcode: MyString
+  conversion: 9.99
+
+two:
+  product_id: 1
+  name: MyString
+  description: MyText
+  barcode: MyString
+  conversion: 9.99

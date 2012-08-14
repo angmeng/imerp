@@ -1,0 +1,67 @@
+<% content_for :head do %>
+  <%= javascript_include_tag "smo" %>
+<% end %><% title "Editing product" %>
+<% title "Add Mixed Item" %>
+<%= link_to "Back to Mixed Item List", mixed_product_product_path(@product)  %>
+<br /><br />
+<%= render 'show_mixed_item'%>
+
+<br><hr></br>
+<div class="mg10 exhibiton ex01">
+    <div class="exHead">
+        <div class="hTxt">
+           <div class="hTxtContent"><h2>Add product to mixed item</h2></div>
+        </div>
+        <div class="hLeft"></div>
+        <div class="hRight"></div>
+    </div>
+    <div class="exBody">
+        <div class="content">
+          <%= render 'search_product'%> 
+<%= will_paginate @products %>
+<br />
+<%= form_tag add_products_mixed_product_path(@product_uom_item) do %>
+<br>
+ <table class="flexi" style="font-size: 12px">
+   <thead>
+   <tr>
+   <th width="50" align="center" style="font-size: 12px"><strong><input type="checkbox" name="checkall" onclick="checkUncheckAll(this);"/></strong></th>
+    <th width="150" align="center" style="font-size: 12px"><strong>Product</strong></th>
+    
+    <th width="250" align="center" style="font-size: 12px"><strong>Short description</strong></th>
+    <th width="120" align="center" style="font-size: 12px"><strong>Type</strong></th>
+    <th width="120" align="center" style="font-size: 12px"><strong>Brand</strong></th>
+    <th width="120" align="center" style="font-size: 12px"><strong>Department</strong></th>
+    <th width="120" align="center" style="font-size: 12px"><strong>Category</strong></th>
+    <th width="100" align="center" style="font-size: 12px"><strong>Model</strong></th>
+   </tr>
+  </thead>
+  <tbody>
+  
+     <% @products.each do |u| %>
+      <tr class="<%= cycle "odd", "even"  %> ">
+      <td><%= check_box_tag "product_ids[]", u.id %></td>
+      <td><%= u.code %> </td>
+      <td><%= u.short_description %></td>
+      <td><%= u.product_kind.name rescue "-" %></td>
+      <td><%= u.product_brand.name rescue "-" %></td>
+      <td><%= u.product_department.name rescue "-" %></td>
+      <td><%= u.product_category.name rescue "-" %></td>
+      <td><%= u.product_model.name rescue "-" %></td>
+    </tr>
+    <% end %>
+  </tbody>
+   </table>
+  <%= submit_tag "Add and Return" if @products.any? %>  <%= submit_tag "Add and Continue" if @products.any? %>
+<% end %>
+
+</div>
+   </div>
+    <div class="exFoot">
+        <div class="fLeft"></div>
+        <div class="fRight"></div>
+    </div>
+</div>
+ <script type="text/javascript">
+   $('.flexi').flexigrid({width: $('#header').width() - 80});
+ </script>

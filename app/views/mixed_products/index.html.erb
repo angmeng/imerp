@@ -1,0 +1,27 @@
+<h1>Listing mixed_products</h1>
+
+<table>
+  <tr>
+    <th>Parent</th>
+    <th>Product</th>
+    <th>Quantity</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @mixed_products.each do |mixed_product| %>
+  <tr>
+    <td><%= mixed_product.parent_id %></td>
+    <td><%= mixed_product.product_id %></td>
+    <td><%= mixed_product.quantity %></td>
+    <td><%= link_to 'Show', mixed_product %></td>
+    <td><%= link_to 'Edit', edit_mixed_product_path(mixed_product) %></td>
+    <td><%= link_to 'Destroy', mixed_product, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Mixed product', new_mixed_product_path %>

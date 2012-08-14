@@ -1,0 +1,18 @@
+<% content_for :head do %>
+  <%= javascript_include_tag "smo" %>
+<% end %>
+
+<%= render 'menu' %>
+
+ <% unless @customer_payment.settled? or @customer_payment.voided? %>
+    <%= render "show_cust_payment" %>
+    <br><hr/>
+     <% unless @customer_payment.customer_id.nil? %>
+    <%= image_tag("add_item2.png")%><%= link_to 'Add Customer Payment Item', item_new_page_customer_payment_path(@customer_payment) %>
+    <%= render "update_invoice" %>
+    <% end %>
+  <% else %>
+     <%= render "show_cust_payment_settled" %>
+     <br><hr/><br>
+     <%= render "sattled_invoice" %>
+ <% end %>

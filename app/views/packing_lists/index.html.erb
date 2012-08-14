@@ -1,0 +1,54 @@
+<% title "Listing Picking Lists" %>
+
+<%= render "search" %>
+<br>
+<hr />
+<br>
+<div class="mg10 exhibiton ex01">
+    <div class="exHead">
+        <div class="hTxt">
+           <div class="hTxtContent"><h2>Picking Lists</h2></div>
+        </div>
+        <div class="hLeft"></div>
+        <div class="hRight"></div>
+    </div>
+    <div class="exBody">
+        <div class="content">
+              <%= will_paginate @packing_lists %>         
+              <table class="list">
+                <tr>
+                  <th>Date</th>
+                  <th>Picking list No</th>
+                  <th>Sales Order No</th>
+                  <th align="left">Customer</th>
+                  <th>Term</th>
+                  
+                  <th>Status</th>
+              
+                  <th>Action</th>
+                </tr>
+
+              <% @packing_lists.each do |packing_list| %>
+               <tr class="<%= cycle "odd", "even"  %> ">
+                  <td style="text-align: center"><%= packing_list.packing_list_date.strftime("%d-%m-%Y") %></td>
+                  <td style="text-align: center"><%= packing_list.packing_list_number %></td>
+                  <td style="text-align: center"><%= packing_list.sales_order.sales_order_number rescue '-'%></td>
+                  <td><%= packing_list.customer.name %></td>
+                  <td style="text-align: center"><%= packing_list.term %></td>
+                  
+                  <td style="text-align: center"><%= raw packing_list.current_status %></td>
+                
+                  <td style="text-align: center"><%= link_to 'Edit', packing_list %>
+               </td>
+                </tr>
+              <% end %>
+              </table>
+              
+              <table> </table>
+        </div>
+   </div>
+    <div class="exFoot">
+        <div class="fLeft"></div>
+        <div class="fRight"></div>
+    </div>
+</div>

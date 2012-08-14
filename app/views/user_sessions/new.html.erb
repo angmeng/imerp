@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang='en' xml:lang='en' xmlns='http://www.w3.org/1999/xhtml'>
+  <head>
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+    <title>DSS</title>
+    <!-- authentications : new -->
+    <link href="/stylesheets/screen.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="/stylesheets/modalbox.css" media="screen" rel="stylesheet" type="text/css" />
+
+  <%= javascript_include_tag :defaults %>
+
+  </head>
+  
+  <body>
+    <div id='header'>
+      <div id='welcome'>
+        <a href="/login">Login</a> |
+        
+        <a href="#" onclick="Modalbox.show($('about'), { title: this.title }); return false;" title="About DSS">About</a>
+
+      </div>
+      <h3>
+        <a href="/">DSS</a>
+      </h3>
+    </div>
+    
+    <p id="flash" style="display:none;"></p>
+    <div class='tabless'>
+      
+      <div class='standalone' id='standalone'>
+          <%= form_for @user_session, :as => :user_session, :url => user_sessions_path do |f| %>
+          <div class='title'>Login</div>
+            <% flash.each do |name, msg| %>
+	           <%= content_tag :p, raw(msg), :class => "flash_#{name}" %>
+	         <% end  %>
+          <div class='section'>
+            <div class='label'>Username:</div>
+            <input id="user_session_login" name="user_session[login]" size="30" type="text" />
+            <div class='label'>Password:</div>
+            <input id="user_session_password" name="user_session[password]" size="30" type="password" />
+
+          </div>
+          <br />
+          <div class='buttonbar'>
+            <input id="authentication_submit" name="commit" type="submit" value="Login" />
+           
+          </div>
+
+        <% end %>
+      </div>
+    </div>
+    <center>
+      <div id='footer'>
+        Powered by <a href="http://www.dsssb.com.my" onclick="window.open(this.href);return false;">DSS</a>
+        v1 &copy; 2008-2010 by DSS
+      </div>
+
+      <br />
+      <div id='about' style='display:none;'>
+        <h3>
+          DSS
+          <span class='cool'>v1</span>
+          (mysql)
+        </h3>
+        <p>
+          Thank you for using DSS IVS! We appreciate your business and hope you enjoy using the software.
+
+        </p>
+      </div>
+    </center>
+
+    <script type='text/javascript'>
+      
+      document.observe("dom:loaded", function() {
+        new Effect.Move("standalone", { x:0, y:-16, mode:"relative", fps:100, duration:0.15, afterFinishInternal: function(effect) {
+          new Effect.Move("standalone", { x:0, y:16, mode:"relative", fps:100, duration:0.15, afterFinishInternal: function(effect) {
+            new Effect.Move("standalone", { x:0, y:-8, mode:"relative", fps:100, duration:0.15, afterFinishInternal: function(effect) {
+              new Effect.Move("standalone", { x:0, y:8, mode:"relative", fps:100, duration:0.15 });
+            }});
+          }});
+        }});
+      });
+      
+    </script>
+  </body>
+</html>

@@ -1,0 +1,27 @@
+<% title "Listing product_racks" %>
+<table class="list">
+  <tr>
+    <th>Location</th>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Disabled</th>
+    <th>Action</th>
+ 
+  </tr>
+
+<% @product_racks.each do |product_rack| %>
+  <tr class="<%= cycle "odd", "even"  %> " style="text-align: center">
+    <td><%= product_rack.product_location.name %></td>
+    <td><%= product_rack.name %></td>
+    <td><%= product_rack.description %></td>
+    <td><%= product_rack.disabled %></td>
+    <td><%= link_to 'Show', product_rack %>
+    | <%= link_to 'Edit', edit_product_rack_path(product_rack) %>
+    | <%= link_to 'Destroy', product_rack, :confirm => 'This will delete the attached stocks as well. Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Product rack', new_product_rack_path %>

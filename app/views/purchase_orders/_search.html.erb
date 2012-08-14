@@ -1,0 +1,49 @@
+
+<div class="mg10 exhibiton ex01">
+    <div class="exHead">
+        <div class="hTxt">
+            <div class="hTxtContent"><h2>Purchase Order Search</h2></div>
+        </div>
+        <div class="hLeft"></div>
+        <div class="hRight"></div>
+    </div>
+    <div class="exBody">
+        <div class="content">
+            <%= form_for @search do |f| %>
+              <table class="list" style="width: auto">
+                <tr>
+
+                  <th>Date</th>
+                  <th>PO Number</th>
+                  <th>PR Number</th>
+                  <th>Supplier</th>
+                  <th>Term</th>
+                  <th>Status</th>
+                  <th>Payment Status</th>
+                  <th>Action</th>
+                </tr>
+                <tr>
+                  
+                  <td><input type="text" size="24"id="datepicker" name="search[purchase_order_date_equals]"/></td>
+                  <td align="center"><%= f.text_field :purchase_order_number_like %></td>
+                  <td align="center"><%= f.text_field :purchase_requisition_pr_number_like %></td>
+                  <td align="center"><%= f.select :supplier_id_equals, Supplier.all(:order => "name").map {|c| [c.name, c.id]} , {:include_blank => true} %></td>
+                  <td align="center"><%= f.text_field :term_like %></td>
+                  <td align="center"><%= f.select :imported_equals, [["Completed", true],["Processing", false]], {:include_blank => true} %></td>
+                  <td align="center"><%= f.select :payment_paid_equals, [["Paid", true],["Unpaid", false]], {:include_blank => true} %></td>
+                  <td align="center"><%= f.submit "Search" %></td>
+               </tr>
+            </table>
+      </div>
+   </div>
+    <div class="exFoot">
+        <div class="fLeft"></div>
+        <div class="fRight"></div>
+    </div>
+</div>   <% end %>
+<script>
+	$(function() {
+		$( "#datepicker" ).datepicker();
+
+	});
+	</script>

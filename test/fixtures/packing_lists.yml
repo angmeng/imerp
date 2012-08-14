@@ -1,0 +1,19 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  packing_list_date: 2011-03-07
+  packing_list_number: 
+  term: 
+  remark: 
+  vioded: false
+  settled: false
+  imported: false
+
+two:
+  packing_list_date: 2011-03-07
+  packing_list_number: 
+  term: 
+  remark: 
+  vioded: false
+  settled: false
+  imported: false

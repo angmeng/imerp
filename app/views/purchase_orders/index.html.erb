@@ -1,0 +1,57 @@
+<% title "Listing Purchase Orders" %>
+<br />
+<%= render "search" %>
+<br/><hr/><br/>
+<div class="mg10 exhibiton ex01">
+    <div class="exHead">
+        <div class="hTxt">
+            <div class="hTxtContent"><h2>Purchase Order</h2></div>
+        </div>
+        <div class="hLeft"></div>
+        <div class="hRight"></div>
+    </div>
+    <div class="exBody">
+        <div class="content">
+              <%= will_paginate @purchase_orders %>
+              <br />
+              <table class="list">
+                <tr>
+                 <th>Date</th>
+                 <th>PO Number</th>
+                 <th>PR Number</th>
+                 <th align="left">Supplier</th>
+                 <th>Term</th>
+                 <th>Status</th>
+                 <th>Payment Status</th>
+                   
+                  <th>Action</th>
+
+                </tr>
+
+              <% @purchase_orders.each do |purchase_order| %>
+                <tr class="<%= cycle "odd", "even"  %> " style="text-align: center">
+                 
+                   <td><%= purchase_order.purchase_order_date.strftime("%d-%m-%Y") %></td>
+                  <td><%= purchase_order.purchase_order_number %></td>
+                  <td><%= purchase_order.purchase_requisition.pr_number %></td>
+                  
+                  <td align="left"><%= purchase_order.supplier.name %></td>
+                  <td><%= purchase_order.term %></td>        
+                  <td><%= raw  purchase_order.current_status%></td>
+                  <td><%= raw  purchase_order.payment_status%></td>
+                  
+                  <td>
+                  <%= link_to 'Edit', edit_purchase_order_path(purchase_order)%>
+
+                 </td>
+                </tr>
+              <% end %>
+              </table>
+              </div>
+   </div>
+    <div class="exFoot">
+        <div class="fLeft"></div>
+        <div class="fRight"></div>
+    </div>
+</div>
+

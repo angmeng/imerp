@@ -1,0 +1,19 @@
+<% content_for :head do %>
+  <%= javascript_include_tag "smo" %>
+<% end %>
+
+<%= render 'menu' %>
+
+<% unless @supplier_payment.settled? or @supplier_payment.voided? %>
+    <%= render "show_supplier_payment" %>
+   <br><hr/>
+    <% unless @supplier_payment.supplier_id.nil? %>
+    <%= image_tag("add_item2.png")%><%= link_to 'Add Supplier Payment Item', item_new_page_supplier_payment_path(@supplier_payment) %>
+    <%= render "update_po" %>
+   <% end %>
+  <% else%>
+
+     <%= render "show_supplier_payment_settled" %>
+     <br><hr/><br>
+     <%= render "po_settled" %>
+ <% end %>

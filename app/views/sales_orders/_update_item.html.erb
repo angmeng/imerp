@@ -1,0 +1,98 @@
+<%= image_tag("add_item2.png")%><%= link_to 'Add Sales Order Item', item_new_page_sales_order_path(@sales_order) %>
+<%= form_tag update_item_sales_order_path(@sales_order) do %>
+<div class="mg10 exhibiton ex01">
+    <div class="exHead">
+        <div class="hTxt">
+           <div class="hTxtContent"><h2>SO Items</h2></div>
+        </div>
+        <div class="hLeft"></div>
+        <div class="hRight"></div>
+    </div>
+    <div class="exBody">
+        <div class="content">
+          <strong>Salesman </strong> <%=select("sales_order", "salesman_id", Salesman.order('name ASC').options.collect {|p| [ p.name, p.id ] },  { :include_blank => false,:id=>"select", :value => @sales_order.salesman_id, :order_by =>'name ASC'})%>
+          <br></br>
+          <table class="flexi" style="font-size: 12px">
+             <thead>
+              <tr>
+                <th width="50" align="center" style="font-size: 12px"><strong><input type="checkbox" name="checkall" onclick="checkUncheckAll(this);"/></strong></th>
+                <th width="100" align="center" style="font-size: 12px"><strong>Status</strong></th>
+                
+                <th width="100" align="center" style="font-size: 12px"><strong>Code</strong></th>
+                <th width="200" align="center" style="font-size: 12px"><strong>Description</strong></th>
+                <th width="80" align="center" style="font-size: 12px"><strong>UOM</strong></th>
+                <th width="80" align="center" style="font-size: 12px"><strong>Quantity</strong></th>
+                <th width="80" align="center" style="font-size: 12px"><strong>Unit Price</strong></th>
+                <th width="80" align="center" style="font-size: 12px"><strong>Price/Unit</strong></th>
+                <th width="80" align="center" style="font-size: 12px"><strong>Discount</strong></th>
+               
+                <th width="80" align="center" style="font-size: 12px"><strong>Total</strong></th>
+                 <th width="300" align="center" style="font-size: 12px"><strong>Remark</strong></th>
+              </tr>
+             </thead>
+             <tbody>
+               <% unit_price = 0 %>
+               <% amount = 0 %>
+               <% total_amount = 0 %>
+               <% @sales_order.sales_order_items.each do |p| %>
+                <% total_amount += p.total_after_disc %>
+               
+               <tr class="<%= cycle("odd", "even") %>" align="center">
+                <td align="center"><%= check_box_tag("item[#{p.id.to_s}][selected]",{},p.confirmed?)  %> </td>
+                <td align="center"><%=raw p.status  %> </td>
+               
+                <td align="center"><%= p.product.code  %> </td>
+                <td align="center"><%= p.product.full_description  %> </td>
+                <td>
+                  <% if p.product_uom_id == 0 %>
+                      <%= select_tag("item[#{p.id.to_s}][product_uom_id]", options_for_select(p.product.product_uom_options.map {|c| [c.name, c.id]}, p.product_uom_id)) %>
+                  <% else %>
+                      <%= select_tag("item[#{p.id.to_s}][product_uom_id]", options_for_select(p.product.product_uom_options.map {|c| [c.name, c.id]}, p.product_uom_id),:value => p.product_uom.name)  %>
+                    <% end %></td>
+                <td  align="center"><%= text_field_tag("item[#{p.id.to_s}][quantity]", {}, :value => p.quantity, :size => 5)  %> </td>
+                <td  align="center"><%= text_field_tag("item[#{p.id.to_s}][unit_price]", {},  :value => "%.2f" % p.unit_price, :size => 10)  %> </td>
+                <td  align="center"><%= "%.2f" % p.price %> </td>
+                <td  align="center"><%= text_field_tag("item[#{p.id.to_s}][discount]", {}, :value => p.discounts, :size => 10)  %> </td>
+                <td  align="center"><%=  "%.2f" % p.total_after_disc rescue"-"%> </td>
+                
+               
+                 <td><%= text_area_tag "item[#{p.id.to_s}][remark]", p.remark,{:style=>"width:280px;height:15px; "}%> </td>
+                <% end %>
+              </tr>
+             </tbody>
+            </table>
+            <table>
+              <tr>
+                <td align="center">
+                   <%= submit_tag "Confirm Items" unless @sales_order.sales_order_items.empty? %>
+                </td>
+                <td align="center">
+                   <%= submit_tag "Remove Items" unless @sales_order.sales_order_items.empty? %>
+                </td>
+                <td align="center">
+                  <%= submit_tag "Update Items" unless @sales_order.sales_order_items.empty? %></td>
+                <td colspan="2"align="right" width="730px"><strong>Total Amount : </strong> <%= total_amount %></td>
+              </tr>
+            </table>
+            <% end %>
+           
+
+           
+</div>
+   </div>
+    <div class="exFoot">
+        <div class="fLeft"></div>
+        <div class="fRight"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function() {
+  $('.nyroModal').nyroModal();
+});
+</script>
+<script type="text/javascript">
+          $('.flexi').flexigrid({width: $('#header').width() - 80});
+ </script>
+
+

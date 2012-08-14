@@ -1,0 +1,64 @@
+<%= link_to 'Edit', edit_product_location_path(@product_location) %> |
+<%= link_to 'Back', product_locations_path %>
+<br />
+<div class="mg10 exhibiton ex01">
+    <div class="exHead">
+        <div class="hTxt">
+           <div class="hTxtContent"><h2>Product Location Details</h2></div>
+        </div>
+        <div class="hLeft"></div>
+        <div class="hRight"></div>
+    </div>
+    <div class="exBody">
+        <div class="content">
+          <table style="width: 80%">
+            <tr>
+              <td style="width: 30%">
+                <p>
+               <b>Name:</b>
+               <%= @product_location.name %>
+               </p>
+
+              <p>
+               <b>Description:</b>
+               <%= @product_location.description %>
+              </p>
+
+              <p>
+               <b>Disabled:</b>
+               <%= @product_location.disabled %>
+              </p>
+              </td>
+              <td>
+                <h2>Attached Racks</h2>
+                <table class="list">
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Disabled</th>
+                  </tr>
+                  <% @product_location.product_racks.each do |r| %>
+                    <tr class="<%= cycle "odd", "even"  %> " style="text-align: center">
+                      <td><%= r.name %></td>
+                      <td><%= r.description %></td>
+                      <td><%= r.disabled %></td>
+                    </tr>
+
+
+                  <% end %>
+                </table>
+              </td>
+            </tr>
+          </table>
+ </div>
+   </div>
+    <div class="exFoot">
+        <div class="fLeft"></div>
+        <div class="fRight"></div>
+    </div>
+</div>
+
+
+
+
+

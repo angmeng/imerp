@@ -1,0 +1,25 @@
+<%= simple_form_for(@customer_payment) do |f| %>
+  <% if @customer_payment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@customer_payment.errors.count, "error") %> prohibited this customer_payment from being saved:</h2>
+
+      <ul>
+      <% @customer_payment.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="inputs">
+    <%= f.input :cust_payment_number %>
+    <%= f.input :cust_payment_date %>
+    <%= f.input :remark %>
+    <%= f.input :voided %>
+    <%= f.input :customer_id %>
+  </div>
+
+  <div class="actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

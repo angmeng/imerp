@@ -1,0 +1,85 @@
+<% title "Listing Product Movement" %>
+<div class="mg10 exhibiton ex01">
+        <div class="exHead">
+            <div class="hTxt">
+               <div class="hTxtContent"><h2>Product Movement Search</h2></div>
+            </div>
+            <div class="hLeft"></div>
+            <div class="hRight"></div>
+        </div>
+        <div class="exBody">
+            <div class="content">
+                <%= form_for @search, :url => {:action => "product_movement"} do |f| %>
+                <table style="width:50%">
+                  <tr>
+                    <th>Product</th>
+                    <th>Product Uom</th>
+                    <th>Action</th>
+                  </tr>
+                  <tr style="text-align:center">
+                    <td align="center"> <%= text_field "product", "product_tokens"  %> </td>
+                    <td align="center"><%= f.select :product_uom_id_equals, @uom_selection, :include_blank => true  %></td>
+                    <td align="center"><%= submit_tag "Search"%> </td>
+                  </tr>
+                </table>
+
+                <% end %>
+
+                <br />
+                </div>
+</div>
+    <div class="exFoot">
+        <div class="fLeft"></div>
+        <div class="fRight"></div>
+    </div>
+    </div>
+<br><hr><br>
+<div class="mg10 exhibiton ex01">
+        <div class="exHead">
+            <div class="hTxt">
+               <div class="hTxtContent"><h2>Product Movement</h2></div>
+            </div>
+            <div class="hLeft"></div>
+            <div class="hRight"></div>
+        </div>
+        <div class="exBody">
+            <div class="content">
+
+               <table class="flexi" style="font-size: 12px">
+                <thead>
+                <tr>
+                   <th width="150" align="center"style="font-size: 12px"><strong>Date</strong></th>
+                   <th width="150" align="center"style="font-size: 12px"><strong>Product</strong></th>
+                   <th width="150" align="center"style="font-size: 12px"><strong>Product Uom</strong></th>
+                   <th width="200" align="center"style="font-size: 12px"><strong>Description</strong></th>
+                   <th width="250" align="center"style="font-size: 12px"><strong>Location</strong></th>
+                   <th width="100" align="center"style="font-size: 12px"><strong>Quantity</strong></th>
+                   <th width="190" align="center"style="font-size: 12px"><strong>Source</strong></th>
+                </tr>
+                 </thead>
+                <tbody>
+                <% @result.each do |r| %>
+                <tr class="<%= cycle "odd", "even"  %> ">
+                  <td align="center"><%= r.movement_date.strftime("%d-%m-%Y") %></td>
+                  <td align="center"><%= r.product.code %></td>
+                  <td align="center"><%= r.product_uom.name rescue "-" %></td>
+                  <td ><%= r.description %></td>
+                  <td align="center"><%= r.stock_location.fullname rescue "-" %></td>
+                  <td align="center"><%= r.quantity %></td>
+                  <td align="center"><%= link_to "Show", r.movement, :target => "_blank" %></td>
+
+                </tr>
+
+                <% end %>
+                </tbody>
+              </table>
+</div>
+</div>
+    <div class="exFoot">
+        <div class="fLeft"></div>
+        <div class="fRight"></div>
+    </div>
+    </div>
+<script type="text/javascript">
+ $('.flexi').flexigrid({width: $('#header').width() - 20});
+ </script>

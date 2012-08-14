@@ -1,0 +1,9 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  payment_name: MyString
+  description: MyString
+
+two:
+  payment_name: MyString
+  description: MyString

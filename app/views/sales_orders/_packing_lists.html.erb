@@ -1,0 +1,33 @@
+
+  <div class="mg10 exhibiton ex01">
+    <div class="exHead">
+        <div class="hTxt">
+           <div class="hTxtContent"><h2>Picking List Details</h2></div>
+        </div>
+        <div class="hLeft"></div>
+        <div class="hRight"></div>
+    </div>
+    <div class="exBody">
+        <div class="content">
+              <table class="list">
+                <tr>
+                  <th>Packing List No</th>
+                  <th>Customer</th>
+                  <th>Action</th>
+                </tr>
+              <% @sales_order.packing_lists.each do |po| %>
+                <tr class="<%= cycle("odd", "even") %>" align="center">
+                  <td><%= po.packing_list_number   %></td>
+                  <td><%= po.customer.name   %></td>
+                  <td><%= link_to "show", po  %></td>
+                </tr>
+              <% end %>
+              </table>
+</div>
+   </div>
+    <div class="exFoot">
+        <div class="fLeft"></div>
+        <div class="fRight"></div>
+    </div>
+</div>
+

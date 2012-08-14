@@ -1,0 +1,40 @@
+
+<% content_for :head do %>
+  <%= javascript_include_tag "smo" %>
+<% end %><% title "Editing product" %>
+
+  <%= link_to 'Show', @product %> |
+  <%= link_to 'Back', products_path %> |
+  <%= link_to 'Add Location', add_location_product_path(@product) %>
+  
+<div class="mg10 exhibiton ex01">
+    <div class="exHead">
+        <div class="hTxt">
+            <div class="hTxtContent"><h2>Product Update Form</h2></div>
+        </div>
+        <div class="hLeft"></div>
+        <div class="hRight"></div>
+    </div>
+    <div class="exBody">
+        <div class="content">
+       <%= render 'form_edit' %>
+       </div>
+   </div>
+    <div class="exFoot">
+        <div class="fLeft"></div>
+        <div class="fRight"></div>
+    </div>
+</div>
+
+  <br/><hr/><br/>
+
+ 
+            <%= render :partial => 'show_uoms'%>
+     
+
+<br /><hr /><br />
+
+
+
+
+

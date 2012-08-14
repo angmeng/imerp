@@ -1,0 +1,184 @@
+<%= stylesheet_link_tag 'print',:media => "print"%>
+
+<a href="#" onclick="window.print();return false;">Print</a>
+
+<div class="print">
+<table align="center">
+    <% @settings.each do |setting| %>
+   <tr>
+     <td align="center" style="font-size: 28"><%= setting.company_name rescue'-' %></td>
+   </tr>
+   <tr>
+     <td align="center"><%= setting.company_address_one rescue'-' %></td>
+   </tr>
+   <tr>
+     <td align="center"><%= setting.company_address_two rescue'-' %></td>
+   </tr>
+   <tr>
+     <td align="center">
+       <%= setting.company_postcode rescue'-'  %>,
+       <%= setting.company_city rescue'-' %>,
+       <%= setting.company_country rescue'-' %>
+     </td>
+   </tr>
+   <tr>
+     <td align="center">
+      &nbsp;&nbsp; TEL NO: <%= setting.phone_number rescue'-'  %>  &nbsp;
+            FAX NO: <%= setting.fax_number rescue'-' %>
+     </td>
+   </tr>
+   <% end %>
+ </table>
+
+<%= image_tag("invoice2.png")%>
+
+ <table style="width: 100%">
+    <tr>
+      <td  style="width: 40%">
+        <table  style=" border:solid" >
+          <tr>
+          <th align="right"style="width: 10%"><strong>Bill To : </strong> </th>
+          <td style="width: 60%">&nbsp&nbsp<%= @invoice.customer.name  rescue"-"%></td>
+          </tr>
+         <tr>
+          <td valign="top"></td>
+          <td> &nbsp&nbsp<%= @invoice.customer.address  rescue"-"%><br />
+              &nbsp&nbsp<%= @invoice.customer.postcode  rescue"-"%>
+          </td>
+          </tr>
+          <tr>
+          <td align="right"> <strong>Contact: </strong></td>
+          <td> &nbsp&nbsp<%= @invoice.customer.contact_person  rescue"-"%> 
+               <strong>Tel:  </strong>&nbsp&nbsp<%= @invoice.customer.office_contact  rescue"-"%>
+               <strong>Fax:  </strong>&nbsp&nbsp<%= @invoice.customer.fax_number  rescue"-"%>
+          </td>
+          </tr>
+
+        </table>
+      </td>
+      <td style="width: 30%"></td>
+     <td style="width: 30%">
+        <table>
+          <tr>
+             <th align="left">Invoice Number</th>
+             <th align="left">&nbsp:</th>
+             <td>&nbsp&nbsp <%= @invoice.invoice_number  rescue"-"%></td>
+         </tr>
+          <tr>
+            <th align="left">Date</th>
+            <th align="left">&nbsp:</th>
+            <td>&nbsp&nbsp<%= @invoice.invoice_date.strftime("%d-%m-%Y") %> - <%= @invoice.end_invoice_date.strftime("%d-%m-%Y") %></td>
+         </tr>
+         
+          <tr>
+          <th align="left">Term</th>
+          <th align="left">&nbsp:</th>
+          <td> &nbsp&nbsp<%=h @invoice.term%></td>
+        </tr>
+        
+        
+      </table>
+
+      </td></tr>
+
+</table>
+
+<br />
+
+<table style="width: 100%" cellpadding="2" cellspacing="0">
+  <tr>
+      <th align="left"style="border-bottom:outset "> No </th>
+      <th align="left"style="border-bottom:outset ">DO Date<br>Description</th>
+      <th  align="left"style="border-bottom:outset ">DO No<br></th>
+      <th  align="left"style="border-bottom:outset ">PO No<br>Uom</th>
+      <th  align="left"style="border-bottom:outset ">SO No</th>
+      <th align="right"style="border-bottom:outset ">DO Qty</th>
+      <th  align="right"style="border-bottom:outset ">Price/Unit</th>
+      <th  align="right"style="border-bottom:outset ">%</th>
+      <th  align="right"style="border-bottom:outset ">Price after %</th>
+      <th  align="right"style="border-bottom:outset ">Total Price</th>
+      <th  align="right"style="border-bottom:outset ">Total</th>
+      
+        
+  </tr>
+	
+  <% line = 0 %>
+  <% total = 0.00 %>
+  <% @invoice_item.each do |c|  %>
+  <% line += 1%>
+  <% total += c.amount %>
+  <% delivery_order = c.delivery_order %>
+  <tr>
+     <td align="left"><%= line.to_s %></td>
+     <td align="left"><strong><%= delivery_order.delivery_order_date.strftime("%d-%m-%Y") %></strong></td>
+     <td align="left"><strong><%= delivery_order.delivery_order_number %></strong></td>
+     <td align="left"><strong><%= delivery_order.purchase_order_number %></td>
+     <td align="left"><strong><%= delivery_order.packing_list.sales_order.sales_order_number %></td>
+     <td colspan ="5"></td>
+     <td align="right"><strong> <%= number_with_precision(c.amount, :precision => 2) %></strong></td>
+  </tr>
+
+       <% tot = 0 %>
+       <% delivery_order.delivery_order_items.each do |d|  %>
+        <% tot = d.total_amount %>
+        <% tot_after_disc = d.total_after_discount %>
+
+       <tr>
+         <td></td>
+         <td colspan="2"align="left"><%= d.product.short_description %></td>
+         
+         <td align="left"><%= d.product_uom.name rescue"-" %></td>
+         <td></td>
+
+         <td align="right"><%= d.delivered_quantity %></td>
+         <td align="right"><%=  "%.2f" % d.unit_price %></td>
+         <td align="right"><%= d.discounts %></td>
+         <td align="right"><%=  "%.2f" % tot_after_disc %></td>
+         <td align="right"><%= number_with_precision(tot, :precision => 2)%> </td>
+       </tr>
+        <%end%>
+       
+  <% end %>
+ </table>
+   <%#*<p class="break"><!--Appendix 2 (continued)--></p>%>
+   <%#*<div style="margin-top:80%">%>
+<fieldset style="padding-left: 10px;padding-right: 10px; padding-top: 700px ; width: 95%; height: 200px;border-style: none">
+ <hr>
+  <table style=" float:right" >
+  <tr>
+    <th style="text-align: right">TOTAL: RM &nbsp&nbsp <%= "%.2f" % total %></th>
+  </tr>
+  <tr>
+    <th style="text-align: right">***********</th>
+  </tr></table>
+  <br>
+
+<table>
+  <tr>
+    <td> Term and Condition:-</td>
+  </tr>
+   <tr>
+    <td>1. Post-dated cheque with only be treated as payment after debited to our account.</td>
+  </tr>
+   <tr>
+    <td>2. Interest of 2% per month will be charges on overdue accounts.</td>
+  </tr>
+   <tr>
+    <td>3. No cash payment allowed unless special approval granted from our company's</td>
+  </tr>
+</table>
+
+
+<table style="width:100%">
+  <tr>
+    <td></td><td></td><td style="text-align:right;margin-right: 50px">Received By:</td>
+  </tr>
+  <tr>
+    <td style="height: 150px">-------------------------------- <br>Authorized Signature</td>
+   
+    <td></td>
+    <td style="text-align:right;height: 150px;margin-right: 50px">---------------------------------<br>Company Stamp & Signature</td>
+  </tr>
+</table>
+  </fieldset>
+     </div>

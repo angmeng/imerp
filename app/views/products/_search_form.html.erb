@@ -1,0 +1,50 @@
+<div class="mg10 exhibiton ex01">
+    <div class="exHead">
+        <div class="hTxt">
+            <div class="hTxtContent"><h2>Product Search</h2></div>
+        </div>
+        <div class="hLeft"></div>
+        <div class="hRight"></div>
+    </div>
+    <div class="exBody">
+        <div class="content">
+              <%= form_for @search, :as => :search, :html => {:method => :get} do |f| %>
+              <table class="list">
+                <tr>
+                  <th>Code</th>
+                  <th>In House code</th>
+                  <th>Short Description</th>
+                  <% if controller_name == "products" %>
+                  <th>Type</th>
+                  <% end %>
+                  <th>Brand</th>
+                  <th>Department</th>
+                  <th>Category</th>
+                  <th>Model</th>
+                  <th></th>
+                </tr>
+                <tr>
+                  <td><%= f.text_field :code_contains %></td>
+                  <td><%= f.text_field :in_house_code_contains %></td>
+                  <td><%= f.text_field :short_description_contains %></td>
+                  <% if controller_name == "products" %>
+                  <td><%= f.collection_select :product_kind_id_equals, ProductKind.all, :id, :name, :include_blank => true %></td>
+                  <% end %>
+                  <td><%= f.collection_select :product_brand_id_equals, ProductBrand.all, :id, :name, :include_blank => true %></td>
+                  <td><%= f.collection_select :product_department_id_equals, ProductDepartment.all, :id, :name, :include_blank => true %></td>
+                  <td><%= f.collection_select :product_category_id_equals, ProductCategory.all, :id, :name, :include_blank => true %></td>
+                  <td><%= f.collection_select :product_model_id_equals, ProductModel.all, :id, :name, :include_blank => true %></td>
+                  <td><%= f.submit "Search" %></td>
+                </tr>
+              </table>
+              
+                <% end %>
+                <br />
+
+        </div>
+   </div>
+    <div class="exFoot">
+        <div class="fLeft"></div>
+        <div class="fRight"></div>
+    </div>
+</div>

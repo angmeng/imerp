@@ -1,0 +1,62 @@
+<% title "Listing Delivery Order"  %>
+<%= link_to image_tag("new.png", :title => "new"), new_delivery_order_path %>
+<br /><br />
+<%= render "search" %>
+<br>
+<hr>
+<br>
+
+<div class="mg10 exhibiton ex01">
+    <div class="exHead">
+        <div class="hTxt">
+          <div class="hTxtContent"><h2>Delivery Orders</h2></div>
+        </div>
+        <div class="hLeft"></div>
+        <div class="hRight"></div>
+    </div>
+    <div class="exBody">
+      <div class="content">
+          <%= will_paginate @delivery_orders  %>
+              <table class="list">
+                <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>DO No</th>
+                   
+                  <th align="left"> PO No</th>
+                  <th>Packing List No</th>
+                  <th align="left">Customer</th>
+                  <th>Status</th>
+                  <th>Void Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+                 <tbody>
+
+              <% @delivery_orders.each do |delivery_order| %>
+                <tr class="<%= cycle("odd", "even") %>">
+                  <td align="center"><%=h delivery_order.delivery_order_date.strftime("%d-%m-%Y") %></td>
+                  <td align="center"><%=h delivery_order.delivery_order_number %></td>
+                
+                  <td><%=h delivery_order.purchase_order_number %></td>
+                  <td align="center"><%=h delivery_order.packing_list.packing_list_number %></td>
+                  <td><%=h delivery_order.customer.name %></td>
+                  <td align="center"><%=raw delivery_order.status %></td>
+                   <td align="center"><%=raw delivery_order.void_status %></td>
+                  <td align="center"><%= link_to 'Edit', delivery_order %> |
+
+                  <%= link_to 'Destroy', delivery_order, :confirm => 'Are you sure?', :method => :delete %></td>
+                </tr>
+              <% end %>
+               </tbody>
+              </table>
+
+               
+
+</div>
+   </div>
+    <div class="exFoot">
+        <div class="fLeft"></div>
+        <div class="fRight"></div>
+    </div>
+</div>

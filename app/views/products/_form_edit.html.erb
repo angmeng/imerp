@@ -1,0 +1,121 @@
+<%= form_for(@product) do |f| %>
+
+<%= render "shared/error_messages", :target => @product %>
+
+<table style="width: 100%">
+  <tr>
+    <td style="width: 45%">
+       <div class="inputs">
+         <table>
+      <tr>
+         <th align="left">Code</th><td><%=f.text_field  :code , :size => 51%><br></td>
+      </tr>
+      <tr>
+        <th align="left">Short Description</th><td><%=f.text_area  :short_description ,{:style=>"width:280px;height:30px; "}%></td>
+      </tr>
+      <tr>
+         <th align="left">Full Description</th><td><%=f.text_area  :full_description ,{:style=>"width:280px;height:50px; "}%></td>
+      </tr>
+      
+      <tr>
+         <th align="left">Product Type</th><td><%= f.select :product_kind_id, ProductKind.all.map {|c|[c.name, c.id]} %>&nbsp<%= link_to image_tag("add3.png", :title => "Add Product Type"), new_kind_product_kind_path(@product), :class=>"nyroModal"%></td></td>
+      </tr>
+      <tr>
+         <th align="left">Category</th><td><%= f.select :product_category_id, ProductCategory.all.map {|c|[c.name, c.id]} %>&nbsp<%= link_to image_tag("add3.png", :title => "Add Product Category"), new_category_product_category_path(@product), :class=>"nyroModal"%></td></td>
+      </tr>
+      <tr>
+        <th align="left">Brand</th><td><%= f.select :product_brand_id, ProductBrand.all.map {|c|[c.name, c.id]} %>&nbsp<%= link_to image_tag("add3.png", :title => "Add Product Brand"), new_brand_product_brand_path(@product), :class=>"nyroModal"%></td>
+      </tr>
+      <tr>
+         <th align="left">Department</th><td><%= f.select :product_department_id, ProductDepartment.all.map {|c|[c.name, c.id]}%>&nbsp<%= link_to image_tag("add3.png", :title => "Add Product Department"), new_department_product_department_path(@product), :class=>"nyroModal"%></td></td>
+      </tr>
+      <tr>
+         <th align="left">Model</th><td><%= f.select :product_model_id, ProductModel.all.map {|c|[c.name, c.id]}  %>&nbsp<%= link_to image_tag("add3.png", :title => "Add Product Model"),new_model_product_model_path(@product), :class=>"nyroModal"%></td></td>
+      </tr>
+      <%#*<tr>%>
+         <%#*<th align="left">Model</th><td><%= f.select :product_model_id, ProductModel.all.map {|c|[c.name, c.id]} , :selected => session[:product_model_id].to_i %>&nbsp<%#= link_to image_tag("add3.png", :title => "Add Product Model"),new_model_product_model_path(@product), :class=>"nyroModal"%></td></td>
+      <%#*</tr>%>
+      <tr>
+       <th align="left">Has serial number</th><td><%=f.check_box  :has_serial_no %></td>
+      </tr>
+      <tr>
+        <th align="left">starred</th><td><%=f.check_box  :starred %></td>
+      </tr>
+   </table>
+
+
+    
+  </div>
+
+    </td>
+    <td>
+      <div class="inputs">
+        <table>
+         <tr>
+       <td align="center"><%=f.check_box  :is_stock %></td><th align="left">Is stock</th>
+      </tr>
+      <tr>
+        <td align="left"><%=f.check_box  :is_sales %></td><th align="left">Is sales</th>
+      </tr>
+       <tr>
+       <td align="left"><%=f.check_box  :is_open_item %></td><th align="left">Is open item</th>
+      </tr>
+      <tr>
+       <td align="left"><%=f.check_box  :is_taxable %></td> <th align="left">Is taxable</th>
+      </tr>
+       <tr>
+      <tr>
+        <td align="left"><%=f.check_box  :allow_discount_below_cost %></td><th align="left">Allow discount below cost</th>
+      </tr>
+       <tr>
+       <td align="left"><%=f.check_box  :allow_negative_amount %></td><th align="left">Allow negative amount</th>
+      </tr>
+      <tr>
+        <td align="left"><%=f.check_box  :allow_quantity_discount %></td><th align="left">Allow Quantity discount</th>
+      </tr>
+       <tr>
+        <td align="left"><%=f.check_box  :allow_free_of_charge %></td><th align="left">Allow free of charge</th>
+      </tr>
+       <tr>
+       <td align="left"><%=f.check_box  :allow_zero_selling_price%></td><th align="left">Allow zero selling price</th>
+      </tr>
+      <tr>
+        <td align="left"><%=f.check_box  :allow_zero_purchase_price %></td><th align="left">Allow zero purchase price</th>
+      </tr>
+       <tr>
+       <td align="left"><%=f.check_box  :allow_sales_discount %></td><th align="left">Allow sales discount</th>
+      </tr>
+      <tr>
+        <td align="left"><%=f.check_box  :allow_return_to_vendor %></td><th align="left">Allow return to vendor</th>
+      </tr>
+       <tr>
+       <td align="left"><%=f.check_box  :cost_include_freight_charge %></td><th align="left">Cost include freight charge</th>
+      </tr>
+      <tr>
+       <td align="left"><%=f.check_box  :cost_include_insurance %></td> <th align="left">Cost include insurance</th>
+      </tr>
+
+        </table>
+      </div>
+    </td>
+  </tr>
+</table>
+ 
+  <div class="actions">
+  
+    <% if @product.new_record? %>
+    <%= f.submit "Create" %>
+     <%= f.submit "Create and continue" %>
+    <% else %>
+     <%= f.submit "Update" %>
+    <% end %>
+  </div>
+<% end %>
+
+<script type="text/javascript">
+$(function() {
+  $('.nyroModal').nyroModal();
+});
+</script>
+
+

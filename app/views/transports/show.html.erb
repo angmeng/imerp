@@ -1,0 +1,94 @@
+<%= link_to 'Edit', edit_transport_path(@transport) %> |
+<%= link_to 'Back', transports_path %>
+
+<div class="mg10 exhibiton ex01">
+    <div class="exHead">
+        <div class="hTxt">
+           <div class="hTxtContent"><h2>Transport Details</h2></div>
+        </div>
+        <div class="hLeft"></div>
+        <div class="hRight"></div>
+    </div>
+    <div class="exBody">
+        <div class="content">
+            <p id="notice"><%= notice %></p>
+
+            <p>
+              <b>Code:</b>
+              <%= @transport.code %>
+            </p>
+
+            <p>
+              <b>Name:</b>
+              <%= @transport.name %>
+            </p>
+
+            <p>
+              <b>Company number:</b>
+              <%= @transport.company_number %>
+            </p>
+
+            <p>
+              <b>Address:</b>
+              <%= @transport.address %>
+            </p>
+
+            <p>
+              <b>City:</b>
+              <%= @transport.city.name %>
+            </p>
+
+            <p>
+              <b>Postcode:</b>
+              <%= @transport.postcode %>
+            </p>
+
+            <p>
+              <b>Email:</b>
+              <%= @transport.email %>
+            </p>
+
+            <p>
+              <b>Office contact:</b>
+              <%= @transport.office_contact %>
+            </p>
+
+            <p>
+              <b>Office contact2:</b>
+              <%= @transport.office_contact2 %>
+            </p>
+
+            <p>
+              <b>Fax number:</b>
+              <%= @transport.fax_number %>
+            </p>
+
+            <p>
+              <b>Contact person:</b>
+              <%= @transport.contact_person %>
+            </p>
+
+            <p>
+              <b>Contact number:</b>
+              <%= @transport.contact_number %>
+            </p>
+
+            <p>
+              <b>Term:</b>
+              <%= @transport.term %>
+            </p>
+
+            <p>
+              <b>Remark:</b>
+              <%= @transport.remark %>
+            </p>
+
+</div>
+   </div>
+    <div class="exFoot">
+        <div class="fLeft"></div>
+        <div class="fRight"></div>
+    </div>
+</div>
+
+

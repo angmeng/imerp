@@ -1,0 +1,43 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  code: MyString
+  full_description: MyText
+  short_description: MyString
+  is_stock: false
+  is_sales: false
+  is_open_item: false
+  is_taxable: false
+  is_disposal: false
+  has_serial_no: false
+  allow_discount_below_cost: false
+  allow_negative_amount: false
+  allow_quantity_discount: false
+  allow_free_of_charge: false
+  allow_zero_selling_price: false
+  allow_zero_purchase_price: false
+  allow_sales_discount: false
+  allow_return_to_vendor: false
+  cost_include_freight_charge: false
+  cost_include_insurance: false
+
+two:
+  code: MyString
+  full_description: MyText
+  short_description: MyString
+  is_stock: false
+  is_sales: false
+  is_open_item: false
+  is_taxable: false
+  is_disposal: false
+  has_serial_no: false
+  allow_discount_below_cost: false
+  allow_negative_amount: false
+  allow_quantity_discount: false
+  allow_free_of_charge: false
+  allow_zero_selling_price: false
+  allow_zero_purchase_price: false
+  allow_sales_discount: false
+  allow_return_to_vendor: false
+  cost_include_freight_charge: false
+  cost_include_insurance: false

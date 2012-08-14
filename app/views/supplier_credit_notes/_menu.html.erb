@@ -1,0 +1,13 @@
+  <%= link_to image_tag("home.png", :title => "View All"), supplier_credit_notes_path %> |
+  <%= link_to image_tag("new.png", :title => "New"), new_supplier_credit_note_path %> |
+  <%= link_to image_tag("delete.png", :title => "Delete"), @supplier_credit_note, :confirm => 'Are you sure you want to delete this supplier credit note?', :method => :delete %> |
+  <%= link_to image_tag("print.png", :title => "Print"), preview_supplier_credit_note_path(@supplier_credit_note), {:target => "_blank"} %> 
+   <% unless @supplier_credit_note.voided?  %>
+  <% unless @supplier_credit_note.posted?  %>
+  <% unless @supplier_credit_note.settled? %>
+    | <%= link_to 'Settle', settle_supplier_credit_note_path(@supplier_credit_note, :status_id => 1), :confirm => "Are you sure you want to settle this return to supplier ?" %>
+  <% else %>
+    | <%= link_to 'UnSettle', settle_supplier_credit_note_path(@supplier_credit_note, :status_id => 2), :confirm => "Are you sure you want to unsettle this return to supplier ?" %>
+    | <%= link_to 'Post Quantity', post_quantity_supplier_credit_note_path(@supplier_credit_note), :confirm => "Are you sure you want to post the quantity ?" %>
+  <% end %>
+  <% end %> <% end %>

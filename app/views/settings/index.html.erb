@@ -1,0 +1,37 @@
+<h1>Listing settings</h1>
+
+<table>
+  <tr>
+    <th>Company name</th>
+    <th>Company address one</th>
+    <th>Company address two</th>
+    <th>Company postcode</th>
+    <th>Company city</th>
+    <th>Company country</th>
+    <th>Product prefix code</th>
+    <th>Product last number</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @settings.each do |setting| %>
+  <tr>
+    <td><%= setting.company_name %></td>
+    <td><%= setting.company_address_one %></td>
+    <td><%= setting.company_address_two %></td>
+    <td><%= setting.company_postcode %></td>
+    <td><%= setting.company_city %></td>
+    <td><%= setting.company_country %></td>
+    <td><%= setting.product_prefix_code %></td>
+    <td><%= setting.product_last_number %></td>
+    <td><%= link_to 'Show', setting %></td>
+    <td><%= link_to 'Edit', edit_setting_path(setting) %></td>
+    <td><%= link_to 'Destroy', setting, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Setting', new_setting_path %>

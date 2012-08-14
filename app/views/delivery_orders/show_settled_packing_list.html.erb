@@ -1,0 +1,48 @@
+
+<%= link_to "Back", new_delivery_order_path %>
+<div class="mg10 exhibiton ex01">
+    <div class="exHead">
+        <div class="hTxt">
+           <div class="hTxtContent"><h2>Settled Picking Lists</h2></div>
+        </div>
+        <div class="hLeft"></div>
+        <div class="hRight"></div>
+    </div>
+    <div class="exBody">
+        <div class="content">
+              <%= will_paginate @po %>
+              <br />
+              <table class="list">
+                <tr>
+                  <th>Date</th>
+                  <th>Packing list No</th>
+                  <th>Sales Order No</th>
+                  <th>Customer</th>
+                  <th>Term</th>
+                  <th>Voided</th>
+                  <th>Settled</th>
+
+                </tr>
+
+              <% @po.each do |packing_list| %>
+               <tr class="<%= cycle "odd", "even"  %> " style="text-align: center">
+                  <td><%= packing_list.packing_list_date %></td>
+                  <td><%= packing_list.packing_list_number %></td>
+                  <td><%= packing_list.sales_order.sales_order_number rescue '-'%></td>
+                  <td><%= packing_list.customer.name %></td>
+                  <td><%= packing_list.term %></td>
+                  <td><%= packing_list.voided %></td>
+                  <td><%= raw packing_list.current_status %></td>
+               </tr>
+              <% end %>
+              </table>
+              <br />
+              <%= will_paginate @po %>
+              <br />
+ </div>
+   </div>
+    <div class="exFoot">
+        <div class="fLeft"></div>
+        <div class="fRight"></div>
+    </div>
+</div>

@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  product_location_id: 1
+  name: MyString
+  description: MyText
+  disabled: false
+
+two:
+  product_location_id: 1
+  name: MyString
+  description: MyText
+  disabled: false

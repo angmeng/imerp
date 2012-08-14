@@ -1,0 +1,33 @@
+<br />
+<%= link_to "Back", supplier_debit_notes_path %>
+<br/>
+<table class="list">
+  <tr>
+    <th>Supplier Debit note number</th>
+    <th>Supplier Debit note date</th>
+    <th>Supplier</th>
+     <th>Status</th>
+    <th>Voided</th>
+    <th>Posted</th>
+    <th>Action</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @supplier_debit_notes.each do |supplier_debit_note| %>
+  <tr class="<%= cycle "odd", "even"  %> " style="text-align: center">
+    <td><%= supplier_debit_note.supplier_debit_note_number %></td>
+    <td><%= supplier_debit_note.supplier_debit_note_date %></td>
+    <td><%= supplier_debit_note.supplier.name rescue "-" %></td>
+    <td align="center"><%=raw supplier_debit_note.status %></td>
+    <td><%= supplier_debit_note.voided %></td>
+    <td><%= supplier_debit_note.posted %></td>
+    <td><%= link_to 'Edit', edit_supplier_debit_note_path(supplier_debit_note) %>
+    | <%= link_to 'Destroy', supplier_debit_note, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+<%= will_paginate @supplier_debit_notes %>
+<br />

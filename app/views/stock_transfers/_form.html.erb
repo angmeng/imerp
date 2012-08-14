@@ -1,0 +1,24 @@
+<%= simple_form_for(@stock_transfer) do |f| %>
+  <% if @stock_transfer.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@stock_transfer.errors.count, "error") %> prohibited this stock_transfer from being saved:</h2>
+
+      <ul>
+      <% @stock_transfer.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="inputs">
+    <%= f.input :stock_transfer_number %>
+    <%= f.input :stock_transfer_date %>
+    <%= f.input :remark %>
+    <%= f.input :user_id %>
+  </div>
+
+  <div class="actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

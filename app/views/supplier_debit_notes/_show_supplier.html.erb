@@ -1,0 +1,42 @@
+<div class="mg10 exhibiton ex01">
+        <div class="exHead">
+            <div class="hTxt">
+               <div class="hTxtContent"><h2>Received From Supplier Details</h2></div>
+            </div>
+            <div class="hLeft"></div>
+            <div class="hRight"></div>
+        </div>
+        <div class="exBody">
+            <div class="content">
+                <table class="list">
+                   <tr>
+                    <th>Received From Supplier Number</th>
+                    <th>Date</th>
+                    <th>Supplier</th>
+                    <th>Status</th>
+                   </tr>
+                   <tr align="center">
+                    <td><%=h @supplier_debit_note.supplier_debit_note_number %></td>
+                    <td><%= @supplier_debit_note.supplier_debit_note_date.strftime("%d-%m-%Y")%></td>
+                    <td><%= @supplier_debit_note.supplier.name rescue"-" %> </td>
+                    <% if @supplier_debit_note.voided? %>
+                       <td><%=raw @supplier_debit_note.void_status %></td>
+                    <%else%>
+                       <td align="center"><%=raw @supplier_debit_note.status %> </td>
+                     <%end%>
+                   </tr>
+                </table>
+                <table class="list">
+                  <tr align="left">
+                   <th align="left">Remark</th>
+                </tr>
+                <tr align="left">
+                <td colspan="8"> <%=  @supplier_debit_note.remark %></td>
+                </tr>
+                </table>
+</div></div>
+    <div class="exFoot">
+        <div class="fLeft"></div>
+        <div class="fRight"></div>
+    </div>
+    </div>

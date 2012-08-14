@@ -1,0 +1,90 @@
+<div class="mg10 exhibiton ex01">
+    <div class="exHead">
+        <div class="hTxt">
+            <div class="hTxtContent"><h2>Purchase Order Details</h2></div>
+        </div>
+        <div class="hLeft"></div>
+        <div class="hRight"></div>
+    </div>
+    <div class="exBody">
+        <div class="content">
+
+
+            <% form_tag update_info_purchase_order_path(@purchase_order) do %>
+            <table width="100%">
+              <tr>
+                <td><strong>PO No</strong></td><td> : </td> <td><%= @purchase_order.purchase_order_number %></td>
+                <td><strong>Date</strong></td><td> : </td> <td><%= @purchase_order.purchase_order_date.strftime("%d-%m-%Y") %></td>
+              </tr>
+              <tr>
+                <td style="width: 10%"><strong>Supplier</strong></td><td> : </td> <td style="width: 60%"><%= @purchase_order.supplier.name %></td>
+                <td style="width: 10%"><strong>Supplier Code</strong></td><td> : </td> <td style="width: 60%"><%= @purchase_order.supplier.code %></td>
+
+              </tr>
+               <tr>
+                <td style="width: 10%"><strong>Address</strong></td><td> : </td> <td style="width: 60%"><%= @purchase_order.supplier.address %></td>
+                <td style="width: 10%"><strong>Office No</strong></td><td> : </td> <td style="width: 60%"><%= @purchase_order.supplier.office_contact %></td>
+
+              </tr>
+              <tr>
+                <td><strong>Remark</strong></td><td> : </td> <td><%= text_area_tag "purchase_order[remark]", @purchase_order.remark, :size => "100x2" %></td>
+                <td><strong>Term</strong></td><td> : </td> <td><%=  text_area_tag "purchase_order[term]", @purchase_order.term %></td>
+              </tr>
+              <tr>
+
+                <td colspan="4" align="center"><%= submit_tag "Update"  %>  </td>
+              </tr>
+            </table>
+
+
+            <table class="list">
+              <thead>
+                <tr>
+                    <th align="center"> No </th>
+                    <th align="left">Code</th>
+                    <th align="left">Description</th>
+                    <th>UOM</th>
+                    <th>Quantity</th>
+                    <th>Unit Price</th>
+                    <th>Total</th>
+
+                </tr>
+               </thead>
+              <tbody>
+              <% line = 0 %>
+              <% total = 0.00 %>
+              <% @current_items.each do |c| %>
+                <% line += 1 %>
+                <% total += c.total %>
+               <tr class="<%= cycle("odd", "even") %>">
+                 <td align="center"><%= line.to_s %></td>
+                 <td><%= c.product.code %></td>
+                 <td><%= c.product.full_description %></td>
+                 <td align="center"><%= c.product_uom.name rescue "-" %></td>
+                 <td align="center"><%= c.quantity %></td>
+                 <td align="center"><%= "%.2f" % c.unit_price %></td>
+                 <td align="center"> <%= number_with_precision(c.total, :precision => 2) %></td>
+
+              </tr>
+            <% end %>
+
+
+              <tr>
+                <td colspan="6">  </td>
+                <td align="center">
+                  <hr/>Total Amount <br />
+                       <%= "%.2f" % total %>
+                  <hr/><hr/>
+                </td>
+
+              </tr>
+            </tbody>
+            </table>
+            <% end %>
+            <br /> <br />
+ </div></div>
+    <div class="exFoot">
+        <div class="fLeft"></div>
+        <div class="fRight"></div>
+    </div>
+</div>

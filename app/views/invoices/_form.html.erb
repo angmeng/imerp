@@ -1,0 +1,21 @@
+<%= form_for(@invoice) do |f| %>
+  <%= render "shared/error_messages", :target => @invoice %>
+   <%= hidden_field :issued_user_id, :value => current_user.id %>
+
+ <table>
+      <tr>
+        <th>Date</th><td><%= f.date_select :invoice_date %>  to  <%= f.date_select :end_invoice_date %></td>
+
+      </tr>
+      <tr>
+         <th>Customer</th><td><%= f.select :customer_id, Customer.selections %></td>
+      </tr>
+     
+      <tr>
+        <th>Remark</th><td valign="top"><%= f.text_area :remark, :size => "80x2" %></td>
+      </tr>
+</table>
+ <p>
+  <%= f.submit 'Next' %>
+  <% end %>
+    </p>

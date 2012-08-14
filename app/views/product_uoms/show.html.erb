@@ -1,0 +1,36 @@
+<%= link_to 'Edit', edit_product_uom_path(@product_uom) %> |
+<%= link_to 'Back', product_uoms_path %>
+
+
+<div class="mg10 exhibiton ex01">
+    <div class="exHead">
+        <div class="hTxt">
+           <div class="hTxtContent"><h2>Product Uom Details</h2></div>
+        </div>
+        <div class="hLeft"></div>
+        <div class="hRight"></div>
+    </div>
+    <div class="exBody">
+        <div class="content">
+                <table class="list">
+                  <tr>
+                   <th>Brand Name</th>
+                   <th>Description</th>
+                   <th>Default</th>
+                  </tr>
+                 <tr class="<%= cycle "odd", "even"  %> " style="text-align: center">
+                    <td align="center"><%= @product_uom.name %></td>
+                    <td align="center"><%= @product_uom.description %></td>
+                    <td align="center"><%= @product_uom.builtin %></td>
+                 </tr>
+                </table>
+               </div>
+</div>
+    <div class="exFoot">
+        <div class="fLeft"></div>
+        <div class="fRight"></div>
+    </div>
+    </div>
+
+ 
+

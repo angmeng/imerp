@@ -1,0 +1,20 @@
+
+
+<p>
+  <b>Name:</b>
+  <%= @product_kind.name %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @product_kind.description %>
+</p>
+
+<p>
+  <b>Disabled:</b>
+  <%= @product_kind.disabled %>
+</p>
+
+
+<%= link_to 'Edit', edit_product_kind_path(@product_kind) %> |
+<%= link_to 'Back', product_kinds_path %>

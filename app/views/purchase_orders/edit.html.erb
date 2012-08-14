@@ -1,0 +1,12 @@
+<% content_for :head do %>
+  <%= javascript_include_tag "smo" %>
+<% end %>
+
+<%= render 'menu' %>
+
+ <% unless @purchase_order.payment_paid? %>
+    <%= render "show" %>
+    <br/><hr/>
+  <% else %>
+     <%= render "settle_po" %>
+ <% end %>

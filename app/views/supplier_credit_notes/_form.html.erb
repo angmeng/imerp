@@ -1,0 +1,24 @@
+
+ <%= form_for(@supplier_credit_note) do |f| %>
+  <%= render "shared/error_messages", :target => @supplier_credit_note %>
+
+
+ <table>
+      <tr>
+        <th>Date</th><td><%= f.date_select :supplier_credit_note_date %></td>
+      </tr>
+      <tr>
+         <th>Supplier</th><td><%= f.select :supplier_id, Supplier.all.map {|c| [c.name, c.id]} %></td>
+      </tr>
+
+      <tr>
+        <th>Remark</th><td valign="top"><%= f.text_area :remark, :size => "60x2" %></td>
+      </tr>
+
+
+ </table>
+  <p>
+    <%= f.submit 'Next' %>
+  <% end %>
+  </p>
+

@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  cust_payment_number: MyString
+  cust_payment_date: 2011-03-25
+  remark: MyString
+  voided: false
+  customer_id: 1
+
+two:
+  cust_payment_number: MyString
+  cust_payment_date: 2011-03-25
+  remark: MyString
+  voided: false
+  customer_id: 1

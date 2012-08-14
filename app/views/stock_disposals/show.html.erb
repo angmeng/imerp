@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Stock disposal number:</b>
+  <%= @stock_disposal.stock_disposal_number %>
+</p>
+
+<p>
+  <b>Stock disposal date:</b>
+  <%= @stock_disposal.stock_disposal_date %>
+</p>
+
+<p>
+  <b>Remark:</b>
+  <%= @stock_disposal.remark %>
+</p>
+
+<p>
+  <b>Voided:</b>
+  <%= @stock_disposal.voided %>
+</p>
+
+<p>
+  <b>Posted:</b>
+  <%= @stock_disposal.posted %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @stock_disposal.user_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_stock_disposal_path(@stock_disposal) %> |
+<%= link_to 'Back', stock_disposals_path %>

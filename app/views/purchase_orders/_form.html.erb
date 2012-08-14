@@ -1,0 +1,18 @@
+<%= simple_form_for(@purchase_order) do |f| %>
+ <%= render "shared/error_messages", :target => @purchase_order %>
+
+  <div class="inputs">
+    <%= f.input :purchase_order_date %>
+
+  
+    <%= f.input :term %>
+    <%= f.input :remark %>
+
+    <%= f.input :voided %>
+    <%= f.input :settled %>
+  </div>
+
+  <div class="actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

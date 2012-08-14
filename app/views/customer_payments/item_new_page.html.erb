@@ -1,0 +1,81 @@
+<% content_for :head do %>
+  <%= javascript_include_tag "smo" %>
+<% end %>
+ <%= link_to image_tag("backs.png", :title => "Back"),edit_customer_payment_path(@customer_payment) %>
+ <%= form_tag removed_item_customer_payment_path(@customer_payment) do %>
+  <div class="mg10 exhibiton ex01">
+                  <div class="exHead">
+                     <div class="hTxt">
+                         <div class="hTxtContent"><h2>Customer Payment Items</h2></div>
+                        </div>
+                      <div class="hLeft"></div>
+                      <div class="hRight"></div>
+                  </div>
+                  <div class="exBody">
+                  <div class="content">
+                      <table class="flexi" style="font-size: 12px">
+                         <thead>
+                            <tr>
+                                <th width="120" align="center" style="font-size: 12px"><input type="checkbox" name="checkall" onclick="checkUncheckAll(this);"/></th>
+                               <th width="250" align="center" style="font-size: 12px"><strong>Invoice No</strong></th>
+                               <th width="250" align="center" style="font-size: 12px"><strong>Date</strong></th>
+                               <th width="300" align="center" style="font-size: 12px"><strong>Customer</strong></th>
+                               <th width="250" align="center" style="font-size: 12px"><strong>Amount</strong></th>
+                           </tr>
+                           </thead>
+                          <tbody>
+                             <% total_amount = 0  %>
+                             <% @items.each do |i| %>
+                              <% item_total = i.invoice.total_amount %>
+                              <% total_amount += item_total %>
+                            <tr class="<%= cycle("odd", "even") %>" align="center">
+                              <td align="center"><%= check_box_tag("item[#{i.id.to_s}][selected]")%></td>
+                              
+                              <td align="center"><%= i.invoice.invoice_number   %></td>
+                              <td align="center"><%= i.invoice.invoice_date.strftime("%d-%m-%Y")%> - <%= i.invoice.end_invoice_date.strftime("%d-%m-%Y")%></td>
+                              <td align="center"><%= i.invoice.customer.name  %></td>
+                              <td align="center"><%= item_total %></td>
+                            </tr>
+                            <% end %>
+                            
+                           </tbody>
+                          </table>
+                    <table><tr>
+                       <td>
+                        <%= submit_tag "Remove items" unless @customer_payment.customer_payment_items.empty? %>
+                       </td>
+                       <td align="right" width="1050px"><strong>Total Amount : </strong> <%= total_amount %></td>
+                      </tr>
+                    </table>
+              <% end %>
+              </div>
+            </div>
+          <div class="exFoot">
+              <div class="fLeft"></div>
+              <div class="fRight"></div>
+          </div>
+          </div>
+
+
+<script type="text/javascript">
+   $('.flexi').flexigrid({width: $('#header').width() - 80});
+</script>
+<hr>
+        <div class="mg10 exhibiton ex01">
+            <div class="exHead">
+               <div class="hTxt">
+                   <div class="hTxtContent"><h2>Add Items</h2></div>
+                  </div>
+                <div class="hLeft"></div>
+                <div class="hRight"></div>
+            </div>
+            <div class="exBody">
+            <div class="content">
+                <%= render "add_item" %>
+            </div>
+            </div>
+          <div class="exFoot">
+              <div class="fLeft"></div>
+              <div class="fRight"></div>
+          </div>
+          </div>

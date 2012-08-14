@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Pack:</b>
+  <%= @pack_item.pack_id %>
+</p>
+
+<p>
+  <b>Product:</b>
+  <%= @pack_item.product_id %>
+</p>
+
+<p>
+  <b>Product uom:</b>
+  <%= @pack_item.product_uom_id %>
+</p>
+
+<p>
+  <b>Stock location:</b>
+  <%= @pack_item.stock_location_id %>
+</p>
+
+<p>
+  <b>Quantity:</b>
+  <%= @pack_item.quantity %>
+</p>
+
+<p>
+  <b>Cost:</b>
+  <%= @pack_item.cost %>
+</p>
+
+
+<%= link_to 'Edit', edit_pack_item_path(@pack_item) %> |
+<%= link_to 'Back', pack_items_path %>

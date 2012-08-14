@@ -1,0 +1,2 @@
+module ProductKindsHelper
+end

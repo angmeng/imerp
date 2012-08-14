@@ -1,0 +1,16 @@
+<% content_for :head do %>
+  <%= javascript_include_tag "smo" %>
+<% end %>
+
+
+<%= render 'menu' %>
+
+ <% unless @delivery_order.settled? or @delivery_order.voided? %>
+  <%= render "update_info" %>
+    <br/><hr/>
+  <%= render "product_unsettle" %>
+ <% else %>
+  <%= render "show_info_settled" %>
+  <br/><hr/><br/>
+  <%= render "product_settled" %>
+ <% end %>

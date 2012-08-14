@@ -1,0 +1,64 @@
+<%= form_tag update_info_delivery_order_path(@delivery_order) do %>
+<div class="mg10 exhibiton ex01">
+    <div class="exHead">
+        <div class="hTxt">
+           <div class="hTxtContent"><h2>Delivery Order Details</h2></div>
+        </div>
+        <div class="hLeft"></div>
+        <div class="hRight"></div>
+    </div>
+    <div class="exBody">
+    <div class="content">
+          <table class="list">
+            <tr>
+              <th>DO No</th>
+              <th>Date</th>
+              <th>PO No</th>
+               <th>Packing list No</th>
+               <th>Salesman</th>
+              <th>Transport</th>
+              <th>Customer</th>
+              
+              <th>Status</th>
+            </tr>
+            <tr align="center">
+
+              <td><%=  @delivery_order.delivery_order_number %></td>
+               <td><input type="text"  size="12" id="datepicker" name="delivery_order[delivery_order_date]" value="<%= @delivery_order.delivery_order_date.strftime("%d-%m-%Y") %>"/></td>
+             
+              <td><%= text_field "delivery_order", "purchase_order_number", :size => 10 %> </td>
+              <td><%=h @delivery_order.packing_list.packing_list_number %></td>
+              <td><%=  @delivery_order.salesman.name rescue "-" %></td>
+              <td><%=  @delivery_order.transport.name rescue "-" %></td>
+
+              <td><%=h @delivery_order.customer.name %></td>
+              
+              <td><%=raw @delivery_order.status %></td>
+            </tr>
+            <tr>
+              <td align="center"><strong>Remark</strong></td>
+              <td colspan="8"> <%= text_area "delivery_order", "remark", {:style=>"width:600px;height:15px; "}%></td>
+            </tr>
+            <tr>
+              <td colspan="9" align="center"><%= submit_tag "Update info"  %></td>
+            </tr>
+          </table>
+ </div>
+ </div>
+    <div class="exFoot">
+        <div class="fLeft"></div>
+        <div class="fRight"></div>
+    </div>
+</div>
+
+<% end %>
+<script>
+	$(function() {
+		$( "#datepicker" ).datepicker({
+			showOn: "button",
+			buttonImage: "/images/calendar2.png",
+			buttonImageOnly: true,
+                        dateFormat: 'dd-mm-yy'
+		});
+	});
+	</script>

@@ -1,0 +1,16 @@
+<%= form_tag add_supplier_purchase_requisition_path(@purchase_requisition) do %>
+<table class="list">
+  <tr>
+    <th>Supplier</th>
+  </tr>
+<% @suppliers.each do |p| %>
+  <tr> 
+   <td><%= select_tag("item[#{p.id.to_s}][supplier_id]", options_for_select(@suppliers, p.supplier_id))  %> </td>
+   <td><%= p.name  %> </td>
+  </tr>
+<% end %>
+</table>
+<%= submit_tag "Add Supplier"%>
+<% end %>
+<br />
+

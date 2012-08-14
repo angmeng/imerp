@@ -1,0 +1,78 @@
+<%= link_to 'Edit', edit_product_path(@product) %> |
+<%= link_to 'Back', products_path %>
+<br />
+<div class="mg10 exhibiton ex01">
+    <div class="exHead">
+        <div class="hTxt">
+            <div class="hTxtContent"><h2>Product Details</h2></div>
+        </div>
+        <div class="hLeft"></div>
+        <div class="hRight"></div>
+    </div>
+    <div class="exBody">
+        <div class="content">
+            <table style="width: 100%">
+              <tr>
+                <td valign="top" style="width:25%;padding: 10px 10px 10px 10px">
+                  <h3>Detail</h3>
+                  <br />
+                  <p>
+                   <b>InHouse Code:</b>
+                   <%= @product.in_house_code %>
+                  </p>
+
+                  <p>
+                   <b>Code:</b>
+                   <%= @product.code %>
+                  </p>
+
+                  <p>
+                   <b>Full description:</b>
+                   <%= @product.full_description %>
+                 </p>
+
+                 <p>
+                  <b>Short description:</b>
+                  <%= @product.short_description %>
+                 </p>
+
+                </td>
+
+
+                <td valign="top" style="padding: 10px 10px 10px 10px">
+                  <h3>UOMs</h3>
+                  <br />
+                  <table style="width: 100%" class="list">
+                  <%= render :partial => 'product_uom_item', :collection => @product.product_uom_items %>
+                </table>
+
+                </td>
+
+                 <td valign="top" style="width: 20%;padding: 10px 10px 10px 50px">
+                    <h3>Options</h3>
+                    <br />
+                    <%=raw show_options %>
+                </td>
+              </tr>
+
+              <% if @product.is_mixed? %>
+              <tr>
+                <td colspan="3">
+                  <%= render 'show_mixed_items' %>
+                </td>
+              </tr>
+              <% end %>
+
+            </table>
+ </div>
+   </div>
+    <div class="exFoot">
+        <div class="fLeft"></div>
+        <div class="fRight"></div>
+    </div>
+</div>
+
+
+
+
+

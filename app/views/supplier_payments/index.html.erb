@@ -1,0 +1,50 @@
+<% title "Listing Supplier Payment" %>
+
+<%= link_to image_tag("new.png", :title => "new"), new_supplier_payment_path %>
+<br /><br />
+<%= render "search" %>
+<br />
+<hr />
+<br />
+<div class="mg10 exhibiton ex01">
+        <div class="exHead">
+            <div class="hTxt">
+               <div class="hTxtContent"><h2>Supplier Payment</h2></div>
+            </div>
+            <div class="hLeft"></div>
+            <div class="hRight"></div>
+        </div>
+        <div class="exBody">
+            <div class="content">
+                <%= will_paginate @supplier_payment %>
+                <br />
+
+                <table class="list">
+                  <tr>
+                    <th>Date</th>
+                    <th>Supplier Payment Number</th>
+                    <th align="left">Supplier</th>
+                    <th>Status</th>
+                    <th>Void Status</th>
+                    <th>Action</th>
+                  </tr>
+
+                <% @supplier_payments.each do |supplier_payment| %>
+                  <tr class="<%= cycle "odd", "even"  %> " style="text-align: center">
+                    <td><%= supplier_payment.supplier_payment_date.strftime("%d-%m-%Y") %></td>
+                    <td><%= supplier_payment.supplier_payment_number %></td>
+                    <td align="left"><%= supplier_payment.supplier.name rescue "-" %></td>
+                    <td align="center"><%=raw supplier_payment.status %></td>
+                    <td><%= raw supplier_payment.void_status %></td>
+                    <td>  <%= link_to 'Edit', edit_supplier_payment_path(supplier_payment) %> |
+                    <%= link_to 'Destroy', supplier_payment, :confirm => 'Are you sure?', :method => :delete %></td>
+                  </tr>
+                <% end %>
+                </table>
+               </div>
+</div>
+    <div class="exFoot">
+        <div class="fLeft"></div>
+        <div class="fRight"></div>
+    </div>
+    </div>

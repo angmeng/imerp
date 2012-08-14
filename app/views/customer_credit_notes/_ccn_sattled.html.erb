@@ -1,0 +1,53 @@
+<div class="mg10 exhibiton ex01">
+        <div class="exHead">
+            <div class="hTxt">
+               <div class="hTxtContent"><h2>Receive From Customer Item Details</h2></div>
+            </div>
+            <div class="hLeft"></div>
+            <div class="hRight"></div>
+        </div>
+        <div class="exBody">
+            <div class="content">
+                <table class="flexi" style="font-size: 12px">
+                   <thead>
+                    <tr>
+                     <th width="98" align="center"style="font-size: 12px"><strong>No</strong></th>
+                     <th width="130" align="center"style="font-size: 12px"><strong>Code</strong></th>
+                    <th width="250" align="center"style="font-size: 12px"><strong>Description</strong></th>
+                    <th width="150" align="center"style="font-size: 12px"><strong>UOM</strong></th>
+                    <th width="150" align="center"style="font-size: 12px"><strong>Stock location</strong></th>
+                    <th width="120" align="center"style="font-size: 12px"><strong>Quantity</strong></th>
+                    <th width="120" align="center"style="font-size: 12px"><strong>Unit Price</strong></th>
+                    <th width="120" align="center"style="font-size: 12px"><strong>Total</strong></th>
+                    </tr>
+                     </thead>
+                     <tbody>
+                  <% line = 0 %>
+                  <% @customer_credit_note.customer_credit_note_items.each do |p| %>
+                  <% line += 1%>
+                  <tr class="<%= cycle "odd", "even"  %> ">
+                    <td align="center"><%= line.to_s %></td>
+                    <td style="text-align: center"><%= p.product.code  %> </td>
+                    <td style="text-align: center"><%= p.product.full_description  %> </td>
+                    <td style="text-align: center"><%= p.product_uom.name rescue "-" %></td>
+                    <td style="text-align: center"><%= p.stock_location.product_rack.name  rescue "-" %></td>
+                    <td style="text-align: center"><%= p.quantity  %> </td>
+                    <td style="text-align: center"><%= "%.2f" % p.unit_price %> </td>
+                    <td style="text-align: center"><%= "%.2f" % p.total  %> </td>
+
+                  </tr>
+                <% end %>
+                </tbody>
+                </table>
+              </div>
+</div>
+    <div class="exFoot">
+        <div class="fLeft"></div>
+        <div class="fRight"></div>
+    </div>
+    </div>
+<script type="text/javascript">
+                   $('.flexi').flexigrid({width: $('#header').width() - 80});
+                   </script>
+
+

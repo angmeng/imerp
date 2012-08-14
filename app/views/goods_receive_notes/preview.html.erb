@@ -1,0 +1,160 @@
+<%= stylesheet_link_tag 'print',:media => "print"%>
+
+<a href="#" onclick="window.print();return false;">Print</a>
+
+<div class="print">
+<table align="center">
+    <% @settings.each do |setting| %>
+   <tr>
+     <td align="center" style="font-size: 28"><%= setting.company_name rescue'-' %></td>
+   </tr>
+   <tr>
+     <td align="center"><%= setting.company_address_one rescue'-' %></td>
+   </tr>
+   <tr>
+     <td align="center"><%= setting.company_address_two rescue'-' %></td>
+   </tr>
+   <tr>
+     <td align="center">
+       <%= setting.company_postcode rescue'-'  %>,
+       <%= setting.company_city rescue'-' %>,
+       <%= setting.company_country rescue'-' %>
+     </td>
+   </tr>
+   <tr>
+     <td align="center">
+      &nbsp;&nbsp; TEL NO: <%= setting.phone_number rescue'-'  %>  &nbsp;
+            FAX NO: <%= setting.fax_number rescue'-' %>
+     </td>
+   </tr>
+   <% end %>
+ </table>
+<%= image_tag("grn.png")%>
+
+<table style="width: 100%">
+    <tr>
+      <td  style="width: 40%">
+        <table  style=" border:solid" >
+          <tr>
+          <th align="right"style="width: 10%"><strong>Pay To : </strong> </th>
+          <td style="width: 60%"><%= @goods_receive_note.supplier.name rescue"-" %></td>
+          </tr>
+         <tr>
+          <td valign="top"></td>
+          <td> <%= @goods_receive_note.supplier.address %><br />
+              <%= @goods_receive_note.supplier.postcode %>
+          </td>
+          </tr>
+          <tr>
+          <td align="right"> <strong>Contact: </strong></td>
+          <td>
+               <strong>Tel:  </strong><%= @goods_receive_note.supplier.office_contact %>
+               <strong>Fax:  </strong><%= @goods_receive_note.supplier.fax_number %>
+          </td>
+          </tr>
+
+
+        </table>
+      </td>
+      <td style="width: 5%"></td>
+     <td style="width: 40%">
+        <table>
+          <tr>
+            <th align="left">Date </th>
+            <th align="center">&nbsp:  </th>
+            <td>&nbsp<%= @goods_receive_note.grn_date.strftime("%d-%m-%Y") %></td>
+         </tr>
+          <tr>
+             <th style="width:100"align="left">GRN No</th>
+             <th align="center">:  </th>
+             <td>&nbsp<%= @goods_receive_note.grn_number %></td>
+         </tr>
+         <tr>
+          <th align="left">PO No</th>
+          <th align="center">&nbsp:  </th>
+          <td>&nbsp<%= @goods_receive_note.purchase_order.purchase_order_number%></td>
+
+         </tr>
+         <tr>
+          <th align="left">PR No</th>
+          <th align="center">&nbsp:  </th>
+          <td> &nbsp<%= @goods_receive_note.purchase_order.purchase_requisition.pr_number%></td>
+
+         </tr>
+       
+        </table>
+
+      </td></tr>
+
+</table>
+<br />
+<fieldset style="width: 96%; height:1100px; border-style: none">
+<table width="100%" cellpadding="2" cellspacing="0">
+  <tr>
+    <th align ="left"style="border-bottom:outset ">No</th>
+    <th align ="left"style="border-bottom:outset ">Code</th>
+    <th align ="left"style="border-bottom:outset ">Description</th>
+    <th align ="left"style="border-bottom:outset ">UOM</th>
+    <th style="border-bottom:outset ">Unit Price</th>
+
+    <th style="border-bottom:outset ">Order Qty</th>
+   
+    <th style="border-bottom:outset ">Deliver Qty</th>
+  
+ 
+
+
+  </tr>
+  <% line = 0 %>
+  <% @items.each do |i| %>
+  <% po_deliver_qty = i.purchase_order_item.collected_quantity %>
+   <% line += 1%>
+  <tr>
+    <td align="center"><%= line.to_s %></td>
+   <% if  i.product.mixed_items.any?%>
+     <td><strong><%=  i.product.code %> </strong>(bundle Item)</td>
+   <%else%>
+     <td><strong><%= i.product.code %></strong></td>
+   <%end%>
+    <td><%= i.product.full_description rescue "-" %> </td>
+    <td align="left"><%= i.product_uom.name rescue "-" %> </td>
+    <td align="center"><%= "%.2f" % i.unit_price %> </td>
+
+    <td align="center"><%= i.delivered_quantity %> </td>
+    
+    <td align="center"><%= po_deliver_qty %> </td>
+    
+  </tr>
+  <% if i.product.is_mixed? %>
+          <% i.product.mixed_items.each do |p| %>
+
+          <tr>
+             <td></td>
+             <td  align="left"><%= p.product.code  %></td>
+             <td  align="left"><%= p.product.short_description %></td>
+             <td align="left"><%= p.product_uom.name rescue"-"%></td>
+             <td align="center"><%#= p.quantity %></td>
+             <td></td>
+             <td></td>
+             <td></td>
+          </tr>
+          <% end %>
+        <% end %>
+<%end%>
+</table>
+  </fieldset>
+<br /><br />
+
+
+<hr>
+<table style="width:100%">
+  <tr>
+    <td>Prepare by:</td><td></td><td style="text-align:right;margin-right: 50px">Approved By:</td>
+  </tr>
+  <tr>
+    <td style="height: 100px">------------------------</td>
+    <td></td>
+    <td style="text-align:right;height: 100px;margin-right: 50px">------------------------</td>
+  </tr>
+</table>
+</div>

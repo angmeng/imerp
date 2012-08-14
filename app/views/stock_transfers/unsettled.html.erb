@@ -1,0 +1,30 @@
+<%= link_to "Back", stock_transfers_path %>
+<br />
+<%= will_paginate @stock_transfers %>
+<br />
+
+<table class="list">
+  <tr>
+    <th>Stock transfer number</th>
+    <th>Stock transfer date</th>
+    <th>User</th>
+    <th>Status</th>
+    <th>Action</th>
+
+  </tr>
+
+<% @stock_transfers.each do |stock_transfer| %>
+  <tr class="<%= cycle "odd", "even"  %> " style="text-align: center">
+    <td><%= stock_transfer.stock_transfer_number %></td>
+    <td><%= stock_transfer.stock_transfer_date %></td>
+    <td><%= stock_transfer.user.name rescue "-" %></td>
+    <td align="center"><%=raw stock_transfer.status %></td>
+    <td><%= link_to 'Edit', edit_stock_transfer_path(stock_transfer) %>
+    | <%= link_to 'Destroy', stock_transfer, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+<%= will_paginate @stock_transfers %>
+<br />

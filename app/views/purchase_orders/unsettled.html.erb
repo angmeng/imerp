@@ -1,0 +1,35 @@
+<%= link_to "Back", purchase_orders_path %>
+<%= will_paginate @purchase_orders %>
+<br />
+<table class="list">
+  <tr>
+    <th>Date</th>
+    <th>PO No</th>
+    <th>Supplier</th>
+    <th>Term</th>
+    <th>Voided</th>
+    <th>Settled</th>
+    <th>Action</th>
+
+  </tr>
+
+<% @purchase_orders.each do |purchase_order| %>
+  <tr class="<%= cycle "odd", "even"  %> " style="text-align: center">
+    <td><%= purchase_order.purchase_order_date %></td>
+    <td><%= purchase_order.purchase_order_number %></td>
+    <td><%= purchase_order.supplier.name %></td>
+    <td><%= purchase_order.term %></td>
+    <td><%= purchase_order.voided %></td>
+    <td><%= raw  purchase_order.current_status%></td>
+    <td>
+    <%= link_to 'Edit', purchase_order %>
+
+   </td>
+  </tr>
+<% end %>
+</table>
+<br />
+<%= will_paginate @purchase_orders %>
+<br />
+
+
